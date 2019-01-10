@@ -138,15 +138,11 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), infinite = Inf, exc
     likelihoods[exclude] <- -Inf
   }
 
-  sexpl <- sum(exp(likelihoods), na.rm = TRUE)
-  if (sexpl < 1) {
-    maxl <- log(1 - sum(exp(likelihoods), na.rm = TRUE))
-  } else {
-    maxl <- -Inf
+  if (any(x >= infinite)) {
+    maxl <- log1p(-sum(exp(likelihoods), na.rm = TRUE))
+    likelihoods <- c(likelihoods, maxl)
+    x[x > infinite] <- infinite + 1
   }
-  likelihoods <- c(likelihoods, maxl)
-
-  x[x > infinite] <- infinite + 1
   chain_likelihoods <- likelihoods[x]
 
   return(sum(chain_likelihoods))
