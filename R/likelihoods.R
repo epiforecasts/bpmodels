@@ -125,12 +125,15 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), infinite = Inf, exc
   ## first, get likelihood function as given by `offspring` and `stat``
   likelihoods <- c()
   ll_func <- paste(offspring, stat, "ll", sep="_")
+  pars <- as.list(unlist(list(...))) ## converts vectors to lists
   if (exists(ll_func)) {
     func <- get(ll_func)
     if (!is.function(func)) stop("'", ll_func, "' is not a function.")
-    likelihoods[calc_sizes] <- func(calc_sizes, ...)
+    likelihoods[calc_sizes] <- do.call(func, c(list(x=calc_sizes), pars))
   } else {
-    likelihoods[calc_sizes] <- offspring_ll(calc_sizes, offspring, stat, ...)
+    likelihoods[calc_sizes] <-
+      do.call(offspring_ll,
+              c(list(x=calc_sizes, offspring=offspring, stat=stat), pars))
   }
 
   if (!missing(exclude)) {
