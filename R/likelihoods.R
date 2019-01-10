@@ -68,7 +68,7 @@ pois_length_ll <- function(x, lambda) {
 ##' @param x vector of sizes
 ##' @param prob probability of the geometric distribution with mean \code{1/prob}
 ##' @return log-likelihood values
-##' @author Sebastian Funkgeom_length_ll <- function(x, prob) {
+##' @author Sebastian Funk
 geom_length_ll <- function(x, prob) {
 
   lambda <- 1 / prob
@@ -87,8 +87,9 @@ geom_length_ll <- function(x, prob) {
 ##' @param x vector of sizes
 ##' @param ... any paramaters to pass to \code{\link{chain_sim}}
 ##' @return log-likelihood values
-##' @author Sebastian Funkgeom_length_ll <- function(x, prob) {
-##' @inheritParams chain_ll chain_sim
+##' @author Sebastian Funk
+##' @inheritParams chain_ll
+##' @inheritParams chain_sim
 offspring_ll <- function(x, offspring, stat, n=100, ...) {
 
   dist <- chain_sim(n, offspring, stat, ...)
@@ -104,15 +105,15 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##' Likelihood for the outcome of a branching process
 ##'
 ##' @param x vector of sizes or lengths of transmission chains
+##' @param ... parameters for the offspring distribution
 ##' @param stat statistic given as \code{x} ("size" or "length" of chains)
 ##' @param infinite any chains of this size/length will be treated as infinite
 ##' @param exclude any sizes/lengths to exclude from the likelihood calculation
-##' @param ... parameters for the offspring distribution
 ##' @return likelihood
 ##' @inheritParams chain_sim
 ##' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll geom_length_ll offspring_ll
 ##' @author Sebastian Funk
-chain_ll <- function(x, offspring, stat=c("size", "length"), infinite = Inf, exclude, ...)
+chain_ll <- function(x, offspring, ..., stat=c("size", "length"), infinite = Inf, exclude)
 {
   stat <- match.arg(stat)
 

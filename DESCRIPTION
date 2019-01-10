@@ -1,0 +1,10 @@
+Package: epichains
+Version: 0.1
+Title: Analysis of transmission chains
+Authors@R: c(person("Sebastian", "Funk", email = "sebastian.funk@lshtm.ac.uk", role = c("aut", "cre")))
+Description: Performs analysis of chain sizes
+License: GPL-3
+URL: https://github.com/sbfnk/epichains
+BugReports: https://github.com/sbfnk/epichains/issues
+NeedsCompilation: no
+RoxygenNote: 6.1.1
