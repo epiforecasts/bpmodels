@@ -118,15 +118,18 @@ chain_ll <- function(x, offspring, ..., stat=c("size", "length"), infinite = Inf
   stat <- match.arg(stat)
 
   if (any(x >= infinite)) {
-    calc_sizes <- seq_len(infinite)
+    calc_sizes <- seq_len(infinite-1)
+    x[x >= infinite] <- infinite
   } else {
-    calc_sizes <- unique(c(1, x))
+    calc_sizes <- unique(x)
   }
 
   ## first, get likelihood function as given by `offspring` and `stat``
   likelihoods <- c()
   ll_func <- paste(offspring, stat, "ll", sep="_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists
+
+  ## calculate likelihoods
   if (exists(ll_func)) {
     func <- get(ll_func)
     if (!is.function(func)) stop("'", ll_func, "' is not a function.")
@@ -145,7 +148,6 @@ chain_ll <- function(x, offspring, ..., stat=c("size", "length"), infinite = Inf
   if (any(x >= infinite)) {
     maxl <- log1p(-sum(exp(likelihoods), na.rm = TRUE))
     likelihoods <- c(likelihoods, maxl)
-    x[x > infinite] <- infinite + 1
   }
   chain_likelihoods <- likelihoods[x]
 
