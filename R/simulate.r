@@ -8,6 +8,7 @@
 ##' @param ... parameters of the offspring distribution
 ##' @return a vector of sizes/lengths
 ##' @author Sebastian Funk
+##' @export
 chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf, ...) {
 
     stat <- match.arg(stat)
