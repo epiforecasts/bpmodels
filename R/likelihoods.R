@@ -146,7 +146,8 @@ chain_ll <- function(x, offspring, ..., stat=c("size", "length"), infinite = Inf
   }
 
   if (any(x >= infinite)) {
-    maxl <- log1p(-sum(exp(likelihoods), na.rm = TRUE))
+    maxl <-
+      tryCatch(log1p(-sum(exp(likelihoods), na.rm = TRUE)), error=function(e) -Inf)
     likelihoods <- c(likelihoods, maxl)
   }
   chain_likelihoods <- likelihoods[x]
