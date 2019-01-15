@@ -4,8 +4,8 @@
 \alias{chain_ll}
 \title{Likelihood for the outcome of a branching process}
 \usage{
-chain_ll(x, offspring, ..., stat = c("size", "length"), infinite = Inf,
-  exclude)
+chain_ll(x, offspring, ..., obs_prob = 1, stat = c("size", "length"),
+  infinite = Inf, exclude)
 }
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}
@@ -14,6 +14,8 @@ chain_ll(x, offspring, ..., stat = c("size", "length"), infinite = Inf,
 the Poisson offspring distribution.}
 
 \item{...}{parameters for the offspring distribution}
+
+\item{obs_prob}{observation probability (assumed constant)}
 
 \item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 

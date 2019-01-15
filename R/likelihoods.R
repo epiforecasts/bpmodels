@@ -106,6 +106,8 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##'
 ##' @param x vector of sizes or lengths of transmission chains
 ##' @param ... parameters for the offspring distribution
+##' @param obs_prob observation probability (assumed constant)
+##' @param n number of samples for estimating the likelihood if obs_prob < 1
 ##' @param stat statistic given as \code{x} ("size" or "length" of chains)
 ##' @param infinite any chains of this size/length will be treated as infinite
 ##' @param exclude any sizes/lengths to exclude from the likelihood calculation
@@ -114,15 +116,27 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll geom_length_ll offspring_ll
 ##' @author Sebastian Funk
 ##' @export
-chain_ll <- function(x, offspring, ..., stat=c("size", "length"), infinite = Inf, exclude)
+chain_ll <- function(x, offspring, ..., obs_prob=1, n, stat=c("size", "length"), infinite = Inf, exclude)
 {
   stat <- match.arg(stat)
 
-  if (any(x >= infinite)) {
-    calc_sizes <- seq_len(infinite-1)
-    x[x >= infinite] <- infinite
+  ## checks
+  if (obs_prob <= 0 || obs_prob > 1) stop("'obs_prob' must be within (0,1]")
+  if (obs_prob < 1) {
+    if (missing(n)) stop("'n' must be specified if 'obs_prob' is <1")
+    sampled_x <- replicate(n, pmin(rbinom_size(length(x), x, obs_prob), infinite))
+    size_x <- unlist(sampled_x)
+    if (!is.finite(infinite)) infinite <- max(size_x) + 1
   } else {
-    calc_sizes <- unique(x)
+    x[x >= infinite] <- infinite
+    size_x <- x
+  }
+
+  ## determine for which sizes to calculate the likelihood (for true chain size)
+  if (any(size_x == infinite)) {
+    calc_sizes <- seq_len(infinite-1)
+  } else {
+    calc_sizes <- unique(size_x)
   }
 
   ## first, get likelihood function as given by `offspring` and `stat``
@@ -141,17 +155,25 @@ chain_ll <- function(x, offspring, ..., stat=c("size", "length"), infinite = Inf
               c(list(x=calc_sizes, offspring=offspring, stat=stat), pars))
   }
 
+  ## assign probabilities to infinite outbreak sizes
+  if (any(size_x == infinite)) {
+    likelihoods[infinite] <- complementary_logprob(likelihoods)
+  }
+
   if (!missing(exclude)) {
     likelihoods <- likelihoods - log(-expm1(sum(likelihoods[exclude])))
     likelihoods[exclude] <- -Inf
   }
 
-  if (any(x >= infinite)) {
-    maxl <-
-      tryCatch(log1p(-sum(exp(likelihoods), na.rm = TRUE)), error=function(e) -Inf)
-    likelihoods <- c(likelihoods, maxl)
+  ## adjust for binomial observation probabilities
+  if (obs_prob < 1) {
+    chains_likelihood <- mean(apply(sampled_x, 2, function(sx) {
+      sum(likelihoods[sx])
+    }))
+  } else {
+    chains_likelihood <- sum(likelihoods[x])
   }
-  chain_likelihoods <- likelihoods[x]
 
-  return(sum(chain_likelihoods))
+  return(chains_likelihood)
 }
+
