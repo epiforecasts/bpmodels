@@ -4,8 +4,8 @@
 \alias{chain_ll}
 \title{Likelihood for the outcome of a branching process}
 \usage{
-chain_ll(x, offspring, stat = c("size", "length"), infinite = Inf,
-  exclude, ...)
+chain_ll(x, offspring, ..., stat = c("size", "length"), infinite = Inf,
+  exclude)
 }
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}
@@ -13,13 +13,13 @@ chain_ll(x, offspring, stat = c("size", "length"), infinite = Inf,
 \item{offspring}{offspring distribution as character string, e.g. "pois" for
 the Poisson offspring distribution.}
 
+\item{...}{parameters for the offspring distribution}
+
 \item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 
 \item{infinite}{any chains of this size/length will be treated as infinite}
 
 \item{exclude}{any sizes/lengths to exclude from the likelihood calculation}
-
-\item{...}{parameters for the offspring distribution}
 }
 \value{
 likelihood

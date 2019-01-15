@@ -113,6 +113,7 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##' @inheritParams chain_sim
 ##' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll geom_length_ll offspring_ll
 ##' @author Sebastian Funk
+##' @export
 chain_ll <- function(x, offspring, ..., stat=c("size", "length"), infinite = Inf, exclude)
 {
   stat <- match.arg(stat)
