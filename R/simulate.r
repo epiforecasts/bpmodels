@@ -28,10 +28,8 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf, 
             offspring <- sum(func(n=state, ...))
             if (stat=="size") {
                 stat_track <- stat_track + offspring
-            } else if (stat=="length"){
+            } else if (stat=="length") {
                 if (offspring > 0) stat_track <- stat_track + 1
-            } else {
-                stop("Unknown statistic: '", stat, "'.")
             }
             state <- offspring
         }
