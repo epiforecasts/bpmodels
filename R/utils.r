@@ -20,5 +20,5 @@ complementary_logprob <- function(x) {
 ##' @author Sebastian Funk
 ##' @keywords internal
 rbinom_size <- function(n, x, prob) {
-    x + rnbinom(n, x, prob) + rnbinom(n, 1, prob)
+    x + stats::rnbinom(n, x, prob) + stats::rnbinom(n, 1, prob)
 }

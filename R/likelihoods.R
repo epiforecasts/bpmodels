@@ -90,7 +90,8 @@ geom_length_ll <- function(x, prob) {
 ##'   chains by linearly approximating any missing values in the empirical
 ##'   cumulative distribution function (ecdf).
 ##' @param x vector of sizes
-##' @param nsim_offspring number of simulations of the offspring distribution for approximation the size/length distribution
+##' @param nsim_offspring number of simulations of the offspring distribution
+##'   for approximation the size/length distribution 
 ##' @param ... any paramaters to pass to \code{\link{chain_sim}}
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
@@ -102,8 +103,10 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
   dist <- chain_sim(nsim_offspring, offspring, stat, ...)
 
   ## linear approximation
-  f <- ecdf(dist)
-  acdf <- diff(c(0, approx(unique(dist), f(unique(dist)), seq_len(max(dist[is.finite(dist)])))$y))
+  f <- stats::ecdf(dist)
+  acdf <-
+    diff(c(0, stats::approx(unique(dist), f(unique(dist)),
+                            seq_len(max(dist[is.finite(dist)])))$y))
   lik <- acdf[x]
   lik[is.na(lik)] <- 0
   log(lik)
