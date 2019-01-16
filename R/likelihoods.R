@@ -90,15 +90,16 @@ geom_length_ll <- function(x, prob) {
 ##'   chains by linearly approximating any missing values in the empirical
 ##'   cumulative distribution function (ecdf).
 ##' @param x vector of sizes
+##' @param nsim_offspring number of simulations of the offspring distribution for approximation the size/length distribution
 ##' @param ... any paramaters to pass to \code{\link{chain_sim}}
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
 ##' @inheritParams chain_ll
 ##' @inheritParams chain_sim
 ##' @keywords internal
-offspring_ll <- function(x, offspring, stat, n=100, ...) {
+offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
 
-  dist <- chain_sim(n, offspring, stat, ...)
+  dist <- chain_sim(nsim_offspring, offspring, stat, ...)
 
   ## linear approximation
   f <- ecdf(dist)
@@ -115,6 +116,7 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##' @param obs_prob observation probability (assumed constant)
 ##' @param infinite any chains of this size/length will be treated as infinite
 ##' @param exclude any sizes/lengths to exclude from the likelihood calculation
+##' @param nsim_obs number of simulations if the likelihood is to be approximated for imperfect observations
 ##' @param ... parameters for the offspring distribution
 ##' @return likelihood
 ##' @inheritParams chain_sim
@@ -124,15 +126,15 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##' @examples
 ##' chain_sizes <- c(1,1,4,7) # example of observed chain sizes
 ##' chain_ll(chain_sizes, "pois", "size", lambda=0.5)
-chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1, infinite = Inf, exclude, ...)
+chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1, infinite = Inf, exclude, nsim_obs, ...)
 {
   stat <- match.arg(stat)
 
   ## checks
   if (obs_prob <= 0 || obs_prob > 1) stop("'obs_prob' must be within (0,1]")
   if (obs_prob < 1) {
-    if (missing(n)) stop("'n' must be specified if 'obs_prob' is <1")
-    sampled_x <- replicate(n, pmin(rbinom_size(length(x), x, obs_prob), infinite))
+    if (missing(nsim_obs)) stop("'nsim_obs' must be specified if 'obs_prob' is <1")
+    sampled_x <- replicate(nsim_obs, pmin(rbinom_size(length(x), x, obs_prob), infinite))
     size_x <- unlist(sampled_x)
     if (!is.finite(infinite)) infinite <- max(size_x) + 1
   } else {
@@ -160,7 +162,8 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1, infinit
   } else {
     likelihoods[calc_sizes] <-
       do.call(offspring_ll,
-              c(list(x=calc_sizes, offspring=offspring, stat=stat), pars))
+              c(list(x=calc_sizes, offspring=offspring,
+                     stat=stat, infinite=infinite), pars))
   }
 
   ## assign probabilities to infinite outbreak sizes
@@ -175,9 +178,9 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1, infinit
 
   ## adjust for binomial observation probabilities
   if (obs_prob < 1) {
-    chains_likelihood <- mean(apply(sampled_x, 2, function(sx) {
+    chains_likelihood <- apply(sampled_x, 2, function(sx) {
       sum(likelihoods[sx])
-    }))
+    })
   } else {
     chains_likelihood <- sum(likelihoods[x])
   }
