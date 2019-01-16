@@ -27,6 +27,7 @@ library('bpmodels')
 ```
 ```{r echo=FALSE}
 suppressWarnings(library('bpmodels'))
+set.seed(13)
 ```
 
 At the heart of the package are the `chains_ll` and `chains_sim` functions. The `chains_ll` function calculates the log-likelihood of a distribution of chain sizes or lengths given an offspring distribution and associated parameters. For example, to get the log-likelihood for a given observed distribution of chain sizes assuming a mean number of 0.5 Poisson-distributed offspring per generation, use
