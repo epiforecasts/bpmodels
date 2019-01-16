@@ -1,5 +1,9 @@
 # bpmodels
 
+[![Travis-CI Build Status](https://travis-ci.org/sbfnk/bpmodels.svg?branch=master)](https://travis-ci.org/sbfnk/bpmodels)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/sbfnk)](https://ci.appveyor.com/project/sbfnk/bpmodels)
+[![codecov](https://codecov.io/github/sbfnk/bpmodels/branch/master/graphs/badge.svg)](https://codecov.io/github/sbfnk/bpmodels) 
+
 Methods for analysing the distribution of epidemiological chain sizes and lengths
 
 The latest development version of the `bpmodels` package can be installed via
