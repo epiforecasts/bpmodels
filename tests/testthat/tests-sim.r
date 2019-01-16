@@ -9,7 +9,5 @@ test_that("Chains can be simulated",
 
 test_that("Errors are thrown",
 {
-    rtest <- 0
     expect_error(chain_sim(n=2, "dummy"), "does not exist")
-    expect_error(chain_sim(n=2, "test"), "is not a function")
 })

@@ -29,5 +29,4 @@ test_that("Errors are thrown",
     expect_error(chain_ll(chain_sizes, "pois", "size", lambda=0.5, obs_prob = 0.5), "must be specified")
     expect_error(nbinom_size_ll(chains, mu=0.5, size=0.2, prob=0.1), "both specified")
     expect_error(gborel_size_ll(chains, mu=0.5, size=0.2, prob=0.1), "both specified")
-    expect_error(chain_sim(n=2, "test"), "is not a function")
 })
