@@ -10,8 +10,9 @@ chain_ll(x, offspring, stat = c("size", "length"), obs_prob = 1,
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}
 
-\item{offspring}{offspring distribution as character string, e.g. "pois" for
-the Poisson offspring distribution.}
+\item{offspring}{offspring distribution, given as the function used to
+generate the number of offspring in each generation, e.g. `rpois` for
+Poisson distributed offspring}
 
 \item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 
@@ -21,7 +22,8 @@ the Poisson offspring distribution.}
 
 \item{exclude}{any sizes/lengths to exclude from the likelihood calculation}
 
-\item{nsim_obs}{number of simulations if the likelihood is to be approximated for imperfect observations}
+\item{nsim_obs}{number of simulations if the likelihood is to be
+approximated for imperfect observations}
 
 \item{...}{parameters for the offspring distribution}
 }
@@ -33,10 +35,11 @@ Likelihood for the outcome of a branching process
 }
 \examples{
 chain_sizes <- c(1,1,4,7) # example of observed chain sizes
-chain_ll(chain_sizes, "pois", "size", lambda=0.5)
+chain_ll(chain_sizes, rpois, "size", lambda=0.5)
 }
 \seealso{
-pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll geom_length_ll offspring_ll
+pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
+  geom_length_ll offspring_ll
 }
 \author{
 Sebastian Funk

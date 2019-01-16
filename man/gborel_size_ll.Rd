@@ -9,9 +9,11 @@ gborel_size_ll(x, size, prob, mu)
 \arguments{
 \item{x}{vector of sizes}
 
-\item{size}{the dispersion parameter (often called \code{k} in ecological applications)}
+\item{size}{the dispersion parameter (often called \code{k} in ecological
+applications)}
 
-\item{prob}{probability of success (in the parameterisation with \code{prob}, see also \code{\link[stats]{NegBinomial}})}
+\item{prob}{probability of success (in the parameterisation with
+\code{prob}, see also \code{\link[stats]{NegBinomial}})}
 
 \item{mu}{mean parameter}
 }

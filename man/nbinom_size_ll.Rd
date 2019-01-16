@@ -2,16 +2,19 @@
 % Please edit documentation in R/likelihoods.R
 \name{nbinom_size_ll}
 \alias{nbinom_size_ll}
-\title{Likelihood of the size of chains with Negative-Binomial offspring distribution}
+\title{Likelihood of the size of chains with Negative-Binomial offspring
+distribution}
 \usage{
 nbinom_size_ll(x, size, prob, mu)
 }
 \arguments{
 \item{x}{vector of sizes}
 
-\item{size}{the dispersion parameter (often called \code{k} in ecological applications)}
+\item{size}{the dispersion parameter (often called \code{k} in ecological
+applications)}
 
-\item{prob}{probability of success (in the parameterisation with \code{prob}, see also \code{\link[stats]{NegBinomial}})}
+\item{prob}{probability of success (in the parameterisation with
+\code{prob}, see also \code{\link[stats]{NegBinomial}})}
 
 \item{mu}{mean parameter}
 }
@@ -19,7 +22,8 @@ nbinom_size_ll(x, size, prob, mu)
 log-likelihood values
 }
 \description{
-Likelihood of the size of chains with Negative-Binomial offspring distribution
+Likelihood of the size of chains with Negative-Binomial offspring
+distribution
 }
 \author{
 Sebastian Funk

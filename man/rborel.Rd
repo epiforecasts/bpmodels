@@ -11,7 +11,8 @@ rborel(n, mu, infinite = Inf)
 
 \item{mu}{mu parameter.}
 
-\item{infinite}{any number to treat as infinite; simulations will be stopped if this number is reached}
+\item{infinite}{any number to treat as infinite; simulations will be stopped
+if this number is reached}
 }
 \value{
 vector of random numbers

@@ -9,7 +9,8 @@ geom_length_ll(x, prob)
 \arguments{
 \item{x}{vector of sizes}
 
-\item{prob}{probability of the geometric distribution with mean \code{1/prob}}
+\item{prob}{probability of the geometric distribution with mean
+\code{1/prob}}
 }
 \value{
 log-likelihood values
