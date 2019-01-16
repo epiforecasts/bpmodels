@@ -18,7 +18,7 @@ a sampled size
 }
 \description{
 Samples the size parameter from the binomial distribution with fixed x
-(number of sucesses) and p (sucess probability)
+(number of successes) and p (success probability)
 }
 \author{
 Sebastian Funk

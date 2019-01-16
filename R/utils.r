@@ -12,7 +12,7 @@ complementary_logprob <- function(x) {
 ##' Samples size (the number of trials) of a binomial distribution
 ##'
 ##' Samples the size parameter from the binomial distribution with fixed x
-##' (number of sucesses) and p (sucess probability)
+##' (number of successes) and p (success probability)
 ##' @param n number of samples to generate
 ##' @param x number of successes
 ##' @param prob probability of success

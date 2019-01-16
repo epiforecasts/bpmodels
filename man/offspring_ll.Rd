@@ -18,7 +18,7 @@ Poisson distributed offspring}
 \item{nsim_offspring}{number of simulations of the offspring distribution
 for approximation the size/length distribution}
 
-\item{...}{any paramaters to pass to \code{\link{chain_sim}}}
+\item{...}{any parameters to pass to \code{\link{chain_sim}}}
 }
 \value{
 log-likelihood values

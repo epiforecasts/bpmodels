@@ -1,7 +1,7 @@
 ##' Likelihood of the size of chains with Poisson offspring distribution
 ##'
 ##' @param x vector of sizes
-##' @param lambda rate of the Poisson distributino
+##' @param lambda rate of the Poisson distribution
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
 ##' @keywords internal
@@ -57,7 +57,7 @@ gborel_size_ll <- function(x, size, prob, mu) {
 ##' Likelihood of the length of chains with Poisson offspring distribution
 ##'
 ##' @param x vector of sizes
-##' @param lambda rate of the Poisson distributino
+##' @param lambda rate of the Poisson distribution
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
 ##' @keywords internal
@@ -99,7 +99,7 @@ geom_length_ll <- function(x, prob) {
 ##' @param x vector of sizes
 ##' @param nsim_offspring number of simulations of the offspring distribution
 ##'   for approximation the size/length distribution
-##' @param ... any paramaters to pass to \code{\link{chain_sim}}
+##' @param ... any parameters to pass to \code{\link{chain_sim}}
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
 ##' @inheritParams chain_ll

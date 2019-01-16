@@ -9,7 +9,7 @@ pois_length_ll(x, lambda)
 \arguments{
 \item{x}{vector of sizes}
 
-\item{lambda}{rate of the Poisson distributino}
+\item{lambda}{rate of the Poisson distribution}
 }
 \value{
 log-likelihood values
