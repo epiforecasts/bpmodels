@@ -105,18 +105,17 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##' Likelihood for the outcome of a branching process
 ##'
 ##' @param x vector of sizes or lengths of transmission chains
-##' @param ... parameters for the offspring distribution
-##' @param obs_prob observation probability (assumed constant)
-##' @param n number of samples for estimating the likelihood if obs_prob < 1
 ##' @param stat statistic given as \code{x} ("size" or "length" of chains)
+##' @param obs_prob observation probability (assumed constant)
 ##' @param infinite any chains of this size/length will be treated as infinite
 ##' @param exclude any sizes/lengths to exclude from the likelihood calculation
+##' @param ... parameters for the offspring distribution
 ##' @return likelihood
 ##' @inheritParams chain_sim
 ##' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll geom_length_ll offspring_ll
 ##' @author Sebastian Funk
 ##' @export
-chain_ll <- function(x, offspring, ..., obs_prob=1, n, stat=c("size", "length"), infinite = Inf, exclude)
+chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1, infinite = Inf, exclude, ...)
 {
   stat <- match.arg(stat)
 
