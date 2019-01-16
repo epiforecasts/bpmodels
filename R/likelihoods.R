@@ -4,6 +4,7 @@
 ##' @param lambda rate of the Poisson distributino
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
+##' @keywords internal
 pois_size_ll <- function(x, lambda)
 {
   (x - 1) * log(lambda) - lambda * x + (x - 2) * log(x) - lgamma(x)
@@ -17,6 +18,7 @@ pois_size_ll <- function(x, lambda)
 ##' @param mu mean parameter
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
+##' @keywords internal
 nbinom_size_ll <- function(x, size, prob, mu)
 {
   if (!missing(prob)) {
@@ -36,6 +38,7 @@ nbinom_size_ll <- function(x, size, prob, mu)
 ##' @param mu mean parameter
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
+##' @keywords internal
 gborel_size_ll <- function(x, size, prob, mu) {
   if (!missing(prob)) {
     if (!missing(mu)) stop("'prob' and 'mu' both specified")
@@ -51,6 +54,7 @@ gborel_size_ll <- function(x, size, prob, mu) {
 ##' @param lambda rate of the Poisson distributino
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
+##' @keywords internal
 pois_length_ll <- function(x, lambda) {
 
   ## iterated exponential function
@@ -69,6 +73,7 @@ pois_length_ll <- function(x, lambda) {
 ##' @param prob probability of the geometric distribution with mean \code{1/prob}
 ##' @return log-likelihood values
 ##' @author Sebastian Funk
+##' @keywords internal
 geom_length_ll <- function(x, prob) {
 
   lambda <- 1 / prob
@@ -90,6 +95,7 @@ geom_length_ll <- function(x, prob) {
 ##' @author Sebastian Funk
 ##' @inheritParams chain_ll
 ##' @inheritParams chain_sim
+##' @keywords internal
 offspring_ll <- function(x, offspring, stat, n=100, ...) {
 
   dist <- chain_sim(n, offspring, stat, ...)
@@ -115,6 +121,9 @@ offspring_ll <- function(x, offspring, stat, n=100, ...) {
 ##' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll geom_length_ll offspring_ll
 ##' @author Sebastian Funk
 ##' @export
+##' @examples
+##' chain_sizes <- c(1,1,4,7) # example of observed chain sizes
+##' chain_ll(chain_sizes, "pois", "size", lambda=0.5)
 chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1, infinite = Inf, exclude, ...)
 {
   stat <- match.arg(stat)
