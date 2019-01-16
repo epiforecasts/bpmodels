@@ -24,3 +24,4 @@ Likelihood of the size of chains with Negative-Binomial offspring distribution
 \author{
 Sebastian Funk
 }
+\keyword{internal}

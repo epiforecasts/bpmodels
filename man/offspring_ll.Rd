@@ -4,7 +4,7 @@
 \alias{offspring_ll}
 \title{Likelihood of the length of chains with generic offspring distribution}
 \usage{
-offspring_ll(x, offspring, stat, n = 100, ...)
+offspring_ll(x, offspring, stat, nsim_offspring = 100, ...)
 }
 \arguments{
 \item{x}{vector of sizes}
@@ -14,7 +14,7 @@ the Poisson offspring distribution.}
 
 \item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 
-\item{n}{number of simulations to run.}
+\item{nsim_offspring}{number of simulations of the offspring distribution for approximation the size/length distribution}
 
 \item{...}{any paramaters to pass to \code{\link{chain_sim}}}
 }
@@ -29,3 +29,4 @@ The likelihoods are calculated with a crude approximation using simulated
 \author{
 Sebastian Funk
 }
+\keyword{internal}

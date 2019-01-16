@@ -4,8 +4,8 @@
 \alias{chain_ll}
 \title{Likelihood for the outcome of a branching process}
 \usage{
-chain_ll(x, offspring, ..., obs_prob = 1, stat = c("size", "length"),
-  infinite = Inf, exclude)
+chain_ll(x, offspring, stat = c("size", "length"), obs_prob = 1,
+  infinite = Inf, exclude, nsim_obs, ...)
 }
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}
@@ -13,21 +13,27 @@ chain_ll(x, offspring, ..., obs_prob = 1, stat = c("size", "length"),
 \item{offspring}{offspring distribution as character string, e.g. "pois" for
 the Poisson offspring distribution.}
 
-\item{...}{parameters for the offspring distribution}
+\item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 
 \item{obs_prob}{observation probability (assumed constant)}
-
-\item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 
 \item{infinite}{any chains of this size/length will be treated as infinite}
 
 \item{exclude}{any sizes/lengths to exclude from the likelihood calculation}
+
+\item{nsim_obs}{number of simulations if the likelihood is to be approximated for imperfect observations}
+
+\item{...}{parameters for the offspring distribution}
 }
 \value{
 likelihood
 }
 \description{
 Likelihood for the outcome of a branching process
+}
+\examples{
+chain_sizes <- c(1,1,4,7) # example of observed chain sizes
+chain_ll(chain_sizes, "pois", "size", lambda=0.5)
 }
 \seealso{
 pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll geom_length_ll offspring_ll

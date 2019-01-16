@@ -24,3 +24,4 @@ Likelihood of the size of chains with gamma-Borel offspring distribution
 \author{
 Sebastian Funk
 }
+\keyword{internal}

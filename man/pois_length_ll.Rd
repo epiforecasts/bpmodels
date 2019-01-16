@@ -20,3 +20,4 @@ Likelihood of the length of chains with Poisson offspring distribution
 \author{
 Sebastian Funk
 }
+\keyword{internal}
