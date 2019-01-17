@@ -148,8 +148,13 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
     if (missing(nsim_obs)) {
       stop("'nsim_obs' must be specified if 'obs_prob' is <1")
     }
+    if (stat=="size") {
+      sample_func <- rbinom_size
+    } else if (stat=="length"){
+      sample_func <- rgen_length
+    }
     sampled_x <-
-      replicate(nsim_obs, pmin(rbinom_size(length(x), x, obs_prob), infinite))
+      replicate(nsim_obs, pmin(sample_func(length(x), x, obs_prob), infinite))
     if (length(x) == 1) sampled_x <- matrix(sampled_x, nrow=1)
     size_x <- unlist(sampled_x)
     if (!is.finite(infinite)) infinite <- max(size_x) + 1
@@ -173,7 +178,7 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
   ## get likelihood function as given by `offspring` and `stat``
   likelihoods <- c()
   ## get offspring distribution by stripping first letter from offspring
-  ## function 
+  ## function
   offspring_dist <- sub("^.", "", deparse(substitute(offspring)))
   ll_func <- paste(offspring_dist, stat, "ll", sep="_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists

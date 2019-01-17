@@ -63,7 +63,7 @@ chain_ll(chain_sizes, rbinom, "size", size=1, prob=0.5, nsim_offspring=100)
 
 # Imperfect observations
 
-The `chain_ll` function has an `obs_prob` parameter that can be used to determine the likelihood if observations are imperfect. This only works when analysing chain sizes (`stat="size"`). In that case, true chain sizes are simulated repeatedly (the number of times given by the `nsim_obs` argument) and the likelihood calculated for each of these simulations. For example, if the probability of observing each case is 30%, use
+The `chain_ll` function has an `obs_prob` parameter that can be used to determine the likelihood if observations are imperfect. In that case, true chain sizes or lengths are simulated repeatedly (the number of times given by the `nsim_obs` argument) and the likelihood calculated for each of these simulations. For example, if the probability of observing each case is 30%, use
 
 ```{r}
 ll <- chain_ll(chain_sizes, rpois, "size", obs_prob = 0.3, lambda=0.5, nsim_obs=10)

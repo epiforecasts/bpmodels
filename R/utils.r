@@ -22,3 +22,18 @@ complementary_logprob <- function(x) {
 rbinom_size <- function(n, x, prob) {
     x + stats::rnbinom(n, x, prob) + stats::rnbinom(n, 1, prob)
 }
+
+##' Samples chain lengths with given observation probabilities
+##'
+##' Samples the length of a transmission chain where each individual element is
+##' observed with binomial probability
+##' (number of successes) and p (success probability)
+##' @param n number of samples to generate
+##' @param x observed chain lengths
+##' @param prob probability of observation
+##' @return sampled lengths
+##' @author Sebastian Funk
+##' @keywords internal
+rgen_length <- function(n, x, prob) {
+    x + ceiling(log(stats::runif(n, 0, 1)) / log(1 - prob) - 1)
+}

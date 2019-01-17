@@ -9,6 +9,8 @@ test_that("Likelihoods can be calculated",
     expect_lt(chain_ll(chains, rpois, "size", lambda=0.5, infinite = 5), 0)
     expect_lt(chain_ll(chains, rpois, "size", lambda=0.5, obs_prob = 0.5,
                        nsim_obs=1), 0)
+    expect_lt(chain_ll(chains, rpois, "length", lambda=0.5, obs_prob = 0.5,
+                       nsim_obs=1), 0)
     expect_lt(chain_ll(chains, rpois, "size", lambda=0.5, infinite = 5,
                        obs_prob = 0.5, nsim_obs=1), 0)
     expect_lt(chain_ll(chains, rbinom, "size", size=1, prob=0.5), 0)
