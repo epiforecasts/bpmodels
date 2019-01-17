@@ -150,6 +150,7 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
     }
     sampled_x <-
       replicate(nsim_obs, pmin(rbinom_size(length(x), x, obs_prob), infinite))
+    if (length(x) == 1) sampled_x <- matrix(sampled_x, nrow=1)
     size_x <- unlist(sampled_x)
     if (!is.finite(infinite)) infinite <- max(size_x) + 1
   } else {
