@@ -16,7 +16,7 @@ complementary_logprob <- function(x) {
 ##' @param n number of samples to generate
 ##' @param x number of successes
 ##' @param prob probability of success
-##' @return a sampled size
+##' @return sampled sizes
 ##' @author Sebastian Funk
 ##' @keywords internal
 rbinom_size <- function(n, x, prob) {

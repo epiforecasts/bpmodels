@@ -14,7 +14,7 @@ rbinom_size(n, x, prob)
 \item{prob}{probability of success}
 }
 \value{
-a sampled size
+sampled sizes
 }
 \description{
 Samples the size parameter from the binomial distribution with fixed x
