@@ -20,7 +20,7 @@ complementary_logprob <- function(x) {
 ##' @author Sebastian Funk
 ##' @keywords internal
 rbinom_size <- function(n, x, prob) {
-    x + stats::rnbinom(n, x + 1, prob) - 1
+    x + stats::rnbinom(n, x + 1, prob)
 }
 
 ##' Samples chain lengths with given observation probabilities
