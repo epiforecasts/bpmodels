@@ -30,6 +30,9 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
         state <- 1
         while (state > 0 && state < infinite) {
             n_offspring <- sum(offspring(n=state, ...))
+            if (n_offspring %% 1 > 0) {
+                stop("Offspring distribution must return integers")
+            }
             if (stat=="size") {
                 stat_track <- stat_track + n_offspring
             } else if (stat=="length") {

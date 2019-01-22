@@ -11,4 +11,5 @@ test_that("Chains can be simulated",
 test_that("Errors are thrown",
 {
     expect_error(chain_sim(n=2, "dummy"), "is not a function")
+    expect_error(chain_sim(n=2, rlnorm, meanlog=log(1.6)), "integer")
 })
