@@ -24,7 +24,7 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
     }
 
     ## next, simulate n chains
-    dist <- c()
+    dist <- integer(n)
     for (i in seq_len(n)) {
         stat_track <- 1 ## track length or size (depending on `stat`)
         state <- 1
