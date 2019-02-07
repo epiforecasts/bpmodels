@@ -40,6 +40,7 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
                        ancestor=NA_integer_,
                        generation=generation)
         ancestor_ids <- rep(1, n)
+        current_max_id <- rep(1, n)
     }
 
     ## next, simulate n chains
@@ -68,11 +69,14 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
         ## record ancestors (if tree==TRUE)
         if (tree && sum(n_offspring[sim]) > 0) {
             ancestors <- rep(ancestor_ids, next_gen)
-            ids <- ancestors + unlist(lapply(n_offspring[sim], seq_len))
+            current_max_id <- unname(tapply(ancestor_ids, indices, max))
+            indices <- rep(sim, n_offspring[sim])
+            ids <- rep(current_max_id, n_offspring[sim]) +
+                unlist(lapply(n_offspring[sim], seq_len))
             generation <- generation + 1L
             ## record indices corresponding the number of offspring
             new_df <-
-                data.frame(n=rep(sim, n_offspring[sim]),
+                data.frame(n=indices,
                            id=ids,
                            ancestor=ancestors,
                            generation=generation)
@@ -82,7 +86,7 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
         ## only continue to simulate chains that offspring and aren't of
         ## infinite size/length
         sim <- which(n_offspring > 0 & stat_track < infinite)
-        if (tree) ancestor_ids <- unlist(lapply(n_offspring[sim], seq_len))
+        if (tree) ancestor_ids <- ids[indices %in% sim]
     }
 
     if (tree) {
