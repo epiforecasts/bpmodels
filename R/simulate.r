@@ -23,27 +23,37 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
         stop("object passed as 'offspring' is not a function.")
     }
 
+    stat_track <- rep(1, n) ## track length or size (depending on `stat`)
+    n_offspring <- rep(1, n) ## current number of offspring
+    sim <- seq_len(n) ## track chains that are still being simulated
+
     ## next, simulate n chains
-    dist <- integer(n)
-    for (i in seq_len(n)) {
-        stat_track <- 1 ## track length or size (depending on `stat`)
-        state <- 1
-        while (state > 0 && state < infinite) {
-            n_offspring <- sum(offspring(n=state, ...))
-            if (n_offspring %% 1 > 0) {
-                stop("Offspring distribution must return integers")
-            }
-            if (stat=="size") {
-                stat_track <- stat_track + n_offspring
-            } else if (stat=="length") {
-                if (n_offspring > 0) stat_track <- stat_track + 1
-            }
-            state <- n_offspring
+    while (length(sim) > 0) {
+        ## simulate next generation
+        next_gen <- offspring(n=sum(n_offspring[sim]), ...)
+        if (any(next_gen %% 1 > 0)) {
+            stop("Offspring distribution must return integers")
         }
-        if (state >= infinite) stat_track <- Inf
-        dist[i] <- stat_track
+        ## record indices corresponding the number of offspring of last
+        ## iteration, for the tapply call below
+        indices <- rep(sim, n_offspring[sim])
+        ## initialise number of offspring
+        n_offspring <- rep(0, n)
+        ## assign offspring sum to indices still being simulated
+        n_offspring[sim] <- tapply(next_gen, indices, sum)
+        ## track size/length
+        if (stat=="size") {
+            stat_track <- stat_track + n_offspring
+        } else if (stat=="length") {
+            stat_track <- stat_track + pmin(1, n_offspring)
+        }
+        ## only continue to simulate chains that offspring and aren't of
+        ## infinite size/length
+        sim <- which(n_offspring > 0 & stat_track < infinite)
     }
 
-    return(dist)
+    stat_track[stat_track >= infinite] <- Inf
+
+    return(stat_track)
 }
 
