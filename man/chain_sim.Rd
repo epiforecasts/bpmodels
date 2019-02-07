@@ -5,7 +5,7 @@
 \title{Simulate chains using a branching process}
 \usage{
 chain_sim(n, offspring, stat = c("size", "length"), infinite = Inf,
-  ...)
+  tree = FALSE, ...)
 }
 \arguments{
 \item{n}{number of simulations to run.}
@@ -19,10 +19,15 @@ Poisson distributed offspring}
 \item{infinite}{a size or length from which the size/length is to be
 considered infinite}
 
+\item{tree}{return the tree of infectors}
+
 \item{...}{parameters of the offspring distribution}
 }
 \value{
-a vector of sizes/lengths
+a vector of sizes/lengths (if \code{tree==FALSE}), or a data frame
+    with columns `n` (simulation ID), `id` (a unique ID within each
+    simulation for each individual element of the chain), `ancestor` (the ID
+    of the ancestor of each element) and `generation`.
 }
 \description{
 Simulate chains using a branching process
