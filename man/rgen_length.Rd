@@ -18,8 +18,8 @@ sampled lengths
 }
 \description{
 Samples the length of a transmission chain where each individual element is
-observed with binomial probability
-(number of successes) and p (success probability)
+observed with binomial probability with parameters n (number of successes)
+and p (success probability)
 }
 \author{
 Sebastian Funk
