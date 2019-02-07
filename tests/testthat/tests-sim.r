@@ -4,6 +4,8 @@ test_that("Chains can be simulated",
 {
     expect_length(chain_sim(n=2, rpois, lambda=0.5), 2)
     expect_length(chain_sim(n=10, rpois, "length", lambda=0.9), 10)
+    expect_true(is.data.frame(chain_sim(n=10, rpois, lambda=2, tree=TRUE,
+                                        infinite=10)))
     expect_false(any(is.finite(chain_sim(n=2, rpois, "length", lambda=0.5,
                                          infinite=1))))
 })
