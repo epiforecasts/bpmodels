@@ -167,7 +167,7 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
   if (any(size_x == infinite)) {
     calc_sizes <- seq_len(infinite-1)
   } else {
-    calc_sizes <- unique(size_x)
+    calc_sizes <- unique(c(size_x, exclude))
   }
 
   ## get random function as given by `offspring`
