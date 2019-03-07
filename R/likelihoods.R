@@ -139,7 +139,7 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
 ##' chain_sizes <- c(1,1,4,7) # example of observed chain sizes
 ##' chain_ll(chain_sizes, rpois, "size", lambda=0.5)
 chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
-                     infinite = Inf, exclude, nsim_obs, ...) {
+                     infinite = Inf, exclude=c(), nsim_obs, ...) {
   stat <- match.arg(stat)
 
   ## checks
@@ -179,7 +179,7 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
   likelihoods <- c()
   ## get offspring distribution by stripping first letter from offspring
   ## function
-  offspring_dist <- sub("^.", "", deparse(substitute(offspring)))
+  offspring_dist <- sub("^.", "", find_function_name(offspring))
   ll_func <- paste(offspring_dist, stat, "ll", sep="_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists
 
