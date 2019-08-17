@@ -207,10 +207,10 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
   ## adjust for binomial observation probabilities
   if (obs_prob < 1) {
     chains_likelihood <- apply(sampled_x, 2, function(sx) {
-      sum(likelihoods[sx])
+      sum(likelihoods[sx[!(sx %in% exclude)]])
     })
   } else {
-    chains_likelihood <- sum(likelihoods[x])
+    chains_likelihood <- sum(likelihoods[x[!(x %in% exclude)]])
   }
 
   return(chains_likelihood)
