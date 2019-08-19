@@ -9,9 +9,7 @@ offspring_ll(x, offspring, stat, nsim_offspring = 100, ...)
 \arguments{
 \item{x}{vector of sizes}
 
-\item{offspring}{offspring distribution, given as the function used to
-generate the number of offspring in each generation, e.g. `rpois` for
-Poisson distributed offspring}
+\item{offspring}{offspring distribution: either a function (e.g., \code{rpois} for Poisson) or a character string (e.g., "pois" for Poisson)}
 
 \item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 

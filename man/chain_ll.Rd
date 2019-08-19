@@ -5,14 +5,12 @@
 \title{Likelihood for the outcome of a branching process}
 \usage{
 chain_ll(x, offspring, stat = c("size", "length"), obs_prob = 1,
-  infinite = Inf, exclude, nsim_obs, ...)
+  infinite = Inf, exclude = c(), nsim_obs, ...)
 }
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}
 
-\item{offspring}{offspring distribution, given as the function used to
-generate the number of offspring in each generation, e.g. `rpois` for
-Poisson distributed offspring}
+\item{offspring}{offspring distribution: either a function (e.g., \code{rpois} for Poisson) or a character string (e.g., "pois" for Poisson)}
 
 \item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 

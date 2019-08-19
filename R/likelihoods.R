@@ -122,6 +122,7 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
 ##' Likelihood for the outcome of a branching process
 ##'
 ##' @param x vector of sizes or lengths of transmission chains
+##' @param offspring offspring distribution: either a function (e.g., \code{rpois} for Poisson) or a character string (e.g., "pois" for Poisson)
 ##' @param stat statistic given as \code{x} ("size" or "length" of chains)
 ##' @param obs_prob observation probability (assumed constant)
 ##' @param infinite any chains of this size/length will be treated as infinite
@@ -143,6 +144,9 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
   stat <- match.arg(stat)
 
   ## checks
+  if (!is.function(offspring) && !is.character(offspring)) {
+    stop("object passed as 'offspring' is not a function or character string.")
+  }
   if (obs_prob <= 0 || obs_prob > 1) stop("'obs_prob' must be within (0,1]")
   if (obs_prob < 1) {
     if (missing(nsim_obs)) {
@@ -171,15 +175,16 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
   }
 
   ## get random function as given by `offspring`
-  if (!is.function(offspring)) {
-    stop("object passed as 'offspring' is not a function.")
+  if (is.character(offspring)) {
+    offspring_dist <- offspring
+  } else {
+    ## get offspring distribution by stripping first letter from offspring
+    ## function
+    offspring_dist <- sub("^.", "", find_function_name(offspring))
   }
 
   ## get likelihood function as given by `offspring` and `stat``
   likelihoods <- c()
-  ## get offspring distribution by stripping first letter from offspring
-  ## function
-  offspring_dist <- sub("^.", "", find_function_name(offspring))
   ll_func <- paste(offspring_dist, stat, "ll", sep="_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists
 
@@ -188,6 +193,15 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
     func <- get(ll_func)
     likelihoods[calc_sizes] <- do.call(func, c(list(x=calc_sizes), pars))
   } else {
+    if (is.character(offspring)) {
+      roffspring_name <- paste0("r", offspring)
+      if (exists(roffspring_name)) {
+        offspring <- get(roffspring_name)
+        if (!is.function(offspring)) stop(roffspring_name, " is not a function.")
+      } else {
+        stop("Function ", roffspring_name, " does not exist.")
+      }
+    }
     likelihoods[calc_sizes] <-
       do.call(offspring_ll,
               c(list(x=calc_sizes, offspring=offspring,

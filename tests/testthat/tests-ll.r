@@ -1,6 +1,7 @@
 context("Calculating the likelihood from a branching process model")
 
 chains <- c(1,1,4,7)
+rtest <- "test"
 
 test_that("Likelihoods can be calculated",
 {
@@ -30,6 +31,10 @@ test_that("Analytical size/length distributions are implemented",
 test_that("Errors are thrown",
 {
     expect_error(chain_ll(chains, "dummy", "size", lambda=0.5),
+                 "does not exist")
+    expect_error(chain_ll(chains, list(), "size", lambda=0.5),
+                 "not a function or")
+    expect_error(chain_ll(chains, "test", "size", lambda=0.5),
                  "not a function")
     expect_error(chain_ll(chains, rpois, "size", lambda=0.5, obs_prob = 3),
                  "must be within")
