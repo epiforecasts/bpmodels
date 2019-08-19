@@ -5,12 +5,14 @@
 \title{Likelihood for the outcome of a branching process}
 \usage{
 chain_ll(x, offspring, stat = c("size", "length"), obs_prob = 1,
-  infinite = Inf, exclude = c(), nsim_obs, ...)
+  infinite = Inf, exclude = c(), individual = FALSE, nsim_obs, ...)
 }
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}
 
-\item{offspring}{offspring distribution: either a function (e.g., \code{rpois} for Poisson) or a character string (e.g., "pois" for Poisson)}
+\item{offspring}{offspring distribution: a character string corresponding to
+the R distribution function (e.g., "pois" for Poisson, where
+\code{\link{rpois}} is the R function to generate Poisson random numbers)}
 
 \item{stat}{statistic given as \code{x} ("size" or "length" of chains)}
 
@@ -20,20 +22,22 @@ chain_ll(x, offspring, stat = c("size", "length"), obs_prob = 1,
 
 \item{exclude}{any sizes/lengths to exclude from the likelihood calculation}
 
+\item{individual}{if TRUE, a vector of individual log-likelihood contributions will be returned rather than the sum}
+
 \item{nsim_obs}{number of simulations if the likelihood is to be
 approximated for imperfect observations}
 
 \item{...}{parameters for the offspring distribution}
 }
 \value{
-likelihood
+likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or a list of individual likelihood contributions (if \code{individual=TRUE})
 }
 \description{
 Likelihood for the outcome of a branching process
 }
 \examples{
 chain_sizes <- c(1,1,4,7) # example of observed chain sizes
-chain_ll(chain_sizes, rpois, "size", lambda=0.5)
+chain_ll(chain_sizes, "pois", "size", lambda=0.5)
 }
 \seealso{
 pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll

@@ -10,9 +10,9 @@ chain_sim(n, offspring, stat = c("size", "length"), infinite = Inf,
 \arguments{
 \item{n}{number of simulations to run.}
 
-\item{offspring}{offspring distribution, given as the function used to
-generate the number of offspring in each generation, e.g. `rpois` for
-Poisson distributed offspring}
+\item{offspring}{offspring distribution: a character string corresponding to
+the R distribution function (e.g., "pois" for Poisson, where
+\code{\link{rpois}} is the R function to generate Poisson random numbers)}
 
 \item{stat}{statistic to calculate ("size" or "length" of chains)}
 
@@ -33,7 +33,7 @@ a vector of sizes/lengths (if \code{tree==FALSE}), or a data frame
 Simulate chains using a branching process
 }
 \examples{
-chain_sim(n=5, rpois, "size", lambda=0.5)
+chain_sim(n=5, "pois", "size", lambda=0.5)
 }
 \author{
 Sebastian Funk

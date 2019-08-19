@@ -1,9 +1,9 @@
 ##' Simulate chains using a branching process
 ##'
 ##' @param n number of simulations to run.
-##' @param offspring offspring distribution, given as the function used to
-##'     generate the number of offspring in each generation, e.g. `rpois` for
-##'     Poisson distributed offspring
+##' @param offspring offspring distribution: a character string corresponding to
+##'   the R distribution function (e.g., "pois" for Poisson, where
+##'   \code{\link{rpois}} is the R function to generate Poisson random numbers) 
 ##' @param stat statistic to calculate ("size" or "length" of chains)
 ##' @param infinite a size or length from which the size/length is to be
 ##'     considered infinite
@@ -16,15 +16,20 @@
 ##' @author Sebastian Funk
 ##' @export
 ##' @examples
-##' chain_sim(n=5, rpois, "size", lambda=0.5)
+##' chain_sim(n=5, "pois", "size", lambda=0.5)
 chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
                       tree=FALSE, ...) {
 
     stat <- match.arg(stat)
 
     ## first, get random function as given by `offspring`
-    if (!is.function(offspring)) {
-        stop("object passed as 'offspring' is not a function.")
+    if (!is.character(offspring)) {
+        stop("object passed as 'offspring' is not a character string.")
+    }
+
+    roffspring_name <- paste0("r", offspring)
+    if (!(exists(roffspring_name)) || !is.function(get(roffspring_name))) {
+        stop("Function ", roffspring_name, " does not exist.")
     }
 
     stat_track <- rep(1, n) ## track length or size (depending on `stat`)
@@ -46,7 +51,7 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
     ## next, simulate n chains
     while (length(sim) > 0) {
         ## simulate next generation
-        next_gen <- offspring(n=sum(n_offspring[sim]), ...)
+        next_gen <- get(roffspring_name)(n=sum(n_offspring[sim]), ...)
         if (any(next_gen %% 1 > 0)) {
             stop("Offspring distribution must return integers")
         }

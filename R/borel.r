@@ -22,5 +22,5 @@ dborel <- function(x, mu, log=FALSE) {
 ##' @return vector of random numbers
 ##' @author Sebastian Funk
 rborel <- function(n, mu, infinite=Inf) {
-    chain_sim(n, stats::rpois, "size", infinite=infinite, lambda=mu)
+    chain_sim(n, "pois", "size", infinite=infinite, lambda=mu)
 }

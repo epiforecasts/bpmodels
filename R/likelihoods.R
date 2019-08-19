@@ -122,15 +122,15 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
 ##' Likelihood for the outcome of a branching process
 ##'
 ##' @param x vector of sizes or lengths of transmission chains
-##' @param offspring offspring distribution: either a function (e.g., \code{rpois} for Poisson) or a character string (e.g., "pois" for Poisson)
 ##' @param stat statistic given as \code{x} ("size" or "length" of chains)
 ##' @param obs_prob observation probability (assumed constant)
 ##' @param infinite any chains of this size/length will be treated as infinite
 ##' @param exclude any sizes/lengths to exclude from the likelihood calculation
+##' @param individual if TRUE, a vector of individual log-likelihood contributions will be returned rather than the sum
 ##' @param nsim_obs number of simulations if the likelihood is to be
 ##'   approximated for imperfect observations
 ##' @param ... parameters for the offspring distribution
-##' @return likelihood
+##' @return likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or a list of individual likelihood contributions (if \code{individual=TRUE})
 ##' @inheritParams chain_sim
 ##' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
 ##'   geom_length_ll offspring_ll
@@ -138,14 +138,14 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
 ##' @export
 ##' @examples
 ##' chain_sizes <- c(1,1,4,7) # example of observed chain sizes
-##' chain_ll(chain_sizes, rpois, "size", lambda=0.5)
+##' chain_ll(chain_sizes, "pois", "size", lambda=0.5)
 chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
-                     infinite = Inf, exclude=c(), nsim_obs, ...) {
+                     infinite = Inf, exclude=c(), individual=FALSE, nsim_obs, ...) {
   stat <- match.arg(stat)
 
   ## checks
-  if (!is.function(offspring) && !is.character(offspring)) {
-    stop("object passed as 'offspring' is not a function or character string.")
+  if (!is.character(offspring)) {
+    stop("object passed as 'offspring' is not a character string.")
   }
   if (obs_prob <= 0 || obs_prob > 1) stop("'obs_prob' must be within (0,1]")
   if (obs_prob < 1) {
@@ -158,13 +158,13 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
       sample_func <- rgen_length
     }
     sampled_x <-
-      replicate(nsim_obs, pmin(sample_func(length(x), x, obs_prob), infinite))
-    if (length(x) == 1) sampled_x <- matrix(sampled_x, nrow=1)
+      replicate(nsim_obs, pmin(sample_func(length(x), x, obs_prob), infinite), simplify = FALSE)
     size_x <- unlist(sampled_x)
     if (!is.finite(infinite)) infinite <- max(size_x) + 1
   } else {
     x[x >= infinite] <- infinite
     size_x <- x
+    sampled_x <- list(x)
   }
 
   ## determine for which sizes to calculate the likelihood (for true chain size)
@@ -174,18 +174,9 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
     calc_sizes <- unique(c(size_x, exclude))
   }
 
-  ## get random function as given by `offspring`
-  if (is.character(offspring)) {
-    offspring_dist <- offspring
-  } else {
-    ## get offspring distribution by stripping first letter from offspring
-    ## function
-    offspring_dist <- sub("^.", "", find_function_name(offspring))
-  }
-
   ## get likelihood function as given by `offspring` and `stat``
   likelihoods <- c()
-  ll_func <- paste(offspring_dist, stat, "ll", sep="_")
+  ll_func <- paste(offspring, stat, "ll", sep="_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists
 
   ## calculate likelihoods
@@ -193,15 +184,6 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
     func <- get(ll_func)
     likelihoods[calc_sizes] <- do.call(func, c(list(x=calc_sizes), pars))
   } else {
-    if (is.character(offspring)) {
-      roffspring_name <- paste0("r", offspring)
-      if (exists(roffspring_name)) {
-        offspring <- get(roffspring_name)
-        if (!is.function(offspring)) stop(roffspring_name, " is not a function.")
-      } else {
-        stop("Function ", roffspring_name, " does not exist.")
-      }
-    }
     likelihoods[calc_sizes] <-
       do.call(offspring_ll,
               c(list(x=calc_sizes, offspring=offspring,
@@ -216,16 +198,18 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
   if (!missing(exclude)) {
     likelihoods <- likelihoods - log(-expm1(sum(likelihoods[exclude])))
     likelihoods[exclude] <- -Inf
+
+    sampled_x <- lapply(sampled_x, function(y) {
+      y[!(y %in% exclude)]
+    })
   }
 
-  ## adjust for binomial observation probabilities
-  if (obs_prob < 1) {
-    chains_likelihood <- apply(sampled_x, 2, function(sx) {
-      sum(likelihoods[sx[!(sx %in% exclude)]])
-    })
-  } else {
-    chains_likelihood <- sum(likelihoods[x[!(x %in% exclude)]])
-  }
+  ## assign likelihoods
+  chains_likelihood <- lapply(sampled_x, function(sx) {
+    likelihoods[sx[!(sx %in% exclude)]]
+  })
+
+  if (!individual) chains_likelihood <- vapply(chains_likelihood, sum, 0)
 
   return(chains_likelihood)
 }

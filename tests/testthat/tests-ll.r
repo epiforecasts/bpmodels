@@ -1,20 +1,19 @@
 context("Calculating the likelihood from a branching process model")
 
 chains <- c(1,1,4,7)
-rtest <- "test"
 
 test_that("Likelihoods can be calculated",
 {
-    expect_lt(chain_ll(chains, rpois, "size", lambda=0.5), 0)
-    expect_lt(chain_ll(chains, rpois, "size", lambda=0.5, exclude=1), 0)
-    expect_lt(chain_ll(chains, rpois, "size", lambda=0.5, infinite = 5), 0)
-    expect_lt(chain_ll(chains, rpois, "size", lambda=0.5, obs_prob = 0.5,
+    expect_lt(chain_ll(chains, "pois", "size", lambda=0.5), 0)
+    expect_lt(chain_ll(chains, "pois", "size", lambda=0.5, exclude=1), 0)
+    expect_lt(chain_ll(chains, "pois", "size", lambda=0.5, infinite = 5), 0)
+    expect_lt(chain_ll(chains, "pois", "size", lambda=0.5, obs_prob = 0.5,
                        nsim_obs=1), 0)
-    expect_lt(chain_ll(chains, rpois, "length", lambda=0.5, obs_prob = 0.5,
+    expect_lt(chain_ll(chains, "pois", "length", lambda=0.5, obs_prob = 0.5,
                        nsim_obs=1), 0)
-    expect_lt(chain_ll(chains, rpois, "size", lambda=0.5, infinite = 5,
+    expect_lt(chain_ll(chains, "pois", "size", lambda=0.5, infinite = 5,
                        obs_prob = 0.5, nsim_obs=1), 0)
-    expect_lt(chain_ll(chains, rbinom, "size", size=1, prob=0.5), 0)
+    expect_lt(chain_ll(chains, "binom", "size", size=1, prob=0.5), 0)
 })
 
 test_that("Analytical size/length distributions are implemented",
@@ -30,15 +29,11 @@ test_that("Analytical size/length distributions are implemented",
 
 test_that("Errors are thrown",
 {
-    expect_error(chain_ll(chains, "dummy", "size", lambda=0.5),
-                 "does not exist")
     expect_error(chain_ll(chains, list(), "size", lambda=0.5),
-                 "not a function or")
-    expect_error(chain_ll(chains, "test", "size", lambda=0.5),
-                 "not a function")
-    expect_error(chain_ll(chains, rpois, "size", lambda=0.5, obs_prob = 3),
+                 "not a character")
+    expect_error(chain_ll(chains, "pois", "size", lambda=0.5, obs_prob = 3),
                  "must be within")
-    expect_error(chain_ll(chains, rpois, "size", lambda=0.5, obs_prob = 0.5),
+    expect_error(chain_ll(chains, "pois", "size", lambda=0.5, obs_prob = 0.5),
                  "must be specified")
     expect_error(nbinom_size_ll(chains, mu=0.5, size=0.2, prob=0.1),
                  "both specified")
