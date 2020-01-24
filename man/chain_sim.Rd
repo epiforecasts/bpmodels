@@ -4,8 +4,17 @@
 \alias{chain_sim}
 \title{Simulate chains using a branching process}
 \usage{
-chain_sim(n, offspring, stat = c("size", "length"), infinite = Inf,
-  tree = FALSE, ...)
+chain_sim(
+  n,
+  offspring,
+  stat = c("size", "length"),
+  infinite = Inf,
+  tree = FALSE,
+  serial,
+  t0 = 0,
+  tf = Inf,
+  ...
+)
 }
 \arguments{
 \item{n}{number of simulations to run.}
@@ -21,13 +30,25 @@ considered infinite}
 
 \item{tree}{return the tree of infectors}
 
+\item{serial}{the serial interval; a function that takes one parameter
+(`n`), the number of serial intervals to randomly sample; if this parameter
+  is set, `chain_sim` returns times of infection, too; implies (`tree`=TRUE)}
+
+\item{t0}{start time (if serial interval is given); either a single value (0
+by default for all simulations, or a vector of length `n` with initial
+times)}
+
+\item{tf}{end time (if serial interval is given)}
+
 \item{...}{parameters of the offspring distribution}
 }
 \value{
-a vector of sizes/lengths (if \code{tree==FALSE}), or a data frame
-    with columns `n` (simulation ID), `id` (a unique ID within each
-    simulation for each individual element of the chain), `ancestor` (the ID
-    of the ancestor of each element) and `generation`.
+a vector of sizes/lengths (if \code{tree==FALSE} and no serial
+  interval given), or a data frame with columns `n` (simulation ID), `time`
+  (if the serial interval is given) and (if \code{tree==TRUE}) `id` (a
+  unique ID within each simulation for each individual element of the
+  chain), `ancestor` (the ID of the ancestor of each element) and
+  `generation`.
 }
 \description{
 Simulate chains using a branching process
