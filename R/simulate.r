@@ -8,17 +8,26 @@
 ##' @param infinite a size or length from which the size/length is to be
 ##'     considered infinite
 ##' @param tree return the tree of infectors
+##' @param serial the serial interval; a function that takes one parameter
+##' (`n`), the number of serial intervals to randomly sample; if this parameter
+##'   is set, `chain_sim` returns times of infection, too; implies (`tree`=TRUE)
+##' @param t0 start time (if serial interval is given); either a single value (0
+##'     by default for all simulations, or a vector of length `n` with initial
+##'     times) 
+##' @param tf end time (if serial interval is given)
 ##' @param ... parameters of the offspring distribution
-##' @return a vector of sizes/lengths (if \code{tree==FALSE}), or a data frame
-##'     with columns `n` (simulation ID), `id` (a unique ID within each
-##'     simulation for each individual element of the chain), `ancestor` (the ID
-##'     of the ancestor of each element) and `generation`.
+##' @return a vector of sizes/lengths (if \code{tree==FALSE} and no serial
+##'   interval given), or a data frame with columns `n` (simulation ID), `time`
+##'   (if the serial interval is given) and (if \code{tree==TRUE}) `id` (a
+##'   unique ID within each simulation for each individual element of the
+##'   chain), `ancestor` (the ID of the ancestor of each element) and
+##'   `generation`. 
 ##' @author Sebastian Funk
 ##' @export
 ##' @examples
 ##' chain_sim(n=5, "pois", "size", lambda=0.5)
 chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
-                      tree=FALSE, ...) {
+                      tree = FALSE, serial, init_time, t0 = 0, tf = Inf, ...) {
 
     stat <- match.arg(stat)
 
@@ -32,6 +41,18 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
         stop("Function ", roffspring_name, " does not exist.")
     }
 
+    if (!missing(serial)) {
+        if (!is.function(serial)) {
+            stop("The `serial` argument must be a function.")
+        }
+        if (!missing(tree) && tree == FALSE) {
+            stop("The `serial` argument can't be used with `tree==FALSE`.")
+        }
+        tree <- TRUE
+    } else if (!missing(tf)) {
+        stop("The `tf` argument needs a `serial` argument.")
+    }
+
     stat_track <- rep(1, n) ## track length or size (depending on `stat`)
     n_offspring <- rep(1, n) ## current number of offspring
     sim <- seq_len(n) ## track chains that are still being simulated
@@ -40,12 +61,16 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
     if (tree) {
         generation <- 1L
         tdf <-
-            data.frame(n=seq_len(n),
-                       id=1L,
-                       ancestor=NA_integer_,
-                       generation=generation)
+            data.frame(n = seq_len(n),
+                       id = 1L,
+                       ancestor = NA_integer_,
+                       generation = generation)
+
         ancestor_ids <- rep(1, n)
-        current_max_id <- rep(1, n)
+        if (!missing(serial)) {
+            tdf$time <- t0
+            times <- tdf$time
+        }
     }
 
     ## next, simulate n chains
@@ -71,7 +96,7 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
             stat_track <- stat_track + pmin(1, n_offspring)
         }
 
-        ## record ancestors (if tree==TRUE)
+        ## record times/ancestors (if tree==TRUE)
         if (tree && sum(n_offspring[sim]) > 0) {
             ancestors <- rep(ancestor_ids, next_gen)
             current_max_id <- unname(tapply(ancestor_ids, indices, max))
@@ -79,22 +104,36 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
             ids <- rep(current_max_id, n_offspring[sim]) +
                 unlist(lapply(n_offspring[sim], seq_len))
             generation <- generation + 1L
-            ## record indices corresponding the number of offspring
             new_df <-
-                data.frame(n=indices,
-                           id=ids,
-                           ancestor=ancestors,
-                           generation=generation)
+                data.frame(n = indices,
+                           id = ids,
+                           ancestor = ancestors,
+                           generation = generation)
+            if (!missing(serial)) {
+                times <- rep(times, next_gen) + serial(sum(n_offspring))
+                current_min_time <- unname(tapply(times, indices, min))
+                new_df$time <- times
+            }
             tdf <- rbind(tdf, new_df)
         }
 
         ## only continue to simulate chains that offspring and aren't of
         ## infinite size/length
         sim <- which(n_offspring > 0 & stat_track < infinite)
-        if (tree) ancestor_ids <- ids[indices %in% sim]
+        if (tree) {
+            if (!missing(serial)) {
+                sim <- sim[current_min_time < tf]
+                times <- times[indices %in% sim]
+            }
+            ancestor_ids <- ids[indices %in% sim]
+        }
     }
 
     if (tree) {
+        if (!missing(tf)) {
+            tdf <- tdf[tdf$time < tf, ]
+        }
+        rownames(tdf) <- NULL
         return(tdf)
     } else {
         stat_track[stat_track >= infinite] <- Inf
