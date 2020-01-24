@@ -120,15 +120,17 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
         ## only continue to simulate chains that offspring and aren't of
         ## infinite size/length
         sim <- which(n_offspring > 0 & stat_track < infinite)
-        if (!missing(serial)) {
-            ## only continue to simulate chains that don't go beyond tf
-            sim <- intersect(sim, unique(indices)[current_min_time < tf])
-        }
-        if (tree) {
+        if (length(sim) > 0) {
             if (!missing(serial)) {
-                times <- times[indices %in% sim]
+                ## only continue to simulate chains that don't go beyond tf
+                sim <- intersect(sim, unique(indices)[current_min_time < tf])
             }
-            ancestor_ids <- ids[indices %in% sim]
+            if (tree) {
+                if (!missing(serial)) {
+                    times <- times[indices %in% sim]
+                }
+                ancestor_ids <- ids[indices %in% sim]
+            }
         }
     }
 
