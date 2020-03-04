@@ -13,7 +13,13 @@ complementary_logprob <- function(x) {
 ##'
 ##' Samples the size parameter from the binomial distribution with fixed x
 ##' (number of successes) and p (success probability)
-##' @param n number of samples to generate
+##' @param n number of samples to generate##'      secondary cases. Ignored if offspring == "pois". Must be > 1.
+##' @param serial the serial interval. A function that takes one parameter
+##'     (`n`), the number of serial intervals to randomly sample.
+##'     Value must be >= 0.
+##' @param t0 start time
+##' @param tf end time
+##' @param pop the population
 ##' @param x number of successes
 ##' @param prob probability of success
 ##' @return sampled sizes
@@ -57,3 +63,18 @@ find_function_name <- function(fun) {
     }
   }
 }
+
+##' Negative binomial random numbers parametrized
+##' in terms of mean and dispersion coefficient
+##' @param n number of samples to draw
+##' @param mn mean of distribution
+##' @param disp dispersion coefficient (var/mean)
+##' @return vector containing the random numbers
+##' @author Flavio Finger
+##' @export
+##' @examples
+##' rnbinom_mean_disp(n = 5, mn = 4, disp = 2)
+rnbinom_mean_disp <- function(n, mn, disp) {
+  size <- mn / (disp - 1)
+  stats::rnbinom(n, size = size, mu = mn)
+  }

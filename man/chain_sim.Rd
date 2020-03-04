@@ -4,17 +4,8 @@
 \alias{chain_sim}
 \title{Simulate chains using a branching process}
 \usage{
-chain_sim(
-  n,
-  offspring,
-  stat = c("size", "length"),
-  infinite = Inf,
-  tree = FALSE,
-  serial,
-  t0 = 0,
-  tf = Inf,
-  ...
-)
+chain_sim(n, offspring, stat = c("size", "length"), infinite = Inf,
+  tree = FALSE, serial, t0 = 0, tf = Inf, ...)
 }
 \arguments{
 \item{n}{number of simulations to run.}
