@@ -13,13 +13,7 @@ complementary_logprob <- function(x) {
 ##'
 ##' Samples the size parameter from the binomial distribution with fixed x
 ##' (number of successes) and p (success probability)
-##' @param n number of samples to generate##'      secondary cases. Ignored if offspring == "pois". Must be > 1.
-##' @param serial the serial interval. A function that takes one parameter
-##'     (`n`), the number of serial intervals to randomly sample.
-##'     Value must be >= 0.
-##' @param t0 start time
-##' @param tf end time
-##' @param pop the population
+##' @param n number of samples to generate
 ##' @param x number of successes
 ##' @param prob probability of success
 ##' @return sampled sizes

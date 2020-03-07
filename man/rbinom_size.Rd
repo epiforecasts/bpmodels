@@ -7,21 +7,11 @@
 rbinom_size(n, x, prob)
 }
 \arguments{
-\item{n}{number of samples to generate##'      secondary cases. Ignored if offspring == "pois". Must be > 1.}
+\item{n}{number of samples to generate}
 
 \item{x}{number of successes}
 
 \item{prob}{probability of success}
-
-\item{serial}{the serial interval. A function that takes one parameter
-(`n`), the number of serial intervals to randomly sample.
-Value must be >= 0.}
-
-\item{t0}{start time}
-
-\item{tf}{end time}
-
-\item{pop}{the population}
 }
 \value{
 sampled sizes

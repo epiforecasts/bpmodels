@@ -43,14 +43,6 @@ chain_sim_susc <- function(
 
     offspring <- match.arg(offspring)
 
-    if (missing(pop)) {
-        stop("Argument pop required.")
-    }
-
-    if (missing(mn_offspring)) {
-        stop("Argument mn_offspring reequired.")
-    }
-
     if (offspring == "pois") {
         if (!missing(disp_offspring)) {
             warning("argument disp_offspring not used for
@@ -68,7 +60,7 @@ chain_sim_susc <- function(
 
     } else if (offspring  == "nbinom") {
 
-        if (missing(disp_offspring) | disp_offspring <= 1) { ## dispersion index
+        if (disp_offspring <= 1) { ## dispersion index
             stop("Offspring distribution 'nbinom' requires argument
                 disp_offspring > 1. Use 'pois' if there is no overdispersion.")
         }
