@@ -57,3 +57,18 @@ find_function_name <- function(fun) {
     }
   }
 }
+
+##' Negative binomial random numbers parametrized
+##' in terms of mean and dispersion coefficient
+##' @param n number of samples to draw
+##' @param mn mean of distribution
+##' @param disp dispersion coefficient (var/mean)
+##' @return vector containing the random numbers
+##' @author Flavio Finger
+##' @export
+##' @examples
+##' rnbinom_mean_disp(n = 5, mn = 4, disp = 2)
+rnbinom_mean_disp <- function(n, mn, disp) {
+  size <- mn / (disp - 1)
+  stats::rnbinom(n, size = size, mu = mn)
+  }

@@ -4,17 +4,8 @@
 \alias{chain_ll}
 \title{Likelihood for the outcome of a branching process}
 \usage{
-chain_ll(
-  x,
-  offspring,
-  stat = c("size", "length"),
-  obs_prob = 1,
-  infinite = Inf,
-  exclude = c(),
-  individual = FALSE,
-  nsim_obs,
-  ...
-)
+chain_ll(x, offspring, stat = c("size", "length"), obs_prob = 1,
+  infinite = Inf, exclude = c(), individual = FALSE, nsim_obs, ...)
 }
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}

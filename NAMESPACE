@@ -2,3 +2,5 @@
 
 export(chain_ll)
 export(chain_sim)
+export(chain_sim_susc)
+export(rnbinom_mean_disp)
