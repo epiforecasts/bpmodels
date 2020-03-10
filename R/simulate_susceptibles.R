@@ -52,8 +52,9 @@ chain_sim_susc <- function(
         ## using a right truncated poisson distribution
         ## to avoid more cases than susceptibles
         offspring_fun <- function(n, susc) {
-            extraDistr::rtpois(
+            truncdist::rtrunc(
                 n,
+                spec = "pois",
                 lambda = mn_offspring * susc / pop,
                 b = susc)
             }

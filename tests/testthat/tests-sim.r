@@ -109,12 +109,5 @@ test_that("Errors are thrown",
             pop = 100
             ),
         "argument \"disp_offspring\" is missing, with no default")
-    expect_error(
-        chain_sim_susc(
-            "pois",
-            mn_offspring = 3,
-            serial = function(x) -3,
-            pop = 100),
-        "Serial interval must be >= 0.")
 
 })
