@@ -16,5 +16,6 @@ Suggests:
 License: GPL-3
 URL: https://github.com/sbfnk/bpmodels
 BugReports: https://github.com/sbfnk/bpmodels
-RoxygenNote: 7.0.2
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
+Encoding: UTF-8
