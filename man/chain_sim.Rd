@@ -2,48 +2,96 @@
 % Please edit documentation in R/simulate.r
 \name{chain_sim}
 \alias{chain_sim}
-\title{Simulate chains using a branching process}
+\title{Simulate transmission chains using a branching process}
 \usage{
-chain_sim(n, offspring, stat = c("size", "length"), infinite = Inf,
-  tree = FALSE, serial, t0 = 0, tf = Inf, ...)
+chain_sim(
+  n,
+  offspring,
+  stat = c("size", "length"),
+  infinite = Inf,
+  tree = FALSE,
+  serial,
+  t0 = 0,
+  tf = Inf,
+  ...
+)
 }
 \arguments{
-\item{n}{number of simulations to run.}
+\item{n}{Number of simulations to run.}
 
-\item{offspring}{offspring distribution: a character string corresponding to
+\item{offspring}{Offspring distribution: a character string corresponding to
 the R distribution function (e.g., "pois" for Poisson, where
 \code{\link{rpois}} is the R function to generate Poisson random numbers)}
 
-\item{stat}{statistic to calculate ("size" or "length" of chains)}
+\item{stat}{String; Statistic to calculate.
+\itemize{
+  \item "size": the total number of offspring.
+  \item "length": the total number of ancestors. 
+}}
 
-\item{infinite}{a size or length from which the size/length is to be
-considered infinite}
+\item{infinite}{A size or length above which the simulation results should be dropped. 
+Defaults to `Inf`.}
 
-\item{tree}{return the tree of infectors}
+\item{tree}{Logical. Should the tree of infectors be returned? Defaults to `FALSE`.}
 
-\item{serial}{the serial interval; a function that takes one parameter
-(`n`), the number of serial intervals to randomly sample; if this parameter
-  is set, `chain_sim` returns times of infection, too; implies (`tree`=TRUE)}
+\item{serial}{The serial interval generator function; the name of a user-defined 
+named function with only one argument `n`, the number of serial intervals 
+to randomly sample.}
 
-\item{t0}{start time (if serial interval is given); either a single value (0
-by default for all simulations, or a vector of length `n` with initial
-times)}
+\item{t0}{Start time (if serial interval is given); either a single value or a 
+vector of length `n` (number of simulations) with initial times. Defaults to 0.}
 
-\item{tf}{end time (if serial interval is given)}
+\item{tf}{End time (if serial interval is given).}
 
-\item{...}{parameters of the offspring distribution}
+\item{...}{Parameters of the offspring distribution.}
 }
 \value{
-a vector of sizes/lengths (if \code{tree==FALSE} and no serial
-  interval given), or a data frame with columns `n` (simulation ID), `time`
-  (if the serial interval is given) and (if \code{tree==TRUE}) `id` (a
-  unique ID within each simulation for each individual element of the
-  chain), `ancestor` (the ID of the ancestor of each element) and
-  `generation`.
+Either: 
+\itemize{
+ \item{A vector of sizes/lengths (if \code{tree == FALSE} OR serial
+  interval not set, since that implies \code{tree == FALSE})}, or 
+  \item {a data frame with 
+  columns `n` (simulation ID), `time` (if the serial interval is given) and 
+  (if \code{tree == TRUE}) `id` (a unique ID within each simulation for each 
+  individual element of the chain), `ancestor` (the ID of the ancestor of each 
+  element) and `generation`.}
+}
 }
 \description{
-Simulate chains using a branching process
+\code{chain_sim()} is a stochastic simulator for generating 
+transmission chain data given information on the offspring distribution, 
+serial interval, time since the first case, e.t.c.
 }
+\details{
+`chain_sim()` either returns a vector or a data.frame. The output is either a 
+vector if serial is not provided, which automatically sets \code{tree = FALSE},
+or a data.frame, which means that `serial` was provided as a function. When `serial`
+is provided, it means \code{tree = TREE} automatically. However, setting 
+\code{tree = TRUE} would require providing a function for `serial`.
+}
+\section{Specifying \code{serial}}{
+
+The argument \code{serial} must be specified as a named function with one 
+argument. #' `chain_sim()` uses the specified function to generate a serial 
+interval vector the size of the offspring from the previous time step.    
+
+If `serial` is set, \code{chain_sim()} returns times of 
+infection as a column in the output. Moreover, setting `serial` implies 
+\code{`tree` = TRUE} and a tree of infectors and infectees will be generated 
+in the output. 
+
+For example, assuming we want to specify the serial interval 
+generator as a random log-normally distributed variable with \code{meanlog = 0.58} 
+and \code{sdlog = 1.58}, we must define a named function, let's call it 
+"serial_interval", with only one argument representing the number of serial 
+intervals to sample. Put together, the function definition will be 
+\code{serial_interval <- function(n){rlnorm(n, 0.58, 1.38)}}. 
+We will then set 
+\code{serial = serial_interval} inside \code{chain_sim()} as 
+\code{chain_sim(..., serial = serial_interval}, 
+where \code{...} are the other arguments to \code{chain_sim()}.
+}
+
 \examples{
 chain_sim(n=5, "pois", "size", lambda=0.5)
 }

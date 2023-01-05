@@ -5,8 +5,16 @@
 \title{Simulate a single chain using a branching process while accounting
 for depletion of susceptibles.}
 \usage{
-chain_sim_susc(offspring = c("pois", "nbinom"), mn_offspring,
-  disp_offspring, serial, t0 = 0, tf = Inf, pop, initial_immune = 0)
+chain_sim_susc(
+  offspring = c("pois", "nbinom"),
+  mn_offspring,
+  disp_offspring,
+  serial,
+  t0 = 0,
+  tf = Inf,
+  pop,
+  initial_immune = 0
+)
 }
 \arguments{
 \item{offspring}{offspring distribution: a character string corresponding to

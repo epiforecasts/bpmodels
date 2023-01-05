@@ -9,7 +9,7 @@ offspring_ll(x, offspring, stat, nsim_offspring = 100, ...)
 \arguments{
 \item{x}{vector of sizes}
 
-\item{offspring}{offspring distribution: a character string corresponding to
+\item{offspring}{Offspring distribution: a character string corresponding to
 the R distribution function (e.g., "pois" for Poisson, where
 \code{\link{rpois}} is the R function to generate Poisson random numbers)}
 

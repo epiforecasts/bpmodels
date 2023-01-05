@@ -4,13 +4,22 @@
 \alias{chain_ll}
 \title{Likelihood for the outcome of a branching process}
 \usage{
-chain_ll(x, offspring, stat = c("size", "length"), obs_prob = 1,
-  infinite = Inf, exclude = c(), individual = FALSE, nsim_obs, ...)
+chain_ll(
+  x,
+  offspring,
+  stat = c("size", "length"),
+  obs_prob = 1,
+  infinite = Inf,
+  exclude = c(),
+  individual = FALSE,
+  nsim_obs,
+  ...
+)
 }
 \arguments{
 \item{x}{vector of sizes or lengths of transmission chains}
 
-\item{offspring}{offspring distribution: a character string corresponding to
+\item{offspring}{Offspring distribution: a character string corresponding to
 the R distribution function (e.g., "pois" for Poisson, where
 \code{\link{rpois}} is the R function to generate Poisson random numbers)}
 
