@@ -29,9 +29,3 @@ vignettes/*.pdf
 rsconnect/
 /doc/
 /Meta/
-
-.Rbuildignore
-
-*.Rproj
-
-*.bib.sav
