@@ -1,13 +1,22 @@
 ---
 title: "Analysing chain statistics using branching process models"
 author: "Sebastian Funk"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  bookdown::html_vignette2:
+    fig_caption: yes
+    code_folding: show
+pkgdown:
+  as_is: true
+bibliography: references.bib
+link-citations: true
 vignette: >
   %\VignetteIndexEntry{Analysing chain statistics using branching process models}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
+
 
 ```{r setup, include = FALSE}
 library('knitr')
@@ -17,9 +26,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-[bpmodels](https://github.com/sbfnk/bpmodels) is an `R` package to analyse and simulate the size and length of branching processes with a given offspring distribution. These can be used, for example, to analyse the distribution of chain sizes or length of infectious disease outbreaks.
+[bpmodels](https://github.com/sbfnk/bpmodels) is an `R` package to simulate and analyse the size and length of branching processes with a given offspring distribution. These can be used, for example, to analyse the distribution of chain sizes or length of infectious disease outbreaks.
 
-# Usage
+# Quick start
 
 To load the package, use
 ```{r eval=FALSE}
@@ -30,47 +39,63 @@ suppressWarnings(library('bpmodels'))
 set.seed(13)
 ```
 
-At the heart of the package are the `chains_ll` and `chains_sim` functions. The `chains_ll` function calculates the log-likelihood of a distribution of chain sizes or lengths given an offspring distribution and associated parameters. For example, to get the log-likelihood for a given observed distribution of chain sizes assuming a mean number of 0.5 Poisson-distributed offspring per generation, use
+At the heart of the package are the `chains_ll()` and `chains_sim()` functions. 
+
+## Calculating log-likelihoods
+
+The `chains_ll()` function calculates the log-likelihood of a distribution of chain sizes or lengths given an offspring distribution and its associated parameters. 
+
+If we have observed a distribution of chains of sizes $1, 1, 4, 7$, we can calculate the log-likelihood of this observed chain by assuming the offspring per generation is Poisson distributed with a mean number of 0.5. 
+
+To do this, we run 
 
 ```{r}
-chain_sizes <- c(1,1,4,7) # example of observed chain sizes
-chain_ll(chain_sizes, "pois", "size", lambda=0.5)
+chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
+chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
 ```
 
-The first argument of `chain_ll` is the size (or length) distribution to analyse. The second argument (called `offspring`) specifies the offspring distribution. This is given as a the function used to generate random offspring. It can be any probability distribution implemented in R, that is, one that has a corresponding function for generating random numbers beginning with the letter `r`. In the case of the example above, since random Poisson numbers are generated in R using a function called `rpois`, the string to pass to the `offspring` argument is `"pois"`.
+The first argument of `chain_ll()` is the size (or length) distribution to analyse. The second argument (called `offspring`) specifies the offspring distribution. This is given as a function used to generate random offspring. It can be any probability distribution implemented in `R`, that is, one that has a corresponding function for generating random numbers beginning with the letter `r`. In the case of the example above, since random Poisson numbers are generated in `R` using a function called `rpois()`, the string to pass to the `offspring` argument is `"pois"`.
 
-The third argument (called `stat`) determines whether to analyse chain sizes (`"size"`, the default if this argument is not specified) or lengths (`"length"`). Lastly, any named arguments not recognised by `chain_ll` are interpreted as parameters of the corresponding probability distribution, here `lambda=0.5` as the mean of the Poisson distribution (see the R help page for the Poisson distribution for more information).
+The third argument (called `stat`) determines whether to analyse chain sizes (`"size"`, the default if this argument is not specified) or lengths (`"length"`). Lastly, any named arguments not recognised by `chain_ll()` are interpreted as parameters of the corresponding probability distribution, here `lambda = 0.5` as the mean of the Poisson distribution (see the `R` help page for the [Poisson distribution](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Poisson.html) for more information).
 
-You can use the `R` help to find out about usage of the `chains_ll` function,
+To find out about usage of the `chains_ll()` function, you can use the `R` help file
 
 ```{r eval=FALSE}
 ?chains_ll
 ```
 
-To simulate from a branching process, use the `chain_sim` function, which follows the same syntax as the `chain_ll` function:
+## Simulating branching processes
+
+To simulate a branching process, we use the `chain_sim()` function. This function follows the same syntax as `chain_ll()`, that is:
 
 ```{r}
-chain_sim(n=5, "pois", "size", lambda=0.5)
+chain_sim(n = 5, "pois", "size", lambda = 0.5)
 ```
 
 # Methodology
 
-If the probability distribution of chain sizes or lengths has an analytical solution, this will be used (size distribution: Poisson and negative binomial; length distribution: Poisson and geometric). If not, simulations are used to approximate this probability distributions (using a linear approximation to the cumulative distribution for unobserved sizes/lengths), requiring an additional parameter `nsim_offspring` for the number of simulations to be used for this approximation. For example, to get offspring drawn from a binomial distribution with probability `prob=0.5`.
+If the probability distribution of chain sizes or lengths has an analytical solution, this will be used (size distribution: Poisson and negative binomial; length distribution: Poisson and geometric). 
+
+If an analytical solution does not exist, simulations are used to approximate this probability distributions (using a linear approximation to the cumulative distribution for unobserved sizes/lengths). The argument `nsim_offspring` is used to specify the number of simulations to be used for this approximation. 
+
+For example, to get offspring drawn from a binomial distribution with probability `prob = 0.5`, we run
 
 ```{r}
-chain_ll(chain_sizes, "binom", "size", size=1, prob=0.5, nsim_offspring=100)
+chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5, nsim_offspring = 100)
 ```
 
 # Imperfect observations
 
-The `chain_ll` function has an `obs_prob` parameter that can be used to determine the likelihood if observations are imperfect. In that case, true chain sizes or lengths are simulated repeatedly (the number of times given by the `nsim_obs` argument) and the likelihood calculated for each of these simulations. For example, if the probability of observing each case is 30%, use
+If observations are imperfect, the `chain_ll()` function has an `obs_prob` argument that can be used to determine the likelihood. In that case, true chain sizes or lengths are simulated repeatedly (the number of times given by the `nsim_obs` argument), and the likelihood calculated for each of these simulations. 
+
+For example, if the probability of observing each case is $30%$, we use
 
 ```{r}
-ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda=0.5, nsim_obs=10)
+ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5, nsim_obs = 10)
 summary(ll)
 ```
 
-This returns `nsim_obs=10` likelihood values which can be averaged to come up with an overall likelihood estimate.
+This returns `nsim_obs = 10` likelihood values which can be averaged to come up with an overall likelihood estimate.
 
 # References
 
