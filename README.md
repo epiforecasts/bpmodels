@@ -4,10 +4,11 @@
 [![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/master/graphs/badge.svg)](https://codecov.io/github/epiverse-trace/bpmodels) 
 <!-- badges: end -->
 
-Methods for analysing the distribution of epidemiological chain sizes and lengths
+`bpmodels` is an R package for simulating epidemics using branching processes. The package provides functions for fitting the following models:
 
 The latest development version of the `bpmodels` package can be installed via
 
+# Installation
 ```{r eval=FALSE}
 devtools::install_github('epiverse-trace/bpmodels')
 ```
