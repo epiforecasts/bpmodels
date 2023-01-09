@@ -35,8 +35,8 @@ Defaults to `Inf`.}
 \item{tree}{Logical. Should the tree of infectors be returned? Defaults to `FALSE`.}
 
 \item{serial}{The serial interval generator function; the name of a user-defined 
-named function with only one argument `n`, the number of serial intervals 
-to randomly sample.}
+named or anonymous function with only one argument `n`, representing the number 
+of serial intervals to generate.}
 
 \item{t0}{Start time (if serial interval is given); either a single value or a 
 vector of length `n` (number of simulations) with initial times. Defaults to 0.}
@@ -71,29 +71,40 @@ is provided, it means \code{tree = TREE} automatically. However, setting
 }
 \section{Specifying \code{serial}}{
 
-The argument \code{serial} must be specified as a named function with one 
-argument. #' `chain_sim()` uses the specified function to generate a serial 
-interval vector the size of the offspring from the previous time step.    
+The argument \code{serial} must be specified as a named or anonymous/inline/unnamed function 
+with one argument. `chain_sim()` uses the specified function to generate a serial 
+interval vector the size of the offspring from the previous time step in the simulation.    
 
 If `serial` is set, \code{chain_sim()} returns times of 
 infection as a column in the output. Moreover, setting `serial` implies 
-\code{`tree` = TRUE} and a tree of infectors and infectees will be generated 
-in the output. 
+\code{`tree` = TRUE} and a tree of infectors (`ancestor`) and infectees (`id`) 
+will be generated in the output. 
 
 For example, assuming we want to specify the serial interval 
 generator as a random log-normally distributed variable with \code{meanlog = 0.58} 
-and \code{sdlog = 1.58}, we must define a named function, let's call it 
+and \code{sdlog = 1.58}, we could define a named function, let's call it 
 "serial_interval", with only one argument representing the number of serial 
-intervals to sample. Put together, the function definition will be 
-\code{serial_interval <- function(n){rlnorm(n, 0.58, 1.38)}}. 
-We will then set 
-\code{serial = serial_interval} inside \code{chain_sim()} as 
-\code{chain_sim(..., serial = serial_interval}, 
+intervals to sample: \code{serial_interval <- function(n){rlnorm(n, 0.58, 1.38)}}, 
+and assign the name of the function to serial in `chain_sim()` like so 
+\code{chain_sim(..., serial = serial_interval)}, 
+where \code{...} are the other arguments to \code{chain_sim()}. Alternatively, we 
+could assign an anonymous function to serial in the `chain_sim()` call like so
+\code{chain_sim(..., serial = function(n){rlnorm(n, 0.58, 1.38)})}, 
 where \code{...} are the other arguments to \code{chain_sim()}.
 }
 
 \examples{
+# Where tree == FALSE
+set.seed(123)
 chain_sim(n=5, "pois", "size", lambda=0.5)
+
+# Where serial is set, implying tree = TREE
+# Define the serial function and assign it to serial
+
+set.seed(123)
+serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
+chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', infinite = 100, 
+serial = serial_interval)
 }
 \author{
 Sebastian Funk
