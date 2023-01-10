@@ -90,7 +90,7 @@ test_that("Errors are thrown",
             mn_offspring = 3,
             serial = function(x) 3,
             pop = 100),
-        "'arg' should be one of \"pois\", \"nbinom\"")
+        paste0("'arg' should be one of ", dQuote('pois'), ', ', dQuote('nbinom')))
     expect_error(
         chain_sim_susc(
             "nbinom",
