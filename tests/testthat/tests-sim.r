@@ -38,7 +38,7 @@ test_that("Chains can be simulated",
             chain_sim_susc(
                 "nbinom",
                 mn_offspring = 2,
-                disp = 1.5,
+                disp_offspring = 1.5,
                 serial = function(x) 3,
                 pop = 100
             )

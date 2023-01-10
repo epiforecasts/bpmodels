@@ -97,7 +97,6 @@
 #' }
 chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
                       tree = FALSE, serial, t0 = 0, tf = Inf, ...) {
-
     stat <- match.arg(stat)
 
     ## first, get random function as given by `offspring`
