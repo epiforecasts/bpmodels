@@ -1,7 +1,7 @@
 #' Simulate transmission chains using a branching process
 #' @description \code{chain_sim()} is a stochastic simulator for generating 
 #' transmission chain data given information on the offspring distribution, 
-#' serial interval, time since the first case, e.t.c. 
+#' serial interval, time since the first case, etc. 
 #' @param n Number of simulations to run.
 #' @param offspring Offspring distribution: a character string corresponding to
 #'   the R distribution function (e.g., "pois" for Poisson, where
@@ -31,7 +31,7 @@
 #'   individual element of the chain), `ancestor` (the ID of the ancestor of each 
 #'   element), and `generation`.}
 #' }
-#' @author Sebastian Funk James M. Azam
+#' @author Sebastian Funk, James M. Azam
 #' @export
 #' @details 
 #' `chain_sim()` either returns a vector or a data.frame. The output is either a 
@@ -40,8 +40,22 @@
 #' is provided, it means \code{tree = TREE} automatically. However, setting 
 #' \code{tree = TRUE} would require providing a function for `serial`.
 #' 
-#' ## Specifying `serial`:
-#' The argument `serial` must be specified as a named or 
+#' # The serial interval (`serial`):
+#' 
+#' ## Assumptions/disambiguation
+#' 
+#' In epidemiology, the generation interval is the duration between successive 
+#' infectious events in a chain of transmission. Similarly, the serial interval is the 
+#' duration between observed symptom onset times between successive 
+#' cases in a transmission chain. The generation interval is often hard to observe 
+#' because exact times of infection are hard to measure hence, the serial interval
+#' is often used instead. Here, we use the serial interval to represent what would 
+#' normally be called the generation interval, that is, the time between successive
+#' cases. 
+#' 
+#' ## Specifying `serial` in `chain_sim()`
+#' 
+#' `serial` must be specified as a named or 
 #' [anonymous/inline/unnamed function](https://en.wikipedia.org/wiki/Anonymous_function#R) 
 #' with one argument. 
 #' 
@@ -68,7 +82,6 @@
 #' 
 #' # Specifying `serial` without specifying `tree` will set `tree = TRUE` internally.
 #'  
-#' 
 #' # We'll first define the serial function 
 #' set.seed(123)
 #' serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
