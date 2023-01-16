@@ -31,7 +31,7 @@
 #'   individual element of the chain), `ancestor` (the ID of the ancestor of each 
 #'   element), and `generation`.}
 #' }
-#' @author Sebastian Funk
+#' @author Sebastian Funk James M. Azam
 #' @export
 #' @details 
 #' `chain_sim()` either returns a vector or a data.frame. The output is either a 
