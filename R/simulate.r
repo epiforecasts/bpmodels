@@ -62,17 +62,26 @@
 #' \code{chain_sim(..., serial = function(n){rlnorm(n, 0.58, 1.38)})}, 
 #' where `...` are the other arguments to `chain_sim()`.
 #' @examples
-#' # Where \code{tree == FALSE}
+#' # Specifying no `serial` and `tree == FALSE` (default) returns a vector
 #' set.seed(123)
-#' chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
+#' chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5, tree = FALSE)
 #' 
-#' # Where serial is specified, implying `tree = TREE`
-#' # Define the serial function and assign it to serial
+#' # Specifying `serial` without specifying `tree` will set `tree = TRUE` internally.
+#'  
 #' 
+#' # We'll first define the serial function 
 #' set.seed(123)
 #' serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
 #' chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', infinite = 100, 
 #' serial = serial_interval)
+#' 
+#' # Specifying `serial` and `tree = FALSE` will throw an error 
+#' set.seed(123)
+#' \dontrun{
+#' try(chain_sim(n = 10, serial = function(x) 3, offspring = "pois", lambda = 2, 
+#' infinite = 10, tree = FALSE)
+#' )
+#' }
 chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
                       tree = FALSE, serial, t0 = 0, tf = Inf, ...) {
 
