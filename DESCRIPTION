@@ -4,8 +4,8 @@ Version: 0.1.0
 Authors@R: c(
     person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut", "cre")),
     person("Zhian N.", "Kamvar", , "zkamvar@gmail.com", role = "ctb"),
-    person("Flavio", "Finger", , "flavio.finger@epicentre.msf.org", role = "aut")
-    person("James", "Azam", "Mba", "james.azam@lshtm.ac.uk", role = c("aut", "cre"))
+    person("Flavio", "Finger", , "flavio.finger@epicentre.msf.org", role = "aut"),
+    person("James", "Azam", "Mba", "james.azam@lshtm.ac.uk", role = c("aut"))
   )
 Description: Provides methods to analyse and simulate the size and length
     of branching processes with an arbitrary offspring distribution. These
