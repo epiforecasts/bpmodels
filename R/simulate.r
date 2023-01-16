@@ -37,7 +37,7 @@
 #' `chain_sim()` either returns a vector or a data.frame. The output is either a 
 #' vector if `serial` is not provided, which automatically sets \code{tree = FALSE},
 #' or a `data.frame`, which means that `serial` was provided as a function. When `serial`
-#' is provided, it means \code{tree = TREE} automatically. However, setting 
+#' is provided, it means \code{tree = TRUE} automatically. However, setting 
 #' \code{tree = TRUE} would require providing a function for `serial`.
 #' 
 #' # The serial interval (`serial`):
