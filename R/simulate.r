@@ -12,7 +12,7 @@
 #'   \item "length": the total number of ancestors. 
 #' }
 #' @param infinite A size or length above which the simulation results should be 
-#' set to `Inf`. Defaults to `Inf`.
+#' set to `Inf`. Defaults to `Inf`, resulting in no results ever set to `Inf`
 #' @param tree Logical. Should the transmission tree be returned? Defaults to `FALSE`.
 #' @param serial The serial interval generator function; the name of a user-defined 
 #' named or anonymous function with only one argument `n`, representing the number 
