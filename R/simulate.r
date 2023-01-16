@@ -6,7 +6,7 @@
 #' @param offspring Offspring distribution: a character string corresponding to
 #'   the R distribution function (e.g., "pois" for Poisson, where
 #'   \code{\link{rpois}} is the R function to generate Poisson random numbers) 
-#' @param stat String; Statistic to calculate.
+#' @param stat String; Statistic to calculate. Can be one of:
 #' \itemize{
 #'   \item "size": the total number of offspring.
 #'   \item "length": the total number of ancestors. 
