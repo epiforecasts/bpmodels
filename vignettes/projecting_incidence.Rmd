@@ -3,6 +3,7 @@ title: "Projecting future disease incidence given early outbreak data"
 author: "James Azam, Sebastian Funk"
 date: '2023-01-13'
 output: html_document
+bibliography: vignettes/references.bib 
 ---
 
 ```{r setup, include=FALSE}
@@ -16,13 +17,16 @@ library('ggplot2')
 ```
 
 ## Description
-Branching processes can be used to project future disease incidence given early 
-outbreak data. `bpmodels` can simulate branching processes using its `chain_sim()` function. 
+Branching processes can be used to project disease incidence provided we have some 
+information on the distribution of times between successive cases (serial interval), 
+and the distribution of secondary cases produced by a single individual (offspring 
+distribution). Such simulations can be achieved in `bpmodels` with the `chain_sim()` function. 
 
 ## Disease data
 
-Let's create some early outbreak data, assuming the cases have a negative binomial \
-distribution
+Let's create an outbreak dataset, assuming the cases are sampled from a negative binomial
+distribution with mean = 5 and dispersion = 7.5. These parameter values are arbitrarily
+chosen for illustrative purposes.
 
 ```{r data_generation, message=FALSE}
 set.seed(12)
@@ -65,11 +69,11 @@ cases_to_project <- 1000
 sigma = 2.9
 mu = 4.7
 
-si_sd <- sqrt(log(1 + (sigma/mu)^2)) 
-si_mean <- log((mu^2)/(sqrt(sigma^2 + mu^2))) #the desired mean
+si_sd <- sqrt(log(1 + (sigma/mu)^2)) #log standard deviation
+si_mean <- log((mu^2)/(sqrt(sigma^2 + mu^2))) #log mean
 
 #' serial interval function
-serial_interval <- function(sample_size = 1) {
+serial_interval <- function(sample_size) {
   si <- rlnorm(sample_size, meanlog = si_mean, sdlog = si_sd)
   return(si)
 }
