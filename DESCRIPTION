@@ -21,7 +21,10 @@ Suggests:
     rmarkdown,
     bookdown,
     testthat,
-    truncdist
+    truncdist,
+    dplyr,
+    ggplot2,
+    lubridate
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
