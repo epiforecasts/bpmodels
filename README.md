@@ -4,9 +4,8 @@
 [![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/master/graphs/badge.svg)](https://codecov.io/github/epiverse-trace/bpmodels) 
 <!-- badges: end -->
 
-`bpmodels` is an R package for simulating epidemics using branching
-processes. The package provides functions for fitting the following
-models:
+`bpmodels` is an R package to simulate and analyse the size and length
+of branching processes with a given offspring distribution.
 
 # Installation
 The latest development version of the `bpmodels` package can be
