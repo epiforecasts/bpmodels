@@ -33,3 +33,5 @@ rsconnect/
 .Rbuildignore
 
 *.Rproj
+
+*.bib.sav
