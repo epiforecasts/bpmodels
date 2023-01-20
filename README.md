@@ -1,7 +1,7 @@
 # bpmodels
-
-[![Travis-CI Build Status](https://travis-ci.org/sbfnk/bpmodels.svg?branch=master)](https://travis-ci.org/sbfnk/bpmodels)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/y37i8x0wo9o8s2wf?svg=true)](https://ci.appveyor.com/project/sbfnk/bpmodels)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/sbfnk/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sbfnk/bpmodels/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 [![codecov](https://codecov.io/github/sbfnk/bpmodels/branch/master/graphs/badge.svg)](https://codecov.io/github/sbfnk/bpmodels) 
 
 Methods for analysing the distribution of epidemiological chain sizes and lengths
