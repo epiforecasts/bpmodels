@@ -1,4 +1,5 @@
 ^CODE_OF_CONDUCT\.md$
-^appveyor\.yml$
-^\.travis\.yml$
 cran-comments.md
+^\.github$
+^.*\.Rproj$
+^\.Rproj\.user$
