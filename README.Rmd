@@ -12,9 +12,10 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-[![Travis-CI Build Status](https://travis-ci.org/sbfnk/bpmodels.svg?branch=master)](https://travis-ci.org/sbfnk/bpmodels)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/y37i8x0wo9o8s2wf?svg=true)](https://ci.appveyor.com/project/sbfnk/bpmodels)
-[![codecov](https://codecov.io/github/sbfnk/bpmodels/branch/master/graphs/badge.svg)](https://codecov.io/github/sbfnk/bpmodels) 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/master/graphs/badge.svg)](https://codecov.io/github/epiverse-trace/bpmodels) 
+<!-- badges: end -->
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
