@@ -19,6 +19,7 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
+    bookdown,
     testthat,
     truncdist
 VignetteBuilder: 
