@@ -1,0 +1,19 @@
+---
+title: "Model and chain likelihood definitions"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Branching process model definition
+
+This is a work in progress to document how the single and multi-type models used in this
+package are defined.
+
+# Likelihoods
+This is a work in progress to document the derivation of analytical solutions
+to the likelihoods used here. 
