@@ -63,8 +63,17 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chain_ll</span><span class="op">(</span><span class="va">x</span>, <span class="va">offspring</span>, stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"length"</span><span class="op">)</span>, obs_prob <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  infinite <span class="op">=</span> <span class="cn">Inf</span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, individual <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">nsim_obs</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chain_ll</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">offspring</span>,</span>
+<span>  stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"length"</span><span class="op">)</span>,</span>
+<span>  obs_prob <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  infinite <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  individual <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">nsim_obs</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,7 +83,7 @@
 
 
 <dt>offspring</dt>
-<dd><p>offspring distribution: a character string corresponding to
+<dd><p>Offspring distribution: a character string corresponding to
 the R distribution function (e.g., "pois" for Poisson, where
 <code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></code> is the R function to generate Poisson random numbers)</p></dd>
 
@@ -117,7 +126,7 @@ approximated for imperfect observations</p></dd>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
-  geom_length_ll offspring_ll</p></div>
+geom_length_ll offspring_ll</p></div>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -139,7 +148,7 @@ approximated for imperfect observations</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sebastian Funk, Flavio Finger.</p>
+  <p></p><p>Developed by Sebastian Funk, Flavio Finger, James Mba Azam.</p>
 </div>
 
 <div class="pkgdown">

@@ -78,12 +78,9 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Analysing chain statistics using branching
-process models</h1>
-                        <h4 data-toc-skip class="author">Sebastian
-Funk</h4>
+      <h1 data-toc-skip>Analysing chain statistics using branching process models</h1>
+                        <h4 data-toc-skip class="author">Sebastian Funk</h4>
             
-            <h4 data-toc-skip class="date">2023-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/sbfnk/bpmodels/blob/HEAD/vignettes/introduction.Rmd" class="external-link"><code>vignettes/introduction.Rmd</code></a></small>
       <div class="hidden name"><code>introduction.Rmd</code></div>
@@ -92,108 +89,77 @@ Funk</h4>
 
     
     
-<p><a href="https://github.com/sbfnk/bpmodels" class="external-link">bpmodels</a> is an
-<code>R</code> package to analyse and simulate the size and length of
-branching processes with a given offspring distribution. These can be
-used, for example, to analyse the distribution of chain sizes or length
-of infectious disease outbreaks.</p>
+<p><a href="https://github.com/sbfnk/bpmodels" class="external-link">bpmodels</a> is an <code>R</code> package to simulate and analyse the size and length of branching processes with a given offspring distribution. These can be used, for example, to analyse the distribution of chain sizes or length of infectious disease outbreaks.</p>
 <div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
 <p>To load the package, use</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/sbfnk/bpmodels" class="external-link">'bpmodels'</a></span><span class="op">)</span></span></code></pre></div>
-<p>At the heart of the package are the <code>chains_ll</code> and
-<code>chains_sim</code> functions. The <code>chains_ll</code> function
-calculates the log-likelihood of a distribution of chain sizes or
-lengths given an offspring distribution and associated parameters. For
-example, to get the log-likelihood for a given observed distribution of
-chain sizes assuming a mean number of 0.5 Poisson-distributed offspring
-per generation, use</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
-<span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, lambda<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+</details><p>At the heart of the package are the <code>chains_ll()</code> and <code>chains_sim()</code> functions.</p>
+<div class="section level3">
+<h3 id="calculating-log-likelihoods">Calculating log-likelihoods<a class="anchor" aria-label="anchor" href="#calculating-log-likelihoods"></a>
+</h3>
+<p>The <code>chains_ll()</code> function calculates the log-likelihood of a distribution of chain sizes or lengths given an offspring distribution and its associated parameters.</p>
+<p>If we have observed a distribution of chains of sizes <span class="math inline">\(1, 1, 4, 7\)</span>, we can calculate the log-likelihood of this observed chain by assuming the offspring per generation is Poisson distributed with a mean number of 0.5.</p>
+<p>To do this, we run</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
+<span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -8.607196</span></span></code></pre></div>
-<p>The first argument of <code>chain_ll</code> is the size (or length)
-distribution to analyse. The second argument (called
-<code>offspring</code>) specifies the offspring distribution. This is
-given as a the function used to generate random offspring. It can be any
-probability distribution implemented in R, that is, one that has a
-corresponding function for generating random numbers beginning with the
-letter <code>r</code>. In the case of the example above, since random
-Poisson numbers are generated in R using a function called
-<code>rpois</code>, the string to pass to the <code>offspring</code>
-argument is <code>"pois"</code>.</p>
-<p>The third argument (called <code>stat</code>) determines whether to
-analyse chain sizes (<code>"size"</code>, the default if this argument
-is not specified) or lengths (<code>"length"</code>). Lastly, any named
-arguments not recognised by <code>chain_ll</code> are interpreted as
-parameters of the corresponding probability distribution, here
-<code>lambda=0.5</code> as the mean of the Poisson distribution (see the
-R help page for the Poisson distribution for more information).</p>
-<p>You can use the <code>R</code> help to find out about usage of the
-<code>chains_ll</code> function,</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</details><p>The first argument of <code><a href="../reference/chain_ll.html">chain_ll()</a></code> is the size (or length) distribution to analyse. The second argument (called <code>offspring</code>) specifies the offspring distribution. This is given as a function used to generate random offspring. It can be any probability distribution implemented in <code>R</code>, that is, one that has a corresponding function for generating random numbers beginning with the letter <code>r</code>. In the case of the example above, since random Poisson numbers are generated in <code>R</code> using a function called <code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois()</a></code>, the string to pass to the <code>offspring</code> argument is <code>"pois"</code>.</p>
+<p>The third argument (called <code>stat</code>) determines whether to analyse chain sizes (<code>"size"</code>, the default if this argument is not specified) or lengths (<code>"length"</code>). Lastly, any named arguments not recognised by <code><a href="../reference/chain_ll.html">chain_ll()</a></code> are interpreted as parameters of the corresponding probability distribution, here <code>lambda = 0.5</code> as the mean of the Poisson distribution (see the <code>R</code> help page for the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Poisson.html" class="external-link">Poisson distribution</a> for more information).</p>
+<p>To find out about usage of the <code>chains_ll()</code> function, you can use the <code>R</code> help file</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span><span class="va">chains_ll</span></span></code></pre></div>
-<p>To simulate from a branching process, use the <code>chain_sim</code>
-function, which follows the same syntax as the <code>chain_ll</code>
-function:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/chain_sim.html">chain_sim</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">5</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, lambda<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+</details>
+</div>
+<div class="section level3">
+<h3 id="simulating-branching-processes">Simulating branching processes<a class="anchor" aria-label="anchor" href="#simulating-branching-processes"></a>
+</h3>
+<p>To simulate a branching process, we use the <code><a href="../reference/chain_sim.html">chain_sim()</a></code> function. This function follows the same syntax as <code><a href="../reference/chain_ll.html">chain_ll()</a></code>, that is:</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/chain_sim.html">chain_sim</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 2 1 1 1 5</span></span></code></pre></div>
+</details>
+</div>
 </div>
 <div class="section level2">
 <h2 id="methodology">Methodology<a class="anchor" aria-label="anchor" href="#methodology"></a>
 </h2>
-<p>If the probability distribution of chain sizes or lengths has an
-analytical solution, this will be used (size distribution: Poisson and
-negative binomial; length distribution: Poisson and geometric). If not,
-simulations are used to approximate this probability distributions
-(using a linear approximation to the cumulative distribution for
-unobserved sizes/lengths), requiring an additional parameter
-<code>nsim_offspring</code> for the number of simulations to be used for
-this approximation. For example, to get offspring drawn from a binomial
-distribution with probability <code>prob=0.5</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"binom"</span>, <span class="st">"size"</span>, size<span class="op">=</span><span class="fl">1</span>, prob<span class="op">=</span><span class="fl">0.5</span>, nsim_offspring<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
+<p>If the probability distribution of chain sizes or lengths has an analytical solution, this will be used (size distribution: Poisson and negative binomial; length distribution: Poisson and geometric).</p>
+<p>If an analytical solution does not exist, simulations are used to approximate this probability distributions (using a linear approximation to the cumulative distribution for unobserved sizes/lengths). The argument <code>nsim_offspring</code> is used to specify the number of simulations to be used for this approximation.</p>
+<p>For example, to get offspring drawn from a binomial distribution with probability <code>prob = 0.5</code>, we run</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"binom"</span>, <span class="st">"size"</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span>, nsim_offspring <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -8.477588</span></span></code></pre></div>
+</details>
 </div>
 <div class="section level2">
 <h2 id="imperfect-observations">Imperfect observations<a class="anchor" aria-label="anchor" href="#imperfect-observations"></a>
 </h2>
-<p>The <code>chain_ll</code> function has an <code>obs_prob</code>
-parameter that can be used to determine the likelihood if observations
-are imperfect. In that case, true chain sizes or lengths are simulated
-repeatedly (the number of times given by the <code>nsim_obs</code>
-argument) and the likelihood calculated for each of these simulations.
-For example, if the probability of observing each case is 30%, use</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ll</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, obs_prob <span class="op">=</span> <span class="fl">0.3</span>, lambda<span class="op">=</span><span class="fl">0.5</span>, nsim_obs<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+<p>If observations are imperfect, the <code><a href="../reference/chain_ll.html">chain_ll()</a></code> function has an <code>obs_prob</code> argument that can be used to determine the likelihood. In that case, true chain sizes or lengths are simulated repeatedly (the number of times given by the <code>nsim_obs</code> argument), and the likelihood calculated for each of these simulations.</p>
+<p>For example, if the probability of observing each case is <span class="math inline">\(30%\)</span>, we use</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ll</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, obs_prob <span class="op">=</span> <span class="fl">0.3</span>, lambda <span class="op">=</span> <span class="fl">0.5</span>, nsim_obs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ll</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
 <span><span class="co">#&gt;  -35.30  -25.68  -23.23  -24.19  -20.89  -18.91</span></span></code></pre></div>
-<p>This returns <code>nsim_obs=10</code> likelihood values which can be
-averaged to come up with an overall likelihood estimate.</p>
+</details><p>This returns <code>nsim_obs = 10</code> likelihood values which can be averaged to come up with an overall likelihood estimate.</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <ul>
-<li>Farrington, C.P., Kanaan, M.N. and Gay, N.J. (2003). <a href="https://doi.org/10.1093/biostatistics/4.2.279" class="external-link">Branching process
-models for surveillance of infectious diseases controlled by mass
-vaccination</a>.</li>
-<li>Blumberg, S. and Lloyd-Smith, J.O. (2013). <a href="https://doi.org/10.1016/j.epidem.2013.05.002" class="external-link">Comparing methods
-for estimating R0 from the size distribution of subcritical transmission
-chains</a>.</li>
+<li>Farrington, C.P., Kanaan, M.N. and Gay, N.J. (2003). <a href="https://doi.org/10.1093/biostatistics/4.2.279" class="external-link">Branching process models for surveillance of infectious diseases controlled by mass vaccination</a>.</li>
+<li>Blumberg, S. and Lloyd-Smith, J.O. (2013). <a href="https://doi.org/10.1016/j.epidem.2013.05.002" class="external-link">Comparing methods for estimating R0 from the size distribution of subcritical transmission chains</a>.</li>
 </ul>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
@@ -201,7 +167,7 @@ chains</a>.</li>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Sebastian Funk, Flavio Finger.</p>
+<p>Developed by Sebastian Funk, Flavio Finger, James Mba Azam.</p>
 </div>
 
 <div class="pkgdown">

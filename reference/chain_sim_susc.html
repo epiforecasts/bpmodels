@@ -68,8 +68,16 @@ for depletion of susceptibles.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chain_sim_susc</span><span class="op">(</span>offspring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pois"</span>, <span class="st">"nbinom"</span><span class="op">)</span>, <span class="va">mn_offspring</span>,</span>
-<span>  <span class="va">disp_offspring</span>, <span class="va">serial</span>, t0 <span class="op">=</span> <span class="fl">0</span>, tf <span class="op">=</span> <span class="cn">Inf</span>, <span class="va">pop</span>, initial_immune <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chain_sim_susc</span><span class="op">(</span></span>
+<span>  offspring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pois"</span>, <span class="st">"nbinom"</span><span class="op">)</span>,</span>
+<span>  <span class="va">mn_offspring</span>,</span>
+<span>  <span class="va">disp_offspring</span>,</span>
+<span>  <span class="va">serial</span>,</span>
+<span>  t0 <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  tf <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  <span class="va">pop</span>,</span>
+<span>  initial_immune <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -92,7 +100,7 @@ secondary cases. Ignored if offspring == "pois". Must be &gt; 1.</p></dd>
 
 <dt>serial</dt>
 <dd><p>the serial interval. A function that takes one parameter
-(`n`), the number of serial intervals to randomly sample.
+(<code>n</code>), the number of serial intervals to randomly sample.
 Value must be &gt;= 0.</p></dd>
 
 
@@ -116,18 +124,18 @@ Value must be &gt;= 0.</p></dd>
     <h2>Value</h2>
     
 
-<p>a data frame with columns `time`, `id` (a unique ID for each
-    individual element of the chain), `ancestor` (the ID of the ancestor
-     of each element), and `generation`.</p>
+<p>a data frame with columns <code>time</code>, <code>id</code> (a unique ID for each
+individual element of the chain), <code>ancestor</code> (the ID of the ancestor
+of each element), and <code>generation</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>This function has a couple of key differences with chain_sim:
-    it can only simulate one chain at a time,
-    it can only handle implemented offspring distributions
-        ("pois" and "nbinom"),
-    it always tracks and returns a data frame containing the entire tree,
-    the maximal length of chains is limited with pop instead of infinite.</p>
+it can only simulate one chain at a time,
+it can only handle implemented offspring distributions
+("pois" and "nbinom"),
+it always tracks and returns a data frame containing the entire tree,
+the maximal length of chains is limited with pop instead of infinite.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -137,17 +145,8 @@ Value must be &gt;= 0.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">chain_sim_susc</span><span class="op">(</span><span class="st">"pois"</span>, mn_offspring<span class="op">=</span><span class="fl">0.5</span>, serial <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">3</span>, pop <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    id ancestor generation time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1       NA          1    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2        1          2    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   3        2          3    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   4        2          3    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   5        3          4    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   6        4          4    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   7        4          4    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   8        6          5   12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   9        7          5   12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 10        8          6   15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id ancestor generation time</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1       NA          1    0</span>
 </code></pre></div>
     </div>
   </div>
@@ -158,7 +157,7 @@ Value must be &gt;= 0.</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sebastian Funk, Flavio Finger.</p>
+  <p></p><p>Developed by Sebastian Funk, Flavio Finger, James Mba Azam.</p>
 </div>
 
 <div class="pkgdown">
