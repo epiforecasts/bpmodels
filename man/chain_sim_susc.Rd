@@ -5,8 +5,16 @@
 \title{Simulate a single chain using a branching process while accounting
 for depletion of susceptibles.}
 \usage{
-chain_sim_susc(offspring = c("pois", "nbinom"), mn_offspring,
-  disp_offspring, serial, t0 = 0, tf = Inf, pop, initial_immune = 0)
+chain_sim_susc(
+  offspring = c("pois", "nbinom"),
+  mn_offspring,
+  disp_offspring,
+  serial,
+  t0 = 0,
+  tf = Inf,
+  pop,
+  initial_immune = 0
+)
 }
 \arguments{
 \item{offspring}{offspring distribution: a character string corresponding to
@@ -20,7 +28,7 @@ more people than susceptibles available.}
 secondary cases. Ignored if offspring == "pois". Must be > 1.}
 
 \item{serial}{the serial interval. A function that takes one parameter
-(`n`), the number of serial intervals to randomly sample.
+(\code{n}), the number of serial intervals to randomly sample.
 Value must be >= 0.}
 
 \item{t0}{start time}
@@ -32,9 +40,9 @@ Value must be >= 0.}
 \item{initial_immune}{the number of initial immunes in the population}
 }
 \value{
-a data frame with columns `time`, `id` (a unique ID for each
-    individual element of the chain), `ancestor` (the ID of the ancestor
-     of each element), and `generation`.
+a data frame with columns \code{time}, \code{id} (a unique ID for each
+individual element of the chain), \code{ancestor} (the ID of the ancestor
+of each element), and \code{generation}.
 }
 \description{
 Simulate a single chain using a branching process while accounting
@@ -42,11 +50,11 @@ for depletion of susceptibles.
 }
 \details{
 This function has a couple of key differences with chain_sim:
-    it can only simulate one chain at a time,
-    it can only handle implemented offspring distributions
-        ("pois" and "nbinom"),
-    it always tracks and returns a data frame containing the entire tree,
-    the maximal length of chains is limited with pop instead of infinite.
+it can only simulate one chain at a time,
+it can only handle implemented offspring distributions
+("pois" and "nbinom"),
+it always tracks and returns a data frame containing the entire tree,
+the maximal length of chains is limited with pop instead of infinite.
 }
 \examples{
 chain_sim_susc("pois", mn_offspring=0.5, serial = function(x) 3, pop = 100)

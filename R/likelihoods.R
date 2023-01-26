@@ -1,27 +1,27 @@
-##' Likelihood of the size of chains with Poisson offspring distribution
-##'
-##' @param x vector of sizes
-##' @param lambda rate of the Poisson distribution
-##' @return log-likelihood values
-##' @author Sebastian Funk
-##' @keywords internal
+#' Likelihood of the size of chains with Poisson offspring distribution
+#'
+#' @param x vector of sizes
+#' @param lambda rate of the Poisson distribution
+#' @return log-likelihood values
+#' @author Sebastian Funk
+#' @keywords internal
 pois_size_ll <- function(x, lambda)
 {
   (x - 1) * log(lambda) - lambda * x + (x - 2) * log(x) - lgamma(x)
 }
 
-##' Likelihood of the size of chains with Negative-Binomial offspring
-##' distribution
-##'
-##' @param x vector of sizes
-##' @param size the dispersion parameter (often called \code{k} in ecological
-##'   applications)
-##' @param prob probability of success (in the parameterisation with
-##'   \code{prob}, see also \code{\link[stats]{NegBinomial}})
-##' @param mu mean parameter
-##' @return log-likelihood values
-##' @author Sebastian Funk
-##' @keywords internal
+#' Likelihood of the size of chains with Negative-Binomial offspring
+#' distribution
+#'
+#' @param x vector of sizes
+#' @param size the dispersion parameter (often called \code{k} in ecological
+#'   applications)
+#' @param prob probability of success (in the parameterisation with
+#'   \code{prob}, see also \code{\link[stats]{NegBinomial}})
+#' @param mu mean parameter
+#' @return log-likelihood values
+#' @author Sebastian Funk
+#' @keywords internal
 nbinom_size_ll <- function(x, size, prob, mu)
 {
   if (!missing(prob)) {
@@ -33,17 +33,17 @@ nbinom_size_ll <- function(x, size, prob, mu)
     (size * x + (x - 1)) * log(1 + mu / size)
 }
 
-##' Likelihood of the size of chains with gamma-Borel offspring distribution
-##'
-##' @param x vector of sizes
-##' @param size the dispersion parameter (often called \code{k} in ecological
-##'   applications)
-##' @param prob probability of success (in the parameterisation with
-##'   \code{prob}, see also \code{\link[stats]{NegBinomial}})
-##' @param mu mean parameter
-##' @return log-likelihood values
-##' @author Sebastian Funk
-##' @keywords internal
+#' Likelihood of the size of chains with gamma-Borel offspring distribution
+#'
+#' @param x vector of sizes
+#' @param size the dispersion parameter (often called \code{k} in ecological
+#'   applications)
+#' @param prob probability of success (in the parameterisation with
+#'   \code{prob}, see also \code{\link[stats]{NegBinomial}})
+#' @param mu mean parameter
+#' @return log-likelihood values
+#' @author Sebastian Funk
+#' @keywords internal
 gborel_size_ll <- function(x, size, prob, mu) {
   if (!missing(prob)) {
     if (!missing(mu)) stop("'prob' and 'mu' both specified")
@@ -54,13 +54,13 @@ gborel_size_ll <- function(x, size, prob, mu) {
     (x - 1) * log(x) - (size + x - 1) * log(x + size / mu)
 }
 
-##' Likelihood of the length of chains with Poisson offspring distribution
-##'
-##' @param x vector of sizes
-##' @param lambda rate of the Poisson distribution
-##' @return log-likelihood values
-##' @author Sebastian Funk
-##' @keywords internal
+#' Likelihood of the length of chains with Poisson offspring distribution
+#'
+#' @param x vector of sizes
+#' @param lambda rate of the Poisson distribution
+#' @return log-likelihood values
+#' @author Sebastian Funk
+#' @keywords internal
 pois_length_ll <- function(x, lambda) {
 
   ## iterated exponential function
@@ -73,14 +73,14 @@ pois_length_ll <- function(x, lambda) {
   log(Gk[x + 1] - Gk[x])
 }
 
-##' Likelihood of the length of chains with geometric offspring distribution
-##'
-##' @param x vector of sizes
-##' @param prob probability of the geometric distribution with mean
-##' \code{1/prob}
-##' @return log-likelihood values
-##' @author Sebastian Funk
-##' @keywords internal
+#' Likelihood of the length of chains with geometric offspring distribution
+#'
+#' @param x vector of sizes
+#' @param prob probability of the geometric distribution with mean
+#' \code{1/prob}
+#' @return log-likelihood values
+#' @author Sebastian Funk
+#' @keywords internal
 geom_length_ll <- function(x, prob) {
 
   lambda <- 1 / prob
@@ -91,20 +91,20 @@ geom_length_ll <- function(x, prob) {
   log(GkmGkm1)
 }
 
-##' Likelihood of the length of chains with generic offspring distribution
-##'
-##' The likelihoods are calculated with a crude approximation using simulated
-##'   chains by linearly approximating any missing values in the empirical
-##'   cumulative distribution function (ecdf).
-##' @param x vector of sizes
-##' @param nsim_offspring number of simulations of the offspring distribution
-##'   for approximation the size/length distribution
-##' @param ... any parameters to pass to \code{\link{chain_sim}}
-##' @return log-likelihood values
-##' @author Sebastian Funk
-##' @inheritParams chain_ll
-##' @inheritParams chain_sim
-##' @keywords internal
+#' Likelihood of the length of chains with generic offspring distribution
+#'
+#' The likelihoods are calculated with a crude approximation using simulated
+#'   chains by linearly approximating any missing values in the empirical
+#'   cumulative distribution function (ecdf).
+#' @param x vector of sizes
+#' @param nsim_offspring number of simulations of the offspring distribution
+#'   for approximation the size/length distribution
+#' @param ... any parameters to pass to \code{\link{chain_sim}}
+#' @return log-likelihood values
+#' @author Sebastian Funk
+#' @inheritParams chain_ll
+#' @inheritParams chain_sim
+#' @keywords internal
 offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
 
   dist <- chain_sim(nsim_offspring, offspring, stat, ...)
@@ -119,26 +119,26 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
   log(lik)
 }
 
-##' Likelihood for the outcome of a branching process
-##'
-##' @param x vector of sizes or lengths of transmission chains
-##' @param stat statistic given as \code{x} ("size" or "length" of chains)
-##' @param obs_prob observation probability (assumed constant)
-##' @param infinite any chains of this size/length will be treated as infinite
-##' @param exclude any sizes/lengths to exclude from the likelihood calculation
-##' @param individual if TRUE, a vector of individual log-likelihood contributions will be returned rather than the sum
-##' @param nsim_obs number of simulations if the likelihood is to be
-##'   approximated for imperfect observations
-##' @param ... parameters for the offspring distribution
-##' @return likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or a list of individual likelihood contributions (if \code{individual=TRUE})
-##' @inheritParams chain_sim
-##' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
-##'   geom_length_ll offspring_ll
-##' @author Sebastian Funk
-##' @export
-##' @examples
-##' chain_sizes <- c(1,1,4,7) # example of observed chain sizes
-##' chain_ll(chain_sizes, "pois", "size", lambda=0.5)
+#' Likelihood for the outcome of a branching process
+#'
+#' @param x vector of sizes or lengths of transmission chains
+#' @param stat statistic given as \code{x} ("size" or "length" of chains)
+#' @param obs_prob observation probability (assumed constant)
+#' @param infinite any chains of this size/length will be treated as infinite
+#' @param exclude any sizes/lengths to exclude from the likelihood calculation
+#' @param individual if TRUE, a vector of individual log-likelihood contributions will be returned rather than the sum
+#' @param nsim_obs number of simulations if the likelihood is to be
+#'   approximated for imperfect observations
+#' @param ... parameters for the offspring distribution
+#' @return likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or a list of individual likelihood contributions (if \code{individual=TRUE})
+#' @inheritParams chain_sim
+#' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
+#'   geom_length_ll offspring_ll
+#' @author Sebastian Funk
+#' @export
+#' @examples
+#' chain_sizes <- c(1,1,4,7) # example of observed chain sizes
+#' chain_ll(chain_sizes, "pois", "size", lambda=0.5)
 chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
                      infinite = Inf, exclude=c(), individual=FALSE, nsim_obs, ...) {
   stat <- match.arg(stat)

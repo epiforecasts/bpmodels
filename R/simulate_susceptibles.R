@@ -1,35 +1,35 @@
-##' Simulate a single chain using a branching process while accounting
-##' for depletion of susceptibles.
-##'
-##' @param offspring offspring distribution: a character string corresponding to
-##'   the R distribution function. Currently only "pois" & "nbinom" are
-##'   supported. Internally truncated distributions are used to avoid infecting
-##'   more people than susceptibles available.
-##' @param mn_offspring the average number of secondary cases for each case
-##' @param disp_offspring the dispersion coefficient (var/mean) of the number of
-##'      secondary cases. Ignored if offspring == "pois". Must be > 1.
-##' @param serial the serial interval. A function that takes one parameter
-##'     (`n`), the number of serial intervals to randomly sample.
-##'     Value must be >= 0.
-##' @param t0 start time
-##' @param tf end time
-##' @param pop the population
-##' @param initial_immune the number of initial immunes in the population
-##' @return a data frame with columns `time`, `id` (a unique ID for each
-##'     individual element of the chain), `ancestor` (the ID of the ancestor
-##'      of each element), and `generation`.
-##'
-##' @details This function has a couple of key differences with chain_sim:
-##'     it can only simulate one chain at a time,
-##'     it can only handle implemented offspring distributions
-##'         ("pois" and "nbinom"),
-##'     it always tracks and returns a data frame containing the entire tree,
-##'     the maximal length of chains is limited with pop instead of infinite.
-##'
-##' @author Flavio Finger
-##' @export
-##' @examples
-##' chain_sim_susc("pois", mn_offspring=0.5, serial = function(x) 3, pop = 100)
+#' Simulate a single chain using a branching process while accounting
+#' for depletion of susceptibles.
+#'
+#' @param offspring offspring distribution: a character string corresponding to
+#'   the R distribution function. Currently only "pois" & "nbinom" are
+#'   supported. Internally truncated distributions are used to avoid infecting
+#'   more people than susceptibles available.
+#' @param mn_offspring the average number of secondary cases for each case
+#' @param disp_offspring the dispersion coefficient (var/mean) of the number of
+#'      secondary cases. Ignored if offspring == "pois". Must be > 1.
+#' @param serial the serial interval. A function that takes one parameter
+#'     (`n`), the number of serial intervals to randomly sample.
+#'     Value must be >= 0.
+#' @param t0 start time
+#' @param tf end time
+#' @param pop the population
+#' @param initial_immune the number of initial immunes in the population
+#' @return a data frame with columns `time`, `id` (a unique ID for each
+#'     individual element of the chain), `ancestor` (the ID of the ancestor
+#'      of each element), and `generation`.
+#'
+#' @details This function has a couple of key differences with chain_sim:
+#'     it can only simulate one chain at a time,
+#'     it can only handle implemented offspring distributions
+#'         ("pois" and "nbinom"),
+#'     it always tracks and returns a data frame containing the entire tree,
+#'     the maximal length of chains is limited with pop instead of infinite.
+#'
+#' @author Flavio Finger
+#' @export
+#' @examples
+#' chain_sim_susc("pois", mn_offspring=0.5, serial = function(x) 3, pop = 100)
 chain_sim_susc <- function(
     offspring = c("pois", "nbinom"),
     mn_offspring,
