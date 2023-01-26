@@ -23,14 +23,14 @@ chain_sim(
 the R distribution function (e.g., "pois" for Poisson, where
 \code{\link{rpois}} is the R function to generate Poisson random numbers)}
 
-\item{stat}{String; Statistic to calculate.
+\item{stat}{String; Statistic to calculate. Can be one of:
 \itemize{
 \item "size": the total number of offspring.
 \item "length": the total number of ancestors.
 }}
 
 \item{infinite}{A size or length above which the simulation results should be
-set to \code{Inf}. Defaults to \code{Inf}.}
+set to \code{Inf}. Defaults to \code{Inf}, resulting in no results ever set to \code{Inf}}
 
 \item{tree}{Logical. Should the transmission tree be returned? Defaults to \code{FALSE}.}
 
@@ -64,9 +64,9 @@ serial interval, time since the first case, etc.
 }
 \details{
 \code{chain_sim()} either returns a vector or a data.frame. The output is either a
-vector if serial is not provided, which automatically sets \code{tree = FALSE},
-or a data.frame, which means that \code{serial} was provided as a function. When \code{serial}
-is provided, it means \code{tree = TREE} automatically. However, setting
+vector if \code{serial} is not provided, which automatically sets \code{tree = FALSE},
+or a \code{data.frame}, which means that \code{serial} was provided as a function. When \code{serial}
+is provided, it means \code{tree = TRUE} automatically. However, setting
 \code{tree = TRUE} would require providing a function for \code{serial}.
 }
 \section{The serial interval (\code{serial}):}{
