@@ -2,7 +2,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/master/graphs/badge.svg)](https://codecov.io/github/epiverse-trace/bpmodels)
+[![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/main/graphs/badge.svg)](https://codecov.io/github/epiverse-trace/bpmodels)
 <!-- badges: end -->
 
 `bpmodels` is an R package to simulate and analyse the size and length
