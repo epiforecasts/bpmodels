@@ -116,8 +116,9 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
             stop("The `serial` argument must be a function (see details in ?chain_sim()).")
         }
         if (!missing(tree) && tree == FALSE) {
-            stop("The `serial` argument can't be used with `tree==FALSE`.")
-        }
+            warning("`serial` can't be used with `tree = FALSE`; Setting `tree = TRUE` internally.")
+          tree <- TRUE
+          }
         tree <- TRUE
     } else if (!missing(tf)) {
         stop("The `tf` argument needs a `serial` argument.")
