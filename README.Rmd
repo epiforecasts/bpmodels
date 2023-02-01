@@ -16,8 +16,15 @@ knitr::opts_chunk$set(
 # _bpmodels_: Methods for analysing the size and length of chains from branching process models
 
 <!-- badges: start -->
+![CRAN/METACRAN](https://img.shields.io/cran/v/bpmodels)
+![GitHub R package version](https://img.shields.io/github/r-package/v/epiverse-trace/bpmodels)
+![GitHub all releases](https://img.shields.io/github/downloads/epiverse-trace/bpmodels/total?style=flat)
+![GitHub issues](https://img.shields.io/github/issues/epiverse-trace/bpmodels)
 [![R-CMD-check](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/main/graphs/badge.svg)](https://codecov.io/github/epiverse-trace/bpmodels) 
+![GitHub contributors](https://img.shields.io/github/contributors/epiverse-trace/bpmodels)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/epiverse-trace/bpmodels)
+![GitHub](https://img.shields.io/github/license/epiverse-trace/bpmodels)
 <!-- badges: end -->
 
 ```{r setup, include=FALSE}
