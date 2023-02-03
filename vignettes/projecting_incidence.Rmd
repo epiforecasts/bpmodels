@@ -22,79 +22,100 @@ knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE, 
                       warning = FALSE, 
                       collapse = TRUE,
-                      comment = "#>"
+                      comment = "#>",
+                      dpi = 300
                       )
 
 ```
 
-## Description
-Branching processes can be used to project disease incidence provided we have some 
-information on the distribution of times between successive cases (serial interval), 
-and the distribution of secondary cases produced by a single individual (offspring 
-distribution). Such simulations can be achieved in `bpmodels` with the `chain_sim()` function. 
+## Overview
+Branching processes can be used to project infectious disease trends provided 
+we have some information on the distribution of times between 
+successive cases (serial interval), and the distribution of secondary cases 
+produced by a single individual (offspring distribution). Such simulations can be achieved in `bpmodels` with the `chain_sim()` function. @Pearson2020, and 
+@abbott2020 illustrate its application to COVID-19. 
+
+The purpose of this vignette is to use early data on COVID-19 in South Africa [@marivate2020] to illustrate how `bpmodels` can be used to forecast 
+an outbreak. 
+
 
 Let's load the required packages
 
-```{r loading_packages, include=TRUE}
+```{r packages, include=TRUE}
 library("bpmodels")
 library('dplyr')
 library('ggplot2')
 library('lubridate')
 ```
 
-## Disease data
+### The data
 
-Let's create an outbreak dataset, assuming the cases are sampled from a negative binomial
-distribution with mean = 5 and dispersion = 7.5. These parameter values are arbitrarily
-chosen for illustrative purposes.
+We will get and clean the first $15$ days of the COVID-19 
+outbreak in South Africa to seed the simulation for this example.
 
-```{r data_generation, message=FALSE}
-set.seed(12)
-cases_df <- data.frame(date = as.Date('2023-01-01') + seq_len(12),
-                       cases = rnbinom(12, size = 7.5, mu = 5)
-                       )
-head(cases_df)
+```{r data, message=FALSE}
+data_url <- 'https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv'
 
-ggplot(cases_df, 
-       aes(x = date, y = cases)
-       ) + 
-  geom_col(fill = 'tomato3', size = 1)
+#Read the data in using the url
+covid19_sa <- read.csv(data_url)
+
+# Subset the first 15 days and count the number of cases per date
+covid19_sa <- covid19_sa %>%
+  dplyr::select(date) %>%
+  dplyr::mutate(date = lubridate::dmy(date)) %>%
+  dplyr::filter(date <= lubridate::dmy("20-03-2020")) %>%
+  dplyr::group_by(date) %>%
+  dplyr::summarise(cases = n()) %>%
+  dplyr::ungroup()
 ```
 
-## Preparing the inputs  
+### Preparing the inputs  
 
-```{r input_prep, message=FALSE}
-# We will create a vector of starting times for each case, using the time of the index cases as the reference point
-cases_df$days_since_index <- as.integer(cases_df$date - min(cases_df$date))
+```{r linelist_gen, message=FALSE}
+days_since_index <- as.integer(covid19_sa$date - min(covid19_sa$date))
 
-#'Disaggregate the time series 
-case_times <- unlist(mapply(function(x, y) rep(x, times = ifelse(y == 0, 1, y)), 
-                       cases_df$days_since_index, 
-                       cases_df$cases
-                       )
-                       )
+start_times <- unlist(mapply(
+  function(x, y) rep(x, times = ifelse(y == 0, 1, y)),
+  days_since_index,
+  covid19_sa$cases
+))
                        
+```
 
 
+Additionally, `chain_sim()` requires other inputs, which we will specify below: 
+
+```{r input_prep2, message=FALSE}
 #' Date to end simulation (14 day projection in this case)
-projection_window <- 14 #2 week ahead projection
-project_to_date <- max(cases_df$days_since_index) + projection_window 
+projection_window <- 14 # 14 days/ 2-week ahead projection
 
+projection_end_day <- max(days_since_index) + projection_window
 
-#' Number of simulations and maximum chain size
-sim_rep <- 1000
-cases_to_project <- 1000
+#' Number of simulations
+sim_rep <- 100
 
+#' Maximum chain size allowed
+chain_threshold <- 1000
 
-### Specifying the `serial` argument to `chain_sim()`
-#' Assume serial interval follows log-normal distribution with mean, mu = 4.7, 
-#' and standard deviation, sigma = 2.9, then the desired standard deviation, si_sd, 
-#' and mean, si_mean, are
-sigma = 2.9
-mu = 4.7
+```
 
-si_sd <- sqrt(log(1 + (sigma/mu)^2)) #log standard deviation
-si_mean <- log((mu^2)/(sqrt(sigma^2 + mu^2))) #log mean
+#### Serial interval
+
+We also assume based on COVID-19 literature that the 
+serial interval, $si$, is lognormal distributed as follows:
+
+$ E[\text{si}] = \ln \left( \dfrac{\mu^2}{(\sqrt{\mu^2 + \sigma^2}} \right)$
+
+$\text{SD} [\text{si}] = \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}$
+
+with $\mu = 4.7$ and standard deviation $\sigma = 2.9$.
+
+```{r input_prep3, message=FALSE}
+mu <- 4.7
+sigma <- 2.9
+
+si_sd <- sqrt(log(1 + (sigma / mu)^2)) # log standard deviation
+si_mean <- log((mu^2) / (sqrt(sigma^2 + mu^2))) # log mean
 
 #' serial interval function
 serial_interval <- function(sample_size) {
