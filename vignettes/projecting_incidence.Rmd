@@ -124,65 +124,123 @@ serial_interval <- function(sample_size) {
 }
 ```
 
-## Simulations
-```{r simulations, message=FALSE}
-## Chain log-likelihood simulation
-sim_chain_sizes <- lapply(seq_len(sim_rep),
-                           function(sim){chain_sim(
-                               n = length(case_times),
-                               offspring = "nbinom",
-                               mu = 2.0,
-                               size = 0.38,
-                               stat = "size",
-                               infinite = cases_to_project,
-                               serial = serial_interval,
-                               t0 = case_times,
-                               tf = project_to_date,
-                               tree = TRUE
-                           ) |> 
-                               mutate(sim = sim)} 
-                          )
+#### Offspring distribution
 
-sim_output <- do.call(rbind, sim_chain_sizes) 
+We assume an offspring distribution that is distributed as a negative binomial with $R = 2.5$ [@abbott2020] and $k = 0.58$. In this parameterization, R represents the $\mathcal{R_0}$, which is defined as the average number of cases produced by a single individual in an entirely susceptible population. The parameter $k$ represents superspreading, that is, the degree of heterogeneity in transmission by single individuals.
+
+### Simulations
+To summarize the simulation set up, for each of the `r sim_rep` simulations, we want to project cases over a `r projection_window` day period since the last case, assuming that no chain would exceed `r chain_threshold`. 
+
+#### Model assumptions
+
+`chain_sim()` makes the following simplifying assumptions:
+
+1. All cases are observed
+1. There is no reporting delay
+1. Reporting rate is constant through the course of the epidemic
+1. No interventions have been implemented
+1. Population is homogeneous and well-mixed
+
+```{r simulations, message=FALSE}
+set.seed(1234)
+
+
+sim_chain_sizes <- lapply(
+  seq_len(sim_rep),
+  function(sim) {
+    chain_sim(
+      n = length(start_times),
+      offspring = "nbinom",
+      mu = 2.5,
+      size = 0.58,
+      stat = "size",
+      infinite = chain_threshold,
+      serial = serial_interval,
+      t0 = start_times,
+      tf = projection_end_day,
+      tree = TRUE
+    ) %>%
+      mutate(sim = sim)
+  }
+)
+
+sim_output <- do.call(rbind, sim_chain_sizes)
+
+head(sim_output)
 ```
 
+From the simulated data, we count the median daily cases across 
+all simulations and overlay that over a plot of all the projections through time.
 
-### Post-processing
+#### Post-processing
+
 ```{r post_processing}
-ref_date <- min(cases_df$date)
+index_date <- min(covid19_sa$date)
 
-incidence_ts <- sim_output |> 
-  mutate(day = floor(time)) |> 
-  group_by(sim, day) |> 
-  summarise(cases = n()) |>  
+# Daily number of cases for each simulation
+incidence_ts <- sim_output %>%
+  mutate(day = ceiling(time)) %>%
+  group_by(sim, day) %>%
+  summarise(cases = n()) %>%
   ungroup()
 
+# Add dates
+incidence_ts <- incidence_ts %>%
+  group_by(sim) %>%
+  mutate(date = index_date + (0:(n() - 1))) %>%
+  ungroup()
 
-## Median cases by date.  
-median_daily_cases <- incidence_ts |>
-  group_by(day)|>
-  summarise(median_cases = median(cases)) |>
-  ungroup()|>
-  arrange(day) |>
-  mutate(date = ymd(ref_date) + 0:(project_to_date - 1))
+## Median daily number of cases aggregated across all simulations
+median_daily_cases <- incidence_ts %>%
+  group_by(day) %>%
+  summarise(median_cases = median(cases)) %>%
+  ungroup() %>%
+  arrange(day)
+
+# Add dates
+median_daily_cases <- median_daily_cases %>%
+  mutate(date = index_date + 0:projection_end_day) %>%
+  ungroup()
 
 ```
 
 
-## Visualization
-```{r visualisation}
+### Visualization
+
+```{r viz, fig.cap ="Projected COVID-19 epidemiological trend. Gray lines represent individual simulation results and red dots represent the median daily cases across all simulations.", fig.width=2.0, fig.height=1.8}
 # Visualization
-cases_plot <- ggplot(data = median_daily_cases) +
-  geom_col(aes(x = date, y = median_cases),
-           fill = "tomato3",
-           size = 1
+cases_plot <- ggplot(data = incidence_ts) +
+  geom_line(aes(
+    x = date,
+    y = cases,
+  group = sim
+  ),
+  color = "grey",
+  linewidth = 1.2,
+  alpha = 0.25
   ) +
-  scale_y_continuous(breaks = seq(0, max(median_daily_cases$median_cases) + 20, 20),
-                     labels = seq(0, max(median_daily_cases$median_cases) + 20, 20)
+  geom_point(
+    data = median_daily_cases,
+    aes(
+      x = date,
+      y = median_cases
+    ),
+    color = "tomato3",
+    size = 0.75
   ) +
-  labs(x = 'Date', y = 'Daily cases (median)') + 
-  theme_minimal(base_size = 14)
+  scale_x_continuous(
+    breaks = seq(min(incidence_ts$date), max(incidence_ts$date), 10),
+    labels = seq(min(incidence_ts$date), max(incidence_ts$date), 10)
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, max(incidence_ts$cases) + 200, 100),
+    labels = seq(0, max(incidence_ts$cases) + 200, 100)
+  ) +
+  labs(x = "Date", y = "Daily cases (median)") +
+  theme_minimal(base_size = 4) +
+  NULL
 
 print(cases_plot)
 ```
 
+### References
