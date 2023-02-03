@@ -15,18 +15,22 @@ Description: Provides methods to analyse and simulate the size and length
 License: MIT + file LICENSE
 URL: https://github.com/sbfnk/bpmodels
 BugReports: https://github.com/sbfnk/bpmodels/issues
+Depends: 
+    R (>= 2.10)
 Suggests: 
+    bookdown,
     covr,
+    dplyr,
+    ggplot2,
     knitr,
+    lubridate,
     rmarkdown,
     bookdown,
     testthat,
-    truncdist,
-    dplyr,
-    ggplot2,
-    lubridate
+    truncdist
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
