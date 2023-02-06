@@ -207,13 +207,13 @@ median_daily_cases <- median_daily_cases %>%
 
 ### Visualization
 
-```{r viz, fig.cap ="Projected COVID-19 epidemiological trend. Gray lines represent individual simulation results and red dots represent the median daily cases across all simulations.", fig.width=2.0, fig.height=1.8}
+```{r viz, fig.cap ="COVID-19 incidence projected over a two week window. The gray lines represent individual simulations, red connected dots represent the median daily cases across all simulations, and the black triangles represent the observed data.", fig.width=2.0, fig.height=1.8}
 # Visualization
 cases_plot <- ggplot(data = incidence_ts) +
   geom_line(aes(
     x = date,
     y = cases,
-  group = sim
+    group = sim
   ),
   color = "grey",
   linewidth = 1.2,
@@ -228,13 +228,32 @@ cases_plot <- ggplot(data = incidence_ts) +
     color = "tomato3",
     size = 0.75
   ) +
+  geom_line(
+    data = median_daily_cases,
+    aes(
+      x = date,
+      y = median_cases
+    ),
+    color = "tomato3",
+    linewidth = 0.25
+  ) +
+  geom_point(
+    data = covid19_sa,
+    aes(
+      x = date,
+      y = cases
+    ),
+    color = "black",
+    size = 0.25,
+    shape = 24
+  ) +
   scale_x_continuous(
     breaks = seq(min(incidence_ts$date), max(incidence_ts$date), 10),
     labels = seq(min(incidence_ts$date), max(incidence_ts$date), 10)
   ) +
   scale_y_continuous(
-    breaks = seq(0, max(incidence_ts$cases) + 200, 100),
-    labels = seq(0, max(incidence_ts$cases) + 200, 100)
+    breaks = seq(0, max(incidence_ts$cases) + 200, 250),
+    labels = seq(0, max(incidence_ts$cases) + 200, 250)
   ) +
   labs(x = "Date", y = "Daily cases (median)") +
   theme_minimal(base_size = 4) +
