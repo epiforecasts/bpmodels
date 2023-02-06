@@ -126,7 +126,7 @@ serial_interval <- function(sample_size) {
 
 #### Offspring distribution
 
-We assume an offspring distribution that is distributed as a negative binomial with $R = 2.5$ [@abbott2020] and $k = 0.58$. In this parameterization, R represents the $\mathcal{R_0}$, which is defined as the average number of cases produced by a single individual in an entirely susceptible population. The parameter $k$ represents superspreading, that is, the degree of heterogeneity in transmission by single individuals.
+We assume an offspring distribution that is distributed as a negative binomial with $R = 2.5$ [@abbott2020] and $k = 0.58$ [@Wang2020]. In this parameterization, R represents the $\mathcal{R_0}$, which is defined as the average number of cases produced by a single individual in an entirely susceptible population. The parameter $k$ represents superspreading, that is, the degree of heterogeneity in transmission by single individuals.
 
 ### Simulations
 To summarize the simulation set up, for each of the `r sim_rep` simulations, we want to project cases over a `r projection_window` day period since the last case, assuming that no chain would exceed `r chain_threshold`. 
