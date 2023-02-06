@@ -10,7 +10,7 @@ pkgdown:
 bibliography: references.bib
 link-citations: true
 vignette: >
-  %\VignetteIndexEntry{Projecting COVID-19 incidence using early outbreak data}
+  %\VignetteIndexEntry{Projecting infectious disease incidence using early outbreak data}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
