@@ -106,7 +106,7 @@ serial interval, $si$, is lognormal distributed as follows:
 
 $ E[\text{si}] = \ln \left( \dfrac{\mu^2}{(\sqrt{\mu^2 + \sigma^2}} \right)$
 
-$\text{SD} [\text{si}] = \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}$
+$ SD [\text{si}] = \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}$
 
 with $\mu = 4.7$ and standard deviation $\sigma = 2.9$.
 
