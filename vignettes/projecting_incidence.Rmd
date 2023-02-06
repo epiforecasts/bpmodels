@@ -1,5 +1,5 @@
 ---
-title: "Projecting COVID-19 incidence using early outbreak data"
+title: "Projecting infectious disease incidence using early outbreak data"
 author: "James Azam, Sebastian Funk"
 output:
   bookdown::html_vignette2:
