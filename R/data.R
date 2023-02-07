@@ -12,7 +12,6 @@
 #' \describe{
 #'   \item{date}{Date case was reported}
 #'   \item{cases}{Number of cases}
-#'   ...
 #' }
 #' @source <https://github.com/dsfsi/covid19za>
 #' Further details in `data-raw/covid19_sa.R`.
