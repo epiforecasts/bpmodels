@@ -1,5 +1,9 @@
 ## code to prepare `covid_sa` dataset
 
+library(dplyr)
+library(lubridate)
+
+#Link to data
 data_url <- 'https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv'
 
 #Read the data in using the url
