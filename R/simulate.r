@@ -1,4 +1,5 @@
 #' Simulate transmission chains using a branching process
+#' 
 #' @description \code{chain_sim()} is a stochastic simulator for generating 
 #' transmission chain data given information on the offspring distribution, 
 #' serial interval, time since the first case, etc. 
