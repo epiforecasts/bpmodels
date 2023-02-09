@@ -11,11 +11,11 @@ covid19_sa <- read.csv(data_url)
 
 #Clean and subset the data we need
 covid19_sa <- covid19_sa %>% 
-  dplyr::select(date) %>% 
-  dplyr::mutate(date = lubridate::dmy(date)) %>%
-  dplyr::filter(date <= lubridate::dmy('20-03-2020')) %>%   
-  dplyr::group_by(date) %>% 
-  dplyr::summarise(cases = n()) %>%   
-  dplyr::ungroup()
+  select(date) %>% 
+  mutate(date = lubridate::dmy(date)) %>%
+  filter(date <= min(date) + lubridate::days(15)) %>%   
+  group_by(date) %>% 
+  summarise(cases = n()) %>%   
+  ungroup()
 
 usethis::use_data(covid19_sa, overwrite = TRUE)
