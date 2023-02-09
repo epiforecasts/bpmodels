@@ -46,7 +46,7 @@ devtools::install_github('epiverse-trace/bpmodels')
 To load the package, use
 
 ```{r echo=FALSE}
-suppressWarnings(library('bpmodels'))
+library('bpmodels')
 ```
 
 At the heart of the package are the `chains_ll()` and `chains_sim()` functions. 
