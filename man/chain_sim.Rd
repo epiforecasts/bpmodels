@@ -59,8 +59,8 @@ element), and \code{generation}.}
 }
 \description{
 \code{chain_sim()} is a stochastic simulator for generating
-transmission chain data given information on the offspring distribution,
-serial interval, time since the first case, etc.
+transmission chain data with key inputs such as the offspring distribution and
+serial interval distribution.
 }
 \details{
 \code{chain_sim()} either returns a vector or a data.frame. The output is either a

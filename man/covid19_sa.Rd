@@ -11,7 +11,6 @@ A data frame with 19 rows and 2 columns:
 \describe{
 \item{date}{Date case was reported}
 \item{cases}{Number of cases}
-...
 }
 }
 }
@@ -25,7 +24,7 @@ covid19_sa
 \description{
 An aggregated subset of the COVID-19 Data Repository for South Africa created,
 maintained and hosted by Data Science for Social Impact research group,
-led by Dr. Vukosi Marivate ...
+led by Dr. Vukosi Marivate.
 }
 \details{
 The data is originally provided as a linelist but has been subsetted and
