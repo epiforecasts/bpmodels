@@ -38,40 +38,42 @@ be achieved in `bpmodels` with the `chain_sim()` function. @Pearson2020, and
 @abbott2020 illustrate its application to COVID-19. 
 
 The purpose of this vignette is to use early data on COVID-19 in South Africa 
-[@marivate2020] to illustrate how `bpmodels` can be used to forecast an outbreak. 
+[@marivate2020] to illustrate how `bpmodels` can be used to forecast an 
+outbreak. 
 
 
 Let's load the required packages
 
 ```{r packages, include=TRUE}
 library("bpmodels")
-library('dplyr')
-library('ggplot2')
-library('lubridate')
+library("dplyr")
+library("ggplot2")
+library("lubridate")
 ```
 
-### The data
+## Data
 
 We will get and clean the first $15$ days of the COVID-19 
 outbreak in South Africa to seed the simulation for this example.
 
 ```{r data, message=FALSE}
-data_url <- 'https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv' # nolint: line_length_linter. this comment overflows the default 80 chars line length.
+data_url <- 'https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv' # nolint: line_length_linter. 
 
 #Read the data in using the url
 covid19_sa <- read.csv(data_url)
 
 # Subset the first 15 days and count the number of cases per date
-covid19_sa <- covid19_sa %>%
-  dplyr::select(date) %>%
-  dplyr::mutate(date = lubridate::dmy(date)) %>%
-  dplyr::filter(date <= lubridate::dmy("20-03-2020")) %>%
-  dplyr::group_by(date) %>%
-  dplyr::summarise(cases = n()) %>%
-  dplyr::ungroup()
+covid19_sa <- covid19_sa %>% 
+  select(date) %>% 
+  mutate(date = lubridate::dmy(date)) %>%
+  filter(date <= min(date) + lubridate::days(15)) %>%   
+  group_by(date) %>% 
+  summarise(cases = n()) %>%   
+  ungroup()
 ```
 
-### Preparing the inputs  
+## Inputs  
+Using the data above, we will set up a vector of start times for each case.
 
 ```{r linelist_gen, message=FALSE}
 days_since_index <- as.integer(covid19_sa$date - min(covid19_sa$date))
