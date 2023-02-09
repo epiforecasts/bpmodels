@@ -87,10 +87,15 @@ start_times <- unlist(mapply(
 ```
 
 
-Additionally, `chain_sim()` requires other inputs, which we will specify below: 
+Additionally, `chain_sim()` requires the end time for the simulations and the 
+maximum size of each chain. Since each result of `chain_sim()` is stochastic,
+it is also best to run it many times. 
+
+We will specify these as follows:
 
 ```{r input_prep2, message=FALSE}
 #' Date to end simulation (14 day projection in this case)
+
 projection_window <- 14 # 14 days/ 2-week ahead projection
 
 projection_end_day <- max(days_since_index) + projection_window
@@ -103,39 +108,59 @@ chain_threshold <- 1000
 
 ```
 
-#### Serial interval
+### Serial interval
 
-We also assume based on COVID-19 literature that the 
-serial interval, $si$, is lognormal distributed as follows:
+In this example, we will assume based on COVID-19 literature that the 
+serial interval, $\mathcal{S}$, is log-normal distributed with parameters, 
+$\mu = 4.7$ and $\sigma = 2.9$ [@Pearson2020]. The log-normal mean, 
+$E[ \mathcal{S} ]$ and standard deviation $SD[ \mathcal{S} ]$ are 
+characterised as:
 
-$ E[\text{si}] = \ln \left( \dfrac{\mu^2}{(\sqrt{\mu^2 + \sigma^2}} \right)$
+\begin{align}
+E[ \mathcal{S} ] &= \ln \left( \dfrac{\mu^2}{(\sqrt{\mu^2 + \sigma^2}} \right) \\
 
-$ SD [\text{si}] = \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}$
+SD [ \mathcal{S} ] &= \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}
+ 
+\end{align}
 
-with $\mu = 4.7$ and standard deviation $\sigma = 2.9$.
+See [Wikipedia](https://en.wikipedia.org/wiki/Log-normal_distribution) for a 
+detailed explanation of this parametrisation.
+
+The following is how we set up the serial interval function using the
+information provided above:
 
 ```{r input_prep3, message=FALSE}
 mu <- 4.7
+
 sigma <- 2.9
 
-si_sd <- sqrt(log(1 + (sigma / mu)^2)) # log standard deviation
-si_mean <- log((mu^2) / (sqrt(sigma^2 + mu^2))) # log mean
+log_sd <- sqrt(log(1 + (sigma / mu)^2)) # log standard deviation
+
+log_mean <- log((mu^2) / (sqrt(sigma^2 + mu^2))) # log mean
 
 #' serial interval function
 serial_interval <- function(sample_size) {
-  si <- rlnorm(sample_size, meanlog = si_mean, sdlog = si_sd)
+  si <- rlnorm(sample_size, meanlog = log_mean, sdlog = log_sd)
   return(si)
 }
 ```
 
-#### Offspring distribution
+### Offspring distribution
 
-We assume an offspring distribution that is distributed as a negative binomial with $R = 2.5$ [@abbott2020] and $k = 0.58$ [@Wang2020]. In this parameterization, R represents the $\mathcal{R_0}$, which is defined as the average number of cases produced by a single individual in an entirely susceptible population. The parameter $k$ represents superspreading, that is, the degree of heterogeneity in transmission by single individuals.
+We will also assume that the offspring distribution is characterised by a 
+negative binomial with $\mathcal{R} = 2.5$ [@abbott2020] and 
+$\mathcal{k} = 0.58$ [@Wang2020]. In this parameterization, $\mathcal{R}$ 
+represents the $\mathcal{R_0}$, which is defined as the average number of 
+cases produced by a single individual in an entirely susceptible population. 
+The parameter $k$ represents superspreading, that is, the degree of 
+heterogeneity in transmission by single individuals.
 
-### Simulations
-To summarize the simulation set up, for each of the `r sim_rep` simulations, we want to project cases over a `r projection_window` day period since the last case, assuming that no chain would exceed `r chain_threshold`. 
+## Simulations
+To summarize the simulation set up, for each of the `r sim_rep` simulations,
+we want to project cases over a `r projection_window` day period since the 
+last case, assuming that no chain would exceed `r chain_threshold`. 
 
-#### Model assumptions
+### Model assumptions
 
 `chain_sim()` makes the following simplifying assumptions:
 
@@ -173,10 +198,11 @@ sim_output <- bind_rows(sim_chain_sizes)
 head(sim_output)
 ```
 
-From the simulated data, we count the median daily cases across 
-all simulations and overlay that over a plot of all the projections through time.
+## Post-processing
 
-#### Post-processing
+From the simulated data, we will count the median daily cases 
+(`median_daily_cases`) across all simulations and overlay that on the results 
+of all the projections through time (`incidence_ts`).
 
 ```{r post_processing}
 index_date <- min(covid19_sa$date)
@@ -191,7 +217,7 @@ incidence_ts <- sim_output %>%
 # Add dates
 incidence_ts <- incidence_ts %>%
   group_by(sim) %>%
-  mutate(date = index_date + (0:(n() - 1))) %>%
+  mutate(date = index_date + days(seq(0, n() - 1))) %>%
   ungroup()
 
 ## Median daily number of cases aggregated across all simulations
@@ -203,17 +229,17 @@ median_daily_cases <- incidence_ts %>%
 
 # Add dates
 median_daily_cases <- median_daily_cases %>%
-  mutate(date = index_date + 0:projection_end_day) %>%
+  mutate(date = index_date + days(seq(0, projection_end_day))) %>%
   ungroup()
 
 ```
 
 
-### Visualization
+## Visualization
 
 ```{r viz, fig.cap ="COVID-19 incidence projected over a two week window. The gray lines represent individual simulations, red connected dots represent the median daily cases across all simulations, and the black triangles represent the observed data.", fig.width=2.0, fig.height=1.8}
 # Visualization
-cases_plot <- ggplot(data = incidence_ts) +
+ggplot(data = incidence_ts) +
   geom_line(aes(
     x = date,
     y = cases,
@@ -260,10 +286,7 @@ cases_plot <- ggplot(data = incidence_ts) +
     labels = seq(0, max(incidence_ts$cases) + 200, 250)
   ) +
   labs(x = "Date", y = "Daily cases (median)") +
-  theme_minimal(base_size = 4) +
-  NULL
-
-print(cases_plot)
+  theme_minimal() 
 ```
 
-### References
+## References
