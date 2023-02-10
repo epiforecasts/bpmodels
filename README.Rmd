@@ -138,9 +138,9 @@ set.seed(13)
 serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
 
 chains_df <- chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', 
-                       infinite = 100, serial = serial_interval)
+                       infinite = 100, serial = serial_interval, tree = TRUE)
 
-chains_df
+head(chains_df)
 ```
 
 
