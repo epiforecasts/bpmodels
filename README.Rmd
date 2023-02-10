@@ -35,19 +35,20 @@ knitr::opts_chunk$set(echo = TRUE)
 branching processes with a given offspring distribution.
 
 # Installation
+
 The latest development version of the `bpmodels` package can be installed via
 
-```{r eval=FALSE}
+```{r include=TRUE,eval=FALSE}
 devtools::install_github('epiverse-trace/bpmodels')
 ```
 
-# Quick start
-
 To load the package, use
 
-```{r echo=FALSE}
+```{r eval=TRUE}
 library('bpmodels')
 ```
+
+# Quick start
 
 At the heart of the package are the `chain_ll()` and `chain_sim()` functions. 
 
@@ -83,7 +84,7 @@ The third argument, `stat`, determines whether to analyse chain sizes
 (`"length"`). Lastly, any named arguments not recognised by `chain_ll()` 
 are interpreted as parameters of the corresponding probability distribution, 
 here `lambda = 0.5` as the mean of the Poisson distribution (see the `R` help 
-page for the [Poisson distribution](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Poisson.html) for more information).
+page for the [Poisson distribution](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Poisson.html) for more information). 
 
 # Imperfect observations
 
@@ -115,20 +116,21 @@ file
 
 ## Simulating branching processes
 
-To simulate a branching process, we use the `chain_sim()` function. This function 
-follows the same syntax as `chain_ll()`.
+To simulate a branching process, we use the `chain_sim()` function. This 
+function follows the same syntax as `chain_ll()`.
 
 Below, we are simulating $5$ chains, assuming the offspring are generated using
-a Poisson distribution with mean, `lambda = 5`. By default, `chain_sim()` returns
-a vector of chain sizes/lengths. However, to override that so that a tree of
-infectees and infectors is returned, we need to specify a function for the serial 
-interval and set `tree = TRUE`
+a Poisson distribution with mean, `lambda = 5`. By default, `chain_sim()` 
+returns a vector of chain sizes/lengths. However, to override that so that 
+a tree of infectees and infectors is returned, we need to specify a function 
+for the serial interval and set `tree = TRUE`.
 
 ```{r}
 chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
 ```
 
 ### Simulating trees
+
 To simulate a tree of branching processes, we specify the serial interval 
 generation function and set `tree = TRUE` as follows:
 
@@ -164,7 +166,8 @@ chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5, nsim_offspring = 10
 
 ## Package vignettes
 
-Specific use cases of _bpmodels_ can be found in the [online documentation as package vignettes](https://epiverse-trace.github.io/bpmodels/), under "Articles".
+Specific use cases of _bpmodels_ can be found in 
+the [online documentation as package vignettes](https://epiverse-trace.github.io/bpmodels/), under "Articles".
 
 ## Reporting bugs 
 
@@ -172,8 +175,8 @@ To report a bug please open an [issue](https://github.com/epiverse-trace/bpmodel
 
 ## Contribute
 
-We welcome contributions to enhance the package's functionalities. If you wish to
-do so, please follow the [package contributing guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
+We welcome contributions to enhance the package's functionalities. If you 
+wish to do so, please follow the [package contributing guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
 
 ## Code of conduct
 
