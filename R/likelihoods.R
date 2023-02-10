@@ -5,8 +5,7 @@
 #' @return log-likelihood values
 #' @author Sebastian Funk
 #' @keywords internal
-pois_size_ll <- function(x, lambda)
-{
+pois_size_ll <- function(x, lambda) {
   (x - 1) * log(lambda) - lambda * x + (x - 2) * log(x) - lgamma(x)
 }
 
@@ -22,14 +21,13 @@ pois_size_ll <- function(x, lambda)
 #' @return log-likelihood values
 #' @author Sebastian Funk
 #' @keywords internal
-nbinom_size_ll <- function(x, size, prob, mu)
-{
+nbinom_size_ll <- function(x, size, prob, mu) {
   if (!missing(prob)) {
     if (!missing(mu)) stop("'prob' and 'mu' both specified")
     mu <- size * (1 - prob) / prob
   }
   lgamma(size * x + (x - 1)) - (lgamma(size * x) + lgamma(x + 1)) +
-    (x - 1) * log (mu / size) -
+    (x - 1) * log(mu / size) -
     (size * x + (x - 1)) * log(1 + mu / size)
 }
 
@@ -66,7 +64,7 @@ pois_length_ll <- function(x, lambda) {
   ## iterated exponential function
   arg <- exp(lambda * exp(-lambda))
   itex <- 1
-  for (i in seq_len(max(x))) itex <- c(itex, arg ^ itex[i])
+  for (i in seq_len(max(x))) itex <- c(itex, arg^itex[i])
 
   Gk <- c(0, exp(-lambda) * itex) ## set G_{0}=1
 
@@ -82,11 +80,10 @@ pois_length_ll <- function(x, lambda) {
 #' @author Sebastian Funk
 #' @keywords internal
 geom_length_ll <- function(x, prob) {
-
   lambda <- 1 / prob
   ## G(k) - G(k - 1)
-  GkmGkm1 <- (1 - lambda ^ (x)) / (1 - lambda ^ (x + 1)) -
-    (1 - lambda ^ (x - 1)) / (1 - lambda ^ (x))
+  GkmGkm1 <- (1 - lambda^(x)) / (1 - lambda^(x + 1)) -
+    (1 - lambda^(x - 1)) / (1 - lambda^(x))
 
   log(GkmGkm1)
 }
@@ -105,15 +102,16 @@ geom_length_ll <- function(x, prob) {
 #' @inheritParams chain_ll
 #' @inheritParams chain_sim
 #' @keywords internal
-offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
-
+offspring_ll <- function(x, offspring, stat, nsim_offspring = 100, ...) {
   dist <- chain_sim(nsim_offspring, offspring, stat, ...)
 
   ## linear approximation
   f <- stats::ecdf(dist)
   acdf <-
-    diff(c(0, stats::approx(unique(dist), f(unique(dist)),
-                            seq_len(max(dist[is.finite(dist)])))$y))
+    diff(c(0, stats::approx(
+      unique(dist), f(unique(dist)),
+      seq_len(max(dist[is.finite(dist)]))
+    )$y))
   lik <- acdf[x]
   lik[is.na(lik)] <- 0
   log(lik)
@@ -126,21 +124,24 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring=100, ...) {
 #' @param obs_prob observation probability (assumed constant)
 #' @param infinite any chains of this size/length will be treated as infinite
 #' @param exclude any sizes/lengths to exclude from the likelihood calculation
-#' @param individual if TRUE, a vector of individual log-likelihood contributions will be returned rather than the sum
+#' @param individual if TRUE, a vector of individual log-likelihood 
+#' contributions will be returned rather than the sum
 #' @param nsim_obs number of simulations if the likelihood is to be
 #'   approximated for imperfect observations
 #' @param ... parameters for the offspring distribution
-#' @return likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or a list of individual likelihood contributions (if \code{individual=TRUE})
+#' @return likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or
+#'  a list of individual likelihood contributions (if \code{individual=TRUE})
 #' @inheritParams chain_sim
 #' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
 #'   geom_length_ll offspring_ll
 #' @author Sebastian Funk
 #' @export
 #' @examples
-#' chain_sizes <- c(1,1,4,7) # example of observed chain sizes
-#' chain_ll(chain_sizes, "pois", "size", lambda=0.5)
-chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
-                     infinite = Inf, exclude=c(), individual=FALSE, nsim_obs, ...) {
+#' chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
+#' chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
+chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
+                     infinite = Inf, exclude = c(), individual = FALSE, 
+                     nsim_obs, ...) {
   stat <- match.arg(stat)
 
   ## checks
@@ -152,13 +153,14 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
     if (missing(nsim_obs)) {
       stop("'nsim_obs' must be specified if 'obs_prob' is <1")
     }
-    if (stat=="size") {
+    if (stat == "size") {
       sample_func <- rbinom_size
-    } else if (stat=="length"){
+    } else if (stat == "length") {
       sample_func <- rgen_length
     }
     sampled_x <-
-      replicate(nsim_obs, pmin(sample_func(length(x), x, obs_prob), infinite), simplify = FALSE)
+      replicate(nsim_obs, pmin(sample_func(length(x), x, obs_prob), 
+                               infinite), simplify = FALSE)
     size_x <- unlist(sampled_x)
     if (!is.finite(infinite)) infinite <- max(size_x) + 1
   } else {
@@ -169,25 +171,29 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
 
   ## determine for which sizes to calculate the likelihood (for true chain size)
   if (any(size_x == infinite)) {
-    calc_sizes <- seq_len(infinite-1)
+    calc_sizes <- seq_len(infinite - 1)
   } else {
     calc_sizes <- unique(c(size_x, exclude))
   }
 
   ## get likelihood function as given by `offspring` and `stat``
   likelihoods <- c()
-  ll_func <- paste(offspring, stat, "ll", sep="_")
+  ll_func <- paste(offspring, stat, "ll", sep = "_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists
 
   ## calculate likelihoods
-  if (exists(ll_func, where=asNamespace('bpmodels'), mode='function')) {
+  if (exists(ll_func, where = asNamespace("bpmodels"), mode = "function")) {
     func <- get(ll_func)
-    likelihoods[calc_sizes] <- do.call(func, c(list(x=calc_sizes), pars))
+    likelihoods[calc_sizes] <- do.call(func, c(list(x = calc_sizes), pars))
   } else {
     likelihoods[calc_sizes] <-
-      do.call(offspring_ll,
-              c(list(x=calc_sizes, offspring=offspring,
-                     stat=stat, infinite=infinite), pars))
+      do.call(
+        offspring_ll,
+        c(list(
+          x = calc_sizes, offspring = offspring,
+          stat = stat, infinite = infinite
+        ), pars)
+      )
   }
 
   ## assign probabilities to infinite outbreak sizes
@@ -213,4 +219,3 @@ chain_ll <- function(x, offspring, stat=c("size", "length"), obs_prob=1,
 
   return(chains_likelihood)
 }
-
