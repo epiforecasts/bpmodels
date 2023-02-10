@@ -94,7 +94,7 @@ case, true chain sizes or lengths are simulated repeatedly (the number of times
 given by the `nsim_obs` argument), and the likelihood calculated for each of 
 these simulations. 
 
-For example, if the probability of observing each case is $30%$, we use
+For example, if the probability of observing each case is $0.30$, we use
 
 ```{r}
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
