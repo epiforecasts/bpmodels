@@ -11,8 +11,8 @@ Provides methods to analyse and simulate the size and length of branching proces
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/sbfnk/bpmodels}
-  \item Report bugs at \url{https://github.com/sbfnk/bpmodels/issues}
+  \item \url{https://github.com/epiverse-trace/bpmodels}
+  \item Report bugs at \url{https://github.com/epiverse-trace/bpmodels/issues}
 }
 
 }
@@ -22,6 +22,7 @@ Useful links:
 Authors:
 \itemize{
   \item Flavio Finger \email{flavio.finger@epicentre.msf.org}
+  \item James Mba Azam \email{james.azam@lshtm.ac.uk}
 }
 
 Other contributors:

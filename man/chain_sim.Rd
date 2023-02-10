@@ -29,17 +29,23 @@ the R distribution function (e.g., "pois" for Poisson, where
 \item "length": the total number of ancestors.
 }}
 
-\item{infinite}{A size or length above which the simulation results should be
+\item{infinite}{A size or length above which the simulation results
+should be
 set to \code{Inf}. Defaults to \code{Inf}, resulting in no results ever set to \code{Inf}}
 
-\item{tree}{Logical. Should the transmission tree be returned? Defaults to \code{FALSE}.}
+\item{tree}{Logical. Should the transmission tree be returned? Defaults
+to \code{FALSE}.}
 
-\item{serial}{The serial interval generator function; the name of a user-defined
-named or anonymous function with only one argument \code{n}, representing the number
+\item{serial}{The serial interval generator function; the name of a
+user-defined
+named or anonymous function with only one argument \code{n}, representing
+the number
 of serial intervals to generate.}
 
-\item{t0}{Start time (if serial interval is given); either a single value or a
-vector of length \code{n} (number of simulations) with initial times. Defaults to 0.}
+\item{t0}{Start time (if serial interval is given); either a single value
+or a
+vector of length \code{n} (number of simulations) with initial times. Defaults
+to 0.}
 
 \item{tf}{End time (if serial interval is given).}
 
@@ -49,23 +55,29 @@ vector of length \code{n} (number of simulations) with initial times. Defaults t
 Either:
 \itemize{
 \item{A vector of sizes/lengths (if \code{tree == FALSE} OR serial
-interval function not specified, since that implies \code{tree == FALSE})}, or
+interval function not specified, since that implies
+\code{tree == FALSE})}, or
 \item {a data frame with
 columns \code{n} (simulation ID), \code{time} (if the serial interval is given) and
-(if \code{tree == TRUE}), \code{id} (a unique ID within each simulation for each
-individual element of the chain), \code{ancestor} (the ID of the ancestor of each
+(if \code{tree == TRUE}), \code{id} (a unique ID within each simulation for
+each
+individual element of the chain), \code{ancestor} (the ID of the ancestor of
+each
 element), and \code{generation}.}
 }
 }
 \description{
 \code{chain_sim()} is a stochastic simulator for generating
-transmission chain data with key inputs such as the offspring distribution and
-serial interval distribution.
+transmission chain data with key inputs such as the offspring distribution
+and serial interval distribution.
 }
 \details{
-\code{chain_sim()} either returns a vector or a data.frame. The output is either a
-vector if \code{serial} is not provided, which automatically sets \code{tree = FALSE},
-or a \code{data.frame}, which means that \code{serial} was provided as a function. When \code{serial}
+\code{chain_sim()} either returns a vector or a data.frame. The output is
+either a
+vector if \code{serial} is not provided, which automatically sets
+\code{tree = FALSE},
+or a \code{data.frame}, which means that \code{serial} was provided as a function.
+When \code{serial}
 is provided, it means \code{tree = TRUE} automatically. However, setting
 \code{tree = TRUE} would require providing a function for \code{serial}.
 }
@@ -73,35 +85,44 @@ is provided, it means \code{tree = TRUE} automatically. However, setting
 \subsection{Assumptions/disambiguation}{
 
 In epidemiology, the generation interval is the duration between successive
-infectious events in a chain of transmission. Similarly, the serial interval is the
+infectious events in a chain of transmission. Similarly, the serial
+interval is the
 duration between observed symptom onset times between successive
-cases in a transmission chain. The generation interval is often hard to observe
-because exact times of infection are hard to measure hence, the serial interval
-is often used instead. Here, we use the serial interval to represent what would
-normally be called the generation interval, that is, the time between successive
+cases in a transmission chain. The generation interval is often hard to
+observe
+because exact times of infection are hard to measure hence, the serial
+interval
+is often used instead. Here, we use the serial interval to represent
+what would
+normally be called the generation interval, that is, the time between
+successive
 cases.
 }
 
 \subsection{Specifying \code{serial} in \code{chain_sim()}}{
 
 \code{serial} must be specified as a named or
-\href{https://en.wikipedia.org/wiki/Anonymous_function#R}{anonymous/inline/unnamed function}
+\href{https://en.wikipedia.org/wiki/Anonymous_function#R}{anonymous/inline/unnamed function} # nolint
 with one argument.
 
 If \code{serial} is specified, \code{chain_sim()} returns times of
-infection as a column in the output. Moreover, specifying a function for \code{serial} implies
+infection as a column in the output. Moreover, specifying a function
+for \code{serial} implies
 \code{tree = TRUE} and a tree of infectors (\code{ancestor}) and infectees (\code{id})
 will be generated in the output.
 
 For example, assuming we want to specify the serial interval
-generator as a random log-normally distributed variable with \code{meanlog = 0.58}
+generator as a random log-normally distributed variable with
+\code{meanlog = 0.58}
 and \code{sdlog = 1.58}, we could define a named function, let's call it
 "serial_interval", with only one argument representing the number of serial
-intervals to sample: \code{serial_interval <- function(n){rlnorm(n, 0.58, 1.38)}},
+intervals to sample:
+\code{serial_interval <- function(n){rlnorm(n, 0.58, 1.38)}},
 and assign the name of the function to serial in \code{chain_sim()} like so
 \code{chain_sim(..., serial = serial_interval)},
 where \code{...} are the other arguments to \code{chain_sim()}. Alternatively, we
-could assign an anonymous function to serial in the \code{chain_sim()} call like so
+could assign an anonymous function to serial in the \code{chain_sim()} call
+like so
 \code{chain_sim(..., serial = function(n){rlnorm(n, 0.58, 1.38)})},
 where \code{...} are the other arguments to \code{chain_sim()}.
 }
@@ -110,22 +131,30 @@ where \code{...} are the other arguments to \code{chain_sim()}.
 \examples{
 # Specifying no `serial` and `tree == FALSE` (default) returns a vector
 set.seed(123)
-chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5, tree = FALSE)
+chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5, 
+tree = FALSE)
 
-# Specifying `serial` without specifying `tree` will set `tree = TRUE` internally.
- 
-# We'll first define the serial function 
+# Specifying `serial` without specifying `tree` will set `tree = TRUE` 
+internally.
+
+# We'll first define the serial function
 set.seed(123)
-serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
-chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', infinite = 100, 
-serial = serial_interval)
+serial_interval <- function(n) {
+  rlnorm(n, meanlog = 0.58, sdlog = 1.58)
+}
+chain_sim(
+  n = 5, offspring = "pois", lambda = 0.5, stat = "length", 
+  infinite = 100,
+  serial = serial_interval
+)
 
-# Specifying `serial` and `tree = FALSE` will throw an error 
+# Specifying `serial` and `tree = FALSE` will throw an error
 set.seed(123)
 \dontrun{
-try(chain_sim(n = 10, serial = function(x) 3, offspring = "pois", lambda = 2, 
-infinite = 10, tree = FALSE)
-)
+try(chain_sim(
+  n = 10, serial = function(x) 3, offspring = "pois", lambda = 2,
+  infinite = 10, tree = FALSE
+))
 }
 }
 \author{
