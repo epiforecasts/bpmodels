@@ -1,7 +1,7 @@
 #' Simulate transmission chains using a branching process
 #'
 #' @description \code{chain_sim()} is a stochastic simulator for generating
-#' transmission chain data with key inputs such as the offspring distribution 
+#' transmission chain data with key inputs such as the offspring distribution
 #' and serial interval distribution.
 #' @param n Number of simulations to run.
 #' @param offspring Offspring distribution: a character string corresponding to
@@ -12,36 +12,36 @@
 #'   \item "size": the total number of offspring.
 #'   \item "length": the total number of ancestors.
 #' }
-#' @param infinite A size or length above which the simulation results 
-#' should be set to `Inf`. Defaults to `Inf`, resulting in no results 
+#' @param infinite A size or length above which the simulation results
+#' should be set to `Inf`. Defaults to `Inf`, resulting in no results
 #' ever set to `Inf`
-#' @param tree Logical. Should the transmission tree be returned? Defaults 
+#' @param tree Logical. Should the transmission tree be returned? Defaults
 #' to `FALSE`.
-#' @param serial The serial interval generator function; the name of a 
-#' user-defined named or anonymous function with only one argument `n`, 
+#' @param serial The serial interval generator function; the name of a
+#' user-defined named or anonymous function with only one argument `n`,
 #' representing the number of serial intervals to generate.
-#' @param t0 Start time (if serial interval is given); either a single value 
-#' or a vector of length `n` (number of simulations) with initial times. 
+#' @param t0 Start time (if serial interval is given); either a single value
+#' or a vector of length `n` (number of simulations) with initial times.
 #' Defaults to 0.
 #' @param tf End time (if serial interval is given).
 #' @param ... Parameters of the offspring distribution as required by R.
 #' @return Either:
 #' \itemize{
 #'  \item{A vector of sizes/lengths (if \code{tree == FALSE} OR serial
-#'   interval function not specified, since that implies 
+#'   interval function not specified, since that implies
 #'   \code{tree == FALSE})}, or
 #'   \item {a data frame with
 #'   columns `n` (simulation ID), `time` (if the serial interval is given) and
-#'   (if \code{tree == TRUE}), `id` (a unique ID within each simulation for 
-#'   each individual element of the chain), `ancestor` (the ID of the 
+#'   (if \code{tree == TRUE}), `id` (a unique ID within each simulation for
+#'   each individual element of the chain), `ancestor` (the ID of the
 #'   ancestor of each element), and `generation`.}
 #' }
 #' @author Sebastian Funk, James M. Azam
 #' @export
 #' @details
-#' `chain_sim()` either returns a vector or a data.frame. The output is 
-#' either a vector if `serial` is not provided, which automatically sets 
-#' \code{tree = FALSE}, or a `data.frame`, which means that `serial` was 
+#' `chain_sim()` either returns a vector or a data.frame. The output is
+#' either a vector if `serial` is not provided, which automatically sets
+#' \code{tree = FALSE}, or a `data.frame`, which means that `serial` was
 #' provided as a function. When `serial` is provided, it means 
 #' \code{tree = TRUE} automatically. However, setting \code{tree = TRUE} 
 #' would require providing a function for `serial`.
