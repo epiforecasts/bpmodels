@@ -129,7 +129,7 @@ chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
 ```
 
 ### Simulating trees
-To simulate a tree of branching processes, we do specify the serial interval 
+To simulate a tree of branching processes, we specify the serial interval 
 generation function and set `tree = TRUE` as follows:
 
 ```{r}
