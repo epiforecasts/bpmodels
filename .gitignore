@@ -29,3 +29,5 @@ vignettes/*.pdf
 rsconnect/
 /doc/
 /Meta/
+/docs/
+.DS_Store
