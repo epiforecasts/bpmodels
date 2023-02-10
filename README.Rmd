@@ -49,11 +49,11 @@ To load the package, use
 library('bpmodels')
 ```
 
-At the heart of the package are the `chains_ll()` and `chains_sim()` functions. 
+At the heart of the package are the `chain_ll()` and `chain_sim()` functions. 
 
 ## Calculating log-likelihoods
 
-The `chains_ll()` function calculates the log-likelihood of a distribution of 
+The `chain_ll()` function calculates the log-likelihood of a distribution of 
 chain sizes or lengths given an offspring distribution and its associated 
 parameters. 
 
@@ -106,11 +106,11 @@ summary(ll)
 This returns `10` likelihood values (because `nsim_obs = 10`), which can be 
 averaged to come up with an overall likelihood estimate.
 
-To find out about usage of the `chains_ll()` function, you can use the `R` help 
+To find out about usage of the `chain_ll()` function, you can use the `R` help 
 file
 
 ```{r eval=FALSE}
-?chains_ll
+?chain_ll
 ```
 
 ## Simulating branching processes
