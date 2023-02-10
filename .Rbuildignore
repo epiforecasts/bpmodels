@@ -5,3 +5,4 @@ cran-comments.md
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^LICENSE\.md$
+.lintr
