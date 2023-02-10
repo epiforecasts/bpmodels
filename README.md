@@ -35,12 +35,12 @@ devtools::install_github('epiverse-trace/bpmodels')
 
 To load the package, use
 
-At the heart of the package are the `chains_ll()` and `chains_sim()`
+At the heart of the package are the `chain_ll()` and `chain_sim()`
 functions.
 
 ## Calculating log-likelihoods
 
-The `chains_ll()` function calculates the log-likelihood of a
+The `chain_ll()` function calculates the log-likelihood of a
 distribution of chain sizes or lengths given an offspring distribution
 and its associated parameters.
 
@@ -55,7 +55,7 @@ To do this, we run
 set.seed(13)
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(x = chain_sizes, offspring = "pois", stat = "size", lambda = 0.5)
-#> [1] -8.607196
+#> [1] -8.607
 ```
 
 The first argument of `chain_ll()` is the size (or length) distribution
@@ -86,7 +86,7 @@ likelihood. In that case, true chain sizes or lengths are simulated
 repeatedly (the number of times given by the `nsim_obs` argument), and
 the likelihood calculated for each of these simulations.
 
-For example, if the probability of observing each case is $30%$, we use
+For example, if the probability of observing each case is $0.30$, we use
 
 ``` r
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
@@ -94,17 +94,17 @@ ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5,
                nsim_obs = 10)
 summary(ll)
 #>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#>  -32.09  -26.52  -24.06  -24.94  -22.49  -19.14
+#>   -32.1   -26.5   -24.1   -24.9   -22.5   -19.1
 ```
 
 This returns `10` likelihood values (because `nsim_obs = 10`), which can
 be averaged to come up with an overall likelihood estimate.
 
-To find out about usage of the `chains_ll()` function, you can use the
+To find out about usage of the `chain_ll()` function, you can use the
 `R` help file
 
 ``` r
-?chains_ll
+?chain_ll
 ```
 
 ## Simulating branching processes
@@ -126,7 +126,7 @@ chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
 
 ### Simulating trees
 
-To simulate a tree of branching processes, we do specify the serial
+To simulate a tree of branching processes, we specify the serial
 interval generation function and set `tree = TRUE` as follows:
 
 ``` r
@@ -135,23 +135,16 @@ set.seed(13)
 serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
 
 chains_df <- chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', 
-                       infinite = 100, serial = serial_interval)
+                       infinite = 100, serial = serial_interval, tree = TRUE)
 
-chains_df
-#>    n id ancestor generation        time
-#> 1  1  1       NA          1  0.00000000
-#> 2  2  1       NA          1  0.00000000
-#> 3  3  1       NA          1  0.00000000
-#> 4  4  1       NA          1  0.00000000
-#> 5  5  1       NA          1  0.00000000
-#> 6  1  2        1          2  0.04771887
-#> 7  5  2        1          2  5.57573333
-#> 8  5  3        1          2  0.11454421
-#> 9  1  3        2          3  2.64367236
-#> 10 5  4        2          3  6.57843219
-#> 11 1  4        3          4  2.96098160
-#> 12 5  5        4          4 10.28370183
-#> 13 5  6        5          5 10.37883069
+head(chains_df)
+#>   n id ancestor generation    time
+#> 1 1  1       NA          1 0.00000
+#> 2 2  1       NA          1 0.00000
+#> 3 3  1       NA          1 0.00000
+#> 4 4  1       NA          1 0.00000
+#> 5 5  1       NA          1 0.00000
+#> 6 1  2        1          2 0.04772
 ```
 
 # Methodology
@@ -171,7 +164,7 @@ probability `prob = 0.5`, we run
 
 ``` r
 chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5, nsim_offspring = 100)
-#> [1] -8.760539
+#> [1] -8.761
 ```
 
 ## Package vignettes
@@ -206,7 +199,7 @@ citation("bpmodels")
 #> 
 #> To cite package 'bpmodels' in publications use:
 #> 
-#>   Funk S, Finger F (????). _bpmodels: Analysing chain statistics using
+#>   Funk S, Finger F (2023). _bpmodels: Analysing chain statistics using
 #>   branching process models_. R package version 0.1.0,
 #>   <https://github.com/sbfnk/bpmodels>.
 #> 
@@ -215,6 +208,7 @@ citation("bpmodels")
 #>   @Manual{,
 #>     title = {bpmodels: Analysing chain statistics using branching process models},
 #>     author = {Sebastian Funk and Flavio Finger},
+#>     year = {2023},
 #>     note = {R package version 0.1.0},
 #>     url = {https://github.com/sbfnk/bpmodels},
 #>   }
