@@ -30,22 +30,19 @@ the R distribution function (e.g., "pois" for Poisson, where
 }}
 
 \item{infinite}{A size or length above which the simulation results
-should be
-set to \code{Inf}. Defaults to \code{Inf}, resulting in no results ever set to \code{Inf}}
+should be set to \code{Inf}. Defaults to \code{Inf}, resulting in no results
+ever set to \code{Inf}}
 
 \item{tree}{Logical. Should the transmission tree be returned? Defaults
 to \code{FALSE}.}
 
 \item{serial}{The serial interval generator function; the name of a
-user-defined
-named or anonymous function with only one argument \code{n}, representing
-the number
-of serial intervals to generate.}
+user-defined named or anonymous function with only one argument \code{n},
+representing the number of serial intervals to generate.}
 
 \item{t0}{Start time (if serial interval is given); either a single value
-or a
-vector of length \code{n} (number of simulations) with initial times. Defaults
-to 0.}
+or a vector of length \code{n} (number of simulations) with initial times.
+Defaults to 0.}
 
 \item{tf}{End time (if serial interval is given).}
 
@@ -60,10 +57,8 @@ interval function not specified, since that implies
 \item {a data frame with
 columns \code{n} (simulation ID), \code{time} (if the serial interval is given) and
 (if \code{tree == TRUE}), \code{id} (a unique ID within each simulation for
-each
-individual element of the chain), \code{ancestor} (the ID of the ancestor of
-each
-element), and \code{generation}.}
+each individual element of the chain), \code{ancestor} (the ID of the
+ancestor of each element), and \code{generation}.}
 }
 }
 \description{
@@ -73,30 +68,23 @@ and serial interval distribution.
 }
 \details{
 \code{chain_sim()} either returns a vector or a data.frame. The output is
-either a
-vector if \code{serial} is not provided, which automatically sets
-\code{tree = FALSE},
-or a \code{data.frame}, which means that \code{serial} was provided as a function.
-When \code{serial}
-is provided, it means \code{tree = TRUE} automatically. However, setting
-\code{tree = TRUE} would require providing a function for \code{serial}.
+either a vector if \code{serial} is not provided, which automatically sets
+\code{tree = FALSE}, or a \code{data.frame}, which means that \code{serial} was
+provided as a function. When \code{serial} is provided, it means
+\code{tree = TRUE} automatically. However, setting \code{tree = TRUE}
+would require providing a function for \code{serial}.
 }
 \section{The serial interval (\code{serial}):}{
 \subsection{Assumptions/disambiguation}{
 
 In epidemiology, the generation interval is the duration between successive
 infectious events in a chain of transmission. Similarly, the serial
-interval is the
-duration between observed symptom onset times between successive
-cases in a transmission chain. The generation interval is often hard to
-observe
-because exact times of infection are hard to measure hence, the serial
-interval
-is often used instead. Here, we use the serial interval to represent
-what would
-normally be called the generation interval, that is, the time between
-successive
-cases.
+interval is the duration between observed symptom onset times between
+successive cases in a transmission chain. The generation interval is
+often hard to observe because exact times of infection are hard to
+measure hence, the serial interval is often used instead. Here, we
+use the serial interval to represent what would normally be called the
+generation interval, that is, the time between successive cases.
 }
 
 \subsection{Specifying \code{serial} in \code{chain_sim()}}{
@@ -107,23 +95,20 @@ with one argument.
 
 If \code{serial} is specified, \code{chain_sim()} returns times of
 infection as a column in the output. Moreover, specifying a function
-for \code{serial} implies
-\code{tree = TRUE} and a tree of infectors (\code{ancestor}) and infectees (\code{id})
-will be generated in the output.
+for \code{serial} implies \code{tree = TRUE} and a tree of
+infectors (\code{ancestor}) and infectees (\code{id}) will be generated in the output.
 
 For example, assuming we want to specify the serial interval
 generator as a random log-normally distributed variable with
-\code{meanlog = 0.58}
-and \code{sdlog = 1.58}, we could define a named function, let's call it
-"serial_interval", with only one argument representing the number of serial
-intervals to sample:
+\code{meanlog = 0.58} and \code{sdlog = 1.58}, we could define a named function,
+let's call it "serial_interval", with only one argument representing the
+number of serial intervals to sample:
 \code{serial_interval <- function(n){rlnorm(n, 0.58, 1.38)}},
 and assign the name of the function to serial in \code{chain_sim()} like so
 \code{chain_sim(..., serial = serial_interval)},
 where \code{...} are the other arguments to \code{chain_sim()}. Alternatively, we
 could assign an anonymous function to serial in the \code{chain_sim()} call
-like so
-\code{chain_sim(..., serial = function(n){rlnorm(n, 0.58, 1.38)})},
+like so \code{chain_sim(..., serial = function(n){rlnorm(n, 0.58, 1.38)})},
 where \code{...} are the other arguments to \code{chain_sim()}.
 }
 }
@@ -135,7 +120,7 @@ chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5,
 tree = FALSE)
 
 # Specifying `serial` without specifying `tree` will set `tree = TRUE` 
-internally.
+# internally.
 
 # We'll first define the serial function
 set.seed(123)

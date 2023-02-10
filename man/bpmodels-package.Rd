@@ -22,7 +22,7 @@ Useful links:
 Authors:
 \itemize{
   \item Flavio Finger \email{flavio.finger@epicentre.msf.org}
-  \item James Mba Azam \email{james.azam@lshtm.ac.uk}
+  \item James M. Azam \email{james.azam@lshtm.ac.uk}
 }
 
 Other contributors:

@@ -89,7 +89,7 @@
 #' tree = FALSE)
 #'
 #' # Specifying `serial` without specifying `tree` will set `tree = TRUE` 
-#' internally.
+#' # internally.
 #'
 #' # We'll first define the serial function
 #' set.seed(123)
