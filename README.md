@@ -31,9 +31,13 @@ installed via
 devtools::install_github('epiverse-trace/bpmodels')
 ```
 
-# Quick start
-
 To load the package, use
+
+``` r
+library('bpmodels')
+```
+
+# Quick start
 
 At the heart of the package are the `chain_ll()` and `chain_sim()`
 functions.
@@ -117,7 +121,7 @@ generated using a Poisson distribution with mean, `lambda = 5`. By
 default, `chain_sim()` returns a vector of chain sizes/lengths. However,
 to override that so that a tree of infectees and infectors is returned,
 we need to specify a function for the serial interval and set
-`tree = TRUE`
+`tree = TRUE`.
 
 ``` r
 chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
@@ -199,15 +203,15 @@ citation("bpmodels")
 #> 
 #> To cite package 'bpmodels' in publications use:
 #> 
-#>   Funk S, Finger F (2023). _bpmodels: Analysing chain statistics using
-#>   branching process models_. R package version 0.1.0,
+#>   Funk S, Finger F, Azam JM (2023). _bpmodels: Analysing chain
+#>   statistics using branching process models_. R package version 0.1.0,
 #>   <https://github.com/sbfnk/bpmodels>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {bpmodels: Analysing chain statistics using branching process models},
-#>     author = {Sebastian Funk and Flavio Finger},
+#>     author = {Sebastian Funk and Flavio Finger and James Mba Azam},
 #>     year = {2023},
 #>     note = {R package version 0.1.0},
 #>     url = {https://github.com/sbfnk/bpmodels},
