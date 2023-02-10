@@ -57,7 +57,7 @@ We will get and clean the first $15$ days of the COVID-19
 outbreak in South Africa to seed the simulation for this example.
 
 ```{r data, message=FALSE}
-data_url <- 'https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv' # nolint: line_length_linter. 
+data_url <- "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv" # nolint: line_length_linter. 
 
 #Read the data in using the url
 covid19_sa <- read.csv(data_url)
