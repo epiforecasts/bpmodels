@@ -124,7 +124,7 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring = 100, ...) {
 #' @param obs_prob observation probability (assumed constant)
 #' @param infinite any chains of this size/length will be treated as infinite
 #' @param exclude any sizes/lengths to exclude from the likelihood calculation
-#' @param individual if TRUE, a vector of individual log-likelihood 
+#' @param individual if TRUE, a vector of individual log-likelihood
 #' contributions will be returned rather than the sum
 #' @param nsim_obs number of simulations if the likelihood is to be
 #'   approximated for imperfect observations
@@ -140,7 +140,7 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring = 100, ...) {
 #' chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 #' chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
 chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
-                     infinite = Inf, exclude = c(), individual = FALSE, 
+                     infinite = Inf, exclude = c(), individual = FALSE,
                      nsim_obs, ...) {
   stat <- match.arg(stat)
 
@@ -159,7 +159,7 @@ chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
       sample_func <- rgen_length
     }
     sampled_x <-
-      replicate(nsim_obs, pmin(sample_func(length(x), x, obs_prob), 
+      replicate(nsim_obs, pmin(sample_func(length(x), x, obs_prob),
                                infinite), simplify = FALSE)
     size_x <- unlist(sampled_x)
     if (!is.finite(infinite)) infinite <- max(size_x) + 1
