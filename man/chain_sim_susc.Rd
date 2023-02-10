@@ -57,7 +57,7 @@ it always tracks and returns a data frame containing the entire tree,
 the maximal length of chains is limited with pop instead of infinite.
 }
 \examples{
-chain_sim_susc("pois", mn_offspring=0.5, serial = function(x) 3, pop = 100)
+chain_sim_susc("pois", mn_offspring = 0.5, serial = function(x) 3, pop = 100)
 }
 \author{
 Flavio Finger

@@ -31,7 +31,8 @@ the R distribution function (e.g., "pois" for Poisson, where
 
 \item{exclude}{any sizes/lengths to exclude from the likelihood calculation}
 
-\item{individual}{if TRUE, a vector of individual log-likelihood contributions will be returned rather than the sum}
+\item{individual}{if TRUE, a vector of individual log-likelihood
+contributions will be returned rather than the sum}
 
 \item{nsim_obs}{number of simulations if the likelihood is to be
 approximated for imperfect observations}
@@ -39,14 +40,15 @@ approximated for imperfect observations}
 \item{...}{parameters for the offspring distribution}
 }
 \value{
-likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or a list of individual likelihood contributions (if \code{individual=TRUE})
+likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or
+a list of individual likelihood contributions (if \code{individual=TRUE})
 }
 \description{
 Likelihood for the outcome of a branching process
 }
 \examples{
-chain_sizes <- c(1,1,4,7) # example of observed chain sizes
-chain_ll(chain_sizes, "pois", "size", lambda=0.5)
+chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
+chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
 }
 \seealso{
 pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll

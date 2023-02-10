@@ -22,9 +22,9 @@ Further details in \code{data-raw/covid19_sa.R}.
 covid19_sa
 }
 \description{
-An aggregated subset of the COVID-19 Data Repository for South Africa created,
-maintained and hosted by Data Science for Social Impact research group,
-led by Dr. Vukosi Marivate.
+An aggregated subset of the COVID-19 Data Repository for South Africa
+created, maintained and hosted by Data Science for Social Impact research
+group, led by Dr. Vukosi Marivate.
 }
 \details{
 The data is originally provided as a linelist but has been subsetted and
