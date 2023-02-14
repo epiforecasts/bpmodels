@@ -1,8 +1,13 @@
 linters: linters_with_defaults(
-    line_length_linter(90), 
-    commented_code_linter = NULL,
+tags = NULL, # include all linters
     object_name_linter = NULL,
-    trailing_whitespace_linter = NULL,
+    undesirable_function_linter = NULL,
+    implicit_integer_linter = NULL,
+    extraction_operator_linter = NULL,
+    todo_comment_linter = NULL,
+    function_argument_linter = NULL,
+    # Use minimum R declared in DESCRIPTION or fall back to current R version
+    backport_linter(if (length(x <- etdev::extract_min_r_version())) x else getRversion()),
     cyclocomp_linter = NULL
   )
 encoding:"UTF-8"
