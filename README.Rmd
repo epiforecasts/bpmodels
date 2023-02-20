@@ -60,7 +60,7 @@ parameters.
 
 For example, if we have observed a distribution of chains of sizes $1, 1, 4, 7$, we can 
 calculate the log-likelihood of this observed chain by assuming the offspring 
-per generation is Poisson distributed with a mean number of $0.5$. 
+per generation is Poisson distributed with a mean number (which can be interpreted as the reproduction number $R$) of $0.5$. 
 
 To do this, we run 
 
