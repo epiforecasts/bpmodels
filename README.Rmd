@@ -70,7 +70,7 @@ chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(x = chain_sizes, offspring = "pois", stat = "size", lambda = 0.5)
 ```
 
-The first argument of `chain_ll()` is the size (or length) distribution to 
+The first argument of `chain_ll()` is the chain size (or length, in number of generations that a chain lasted) distribution to 
 analyse. The second argument, `offspring`, specifies the offspring 
 distribution. This is given as a function used to generate random offspring. 
 It can be any probability distribution implemented in `R`, that is, one that 
