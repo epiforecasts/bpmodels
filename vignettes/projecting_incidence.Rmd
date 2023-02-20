@@ -220,7 +220,7 @@ incidence_ts <- incidence_ts %>%
   mutate(date = index_date + days(seq(0, n() - 1))) %>%
   ungroup()
 
-## Median daily number of cases aggregated across all simulations
+# Median daily number of cases aggregated across all simulations
 median_daily_cases <- incidence_ts %>%
   group_by(day) %>%
   summarise(median_cases = median(cases)) %>%
