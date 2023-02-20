@@ -32,7 +32,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 `bpmodels` is an R package to simulate and analyse the size and length of 
-branching processes with a given offspring distribution.
+branching processes with a given offspring distribution. These models are often 
+used in infectious disease epidemiology, where the chains represent chains of
+transmission, and offspring distribution, the distribution of secondary infections
+caused by an infected individual.
 
 # Installation
 
