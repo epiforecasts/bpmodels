@@ -58,7 +58,7 @@ The `chain_ll()` function calculates the log-likelihood of a distribution of
 chain sizes or lengths given an offspring distribution and its associated 
 parameters. 
 
-If we have observed a distribution of chains of sizes $1, 1, 4, 7$, we can 
+For example, if we have observed a distribution of chains of sizes $1, 1, 4, 7$, we can 
 calculate the log-likelihood of this observed chain by assuming the offspring 
 per generation is Poisson distributed with a mean number of $0.5$. 
 
