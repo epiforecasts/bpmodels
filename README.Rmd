@@ -120,7 +120,7 @@ To simulate a branching process, we use the `chain_sim()` function. This
 function follows the same syntax as `chain_ll()`.
 
 Below, we are simulating $5$ chains, assuming the offspring are generated using
-a Poisson distribution with mean, `lambda = 5`. By default, `chain_sim()` 
+a Poisson distribution with mean, `lambda = 0.5`. By default, `chain_sim()` 
 returns a vector of chain sizes/lengths. However, to override that so that 
 a tree of infectees and infectors is returned, we need to specify a function 
 for the serial interval and set `tree = TRUE`.
