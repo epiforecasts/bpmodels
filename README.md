@@ -19,12 +19,16 @@ activity](https://img.shields.io/github/commit-activity/m/epiverse-trace/bpmodel
 ![GitHub](https://img.shields.io/github/license/epiverse-trace/bpmodels)
 <!-- badges: end -->
 
-`bpmodels` is an R package to simulate and analyse the size and length
-of branching processes with a given offspring distribution.
+*bpmodels* is an R package to simulate and analyse the size and length
+of branching processes with a given offspring distribution. These models
+are often used in infectious disease epidemiology, where the chains
+represent chains of transmission, and the offspring distribution
+represents the distribution of secondary infections caused by an
+infected individual.
 
 # Installation
 
-The latest development version of the `bpmodels` package can be
+The latest development version of the *bpmodels* package can be
 installed via
 
 ``` r
@@ -48,10 +52,11 @@ The `chain_ll()` function calculates the log-likelihood of a
 distribution of chain sizes or lengths given an offspring distribution
 and its associated parameters.
 
-If we have observed a distribution of chains of sizes $1, 1, 4, 7$, we
-can calculate the log-likelihood of this observed chain by assuming the
-offspring per generation is Poisson distributed with a mean number of
-$0.5$.
+For example, if we have observed a distribution of chains of sizes
+$1, 1, 4, 7$, we can calculate the log-likelihood of this observed chain
+by assuming the offspring per generation is Poisson distributed with a
+mean number (which can be interpreted as the reproduction number
+$\mathcal{R_0}$) of $0.5$.
 
 To do this, we run
 
@@ -62,15 +67,15 @@ chain_ll(x = chain_sizes, offspring = "pois", stat = "size", lambda = 0.5)
 #> [1] -8.607
 ```
 
-The first argument of `chain_ll()` is the size (or length) distribution
-to analyse. The second argument, `offspring`, specifies the offspring
-distribution. This is given as a function used to generate random
-offspring. It can be any probability distribution implemented in `R`,
-that is, one that has a corresponding function for generating random
-numbers beginning with the letter `r`. In the case of the example above,
-since random Poisson numbers are generated in `R` using a function
-called `rpois()`, the string to pass to the `offspring` argument is
-`"pois"`.
+The first argument of `chain_ll()` is the chain size (or length, in
+number of generations that a chain lasted) distribution to analyse. The
+second argument, `offspring`, specifies the offspring distribution. This
+is given as a function used to generate random offspring. It can be any
+probability distribution implemented in `R`, that is, one that has a
+corresponding function for generating random numbers beginning with the
+letter `r`. In the case of the example above, since random Poisson
+numbers are generated in `R` using a function called `rpois()`, the
+string to pass to the `offspring` argument is `"pois"`.
 
 The third argument, `stat`, determines whether to analyse chain sizes
 (`"size"`, the default if this argument is not specified) or lengths
@@ -81,24 +86,27 @@ distribution (see the `R` help page for the [Poisson
 distribution](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Poisson.html)
 for more information).
 
-# Imperfect observations
+### Imperfect observations
 
-By default, `chain_ll` assumes perfect observation, where `obs_prob = 1`
-(See `?chain_ll`). If observations are imperfect, the `chain_ll()`
-function has an `obs_prob` argument that can be used to determine the
-likelihood. In that case, true chain sizes or lengths are simulated
+By default, `chain_ll()` assumes perfect observation, where
+`obs_prob = 1` (See `?chain_ll`), meaning that all transmission events
+are observed and recorded in the data. If observations are imperfect,
+`chain_ll()` provides the argument, `obs_prob`, for specifying the
+probability of observation. This probability is used to determine the
+likelihood of observing the specified chain sizes or lengths. In the
+case of imperfect observation, true chain sizes or lengths are simulated
 repeatedly (the number of times given by the `nsim_obs` argument), and
 the likelihood calculated for each of these simulations.
 
-For example, if the probability of observing each case is $0.30$, we use
+For example, if the probability of observing each case is
+`obs_prob = 0.30`, we use
 
 ``` r
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5, 
                nsim_obs = 10)
-summary(ll)
-#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#>   -32.1   -26.5   -24.1   -24.9   -22.5   -19.1
+ll
+#>  [1] -26.54 -23.26 -24.33 -20.80 -30.76 -26.47 -23.79 -19.14 -32.09 -22.23
 ```
 
 This returns `10` likelihood values (because `nsim_obs = 10`), which can
@@ -111,13 +119,38 @@ To find out about usage of the `chain_ll()` function, you can use the
 ?chain_ll
 ```
 
+### How `chain_ll()` works
+
+If the probability distribution of chain sizes or lengths has an
+analytical solution, this will be used. `chain_ll()` currently supports
+the Poisson and negative binomial size distribution and the Poisson and
+geometric length distribution.
+
+If an analytical solution does not exist, simulations are used to
+approximate this probability distributions ([using a linear
+approximation to the cumulative
+distribution](https://en.wikipedia.org/wiki/Empirical_distribution_function)
+for unobserved sizes/lengths). In that case, an extra argument
+`nsim_offspring` must be passed to `chain_ll()` to specify the number of
+simulations to be used for this approximation.
+
+For example, to get offspring drawn from a binomial distribution with
+probability `prob = 0.5`, we run
+
+``` r
+chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
+chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5, 
+         nsim_offspring = 100)
+#> [1] -Inf
+```
+
 ## Simulating branching processes
 
 To simulate a branching process, we use the `chain_sim()` function. This
 function follows the same syntax as `chain_ll()`.
 
 Below, we are simulating $5$ chains, assuming the offspring are
-generated using a Poisson distribution with mean, `lambda = 5`. By
+generated using a Poisson distribution with mean, `lambda = 0.5`. By
 default, `chain_sim()` returns a vector of chain sizes/lengths. However,
 to override that so that a tree of infectees and infectors is returned,
 we need to specify a function for the serial interval and set
@@ -125,22 +158,19 @@ we need to specify a function for the serial interval and set
 
 ``` r
 chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
-#> [1] 5 1 1 1 1
+#> [1] 2 6 2 1 2
 ```
 
 ### Simulating trees
 
-To simulate a tree of branching processes, we specify the serial
+To simulate a tree of transmission chains, we specify the serial
 interval generation function and set `tree = TRUE` as follows:
 
 ``` r
 set.seed(13)
-
 serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
-
 chains_df <- chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', 
                        infinite = 100, serial = serial_interval, tree = TRUE)
-
 head(chains_df)
 #>   n id ancestor generation    time
 #> 1 1  1       NA          1 0.00000
@@ -149,26 +179,6 @@ head(chains_df)
 #> 4 4  1       NA          1 0.00000
 #> 5 5  1       NA          1 0.00000
 #> 6 1  2        1          2 0.04772
-```
-
-# Methodology
-
-If the probability distribution of chain sizes or lengths has an
-analytical solution, this will be used (size distribution: Poisson and
-negative binomial; length distribution: Poisson and geometric).
-
-If an analytical solution does not exist, simulations are used to
-approximate this probability distributions (using a linear approximation
-to the cumulative distribution for unobserved sizes/lengths). The
-argument `nsim_offspring` is used to specify the number of simulations
-to be used for this approximation.
-
-For example, to get offspring drawn from a binomial distribution with
-probability `prob = 0.5`, we run
-
-``` r
-chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5, nsim_offspring = 100)
-#> [1] -8.761
 ```
 
 ## Package vignettes
