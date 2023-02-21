@@ -132,13 +132,9 @@ information provided above:
 
 ```{r input_prep3, message=FALSE}
 mu <- 4.7
-
-sigma <- 2.9
-
-log_sd <- sqrt(log(1 + (sigma / mu)^2)) # log standard deviation
-
-log_mean <- log((mu^2) / (sqrt(sigma^2 + mu^2))) # log mean
-
+sgma <- 2.9
+log_sd <- sqrt(log(1 + (sgma / mu)^2)) # log standard deviation
+log_mean <- log((mu^2) / (sqrt(sgma^2 + mu^2))) # log mean
 #' serial interval function
 serial_interval <- function(sample_size) {
   si <- rlnorm(sample_size, meanlog = log_mean, sdlog = log_sd)
@@ -173,8 +169,6 @@ last case, assuming that no chain would exceed `r chain_threshold`.
 
 ```{r simulations, message=FALSE}
 set.seed(1234)
-
-
 sim_chain_sizes <- lapply(
   seq_len(sim_rep),
   function(sim) {
@@ -207,7 +201,7 @@ of all the projections through time (`incidence_ts`).
 
 ```{r post_processing}
 index_date <- min(covid19_sa$date)
-
+index_date
 # Daily number of cases for each simulation
 incidence_ts <- sim_output %>%
   mutate(day = ceiling(time)) %>%
@@ -215,12 +209,15 @@ incidence_ts <- sim_output %>%
   summarise(cases = n()) %>%
   ungroup()
 
+head(incidence_ts)
+
 # Add dates
-incidence_ts <- incidence_ts %>%
+incidence_ts_by_date <- incidence_ts %>%
   group_by(sim) %>%
   mutate(date = index_date + days(seq(0, n() - 1))) %>%
   ungroup()
 
+head(incidence_ts_by_date)
 # Median daily number of cases aggregated across all simulations
 median_daily_cases <- incidence_ts %>%
   group_by(day) %>%
@@ -228,19 +225,22 @@ median_daily_cases <- incidence_ts %>%
   ungroup() %>%
   arrange(day)
 
+head(median_daily_cases)
+
 # Add dates
 median_daily_cases <- median_daily_cases %>%
   mutate(date = index_date + days(seq(0, projection_end_day))) %>%
   ungroup()
 
+head(median_daily_cases)
 ```
 
 
 ## Visualization
 
-```{r viz, fig.cap ="COVID-19 incidence projected over a two week window. The gray lines represent individual simulations, red connected dots represent the median daily cases across all simulations, and the black triangles represent the observed data.", fig.width=2.0, fig.height=1.8}
+```{r viz, fig.cap ="COVID-19 incidence projected over a two week window. The gray lines represent individual simulations, red connected dots represent the median daily cases across all simulations, and the black triangles represent the observed data.", fig.width=4.0, fig.height=3.8}
 # Visualization
-ggplot(data = incidence_ts) +
+ggplot(data = incidence_ts_by_date) +
   geom_line(aes(
     x = date,
     y = cases,
@@ -279,12 +279,12 @@ ggplot(data = incidence_ts) +
     shape = 24
   ) +
   scale_x_continuous(
-    breaks = seq(min(incidence_ts$date), max(incidence_ts$date), 10),
-    labels = seq(min(incidence_ts$date), max(incidence_ts$date), 10)
+    breaks = seq(min(incidence_ts_by_date$date), max(incidence_ts_by_date$date), 10),
+    labels = seq(min(incidence_ts_by_date$date), max(incidence_ts_by_date$date), 10)
   ) +
   scale_y_continuous(
-    breaks = seq(0, max(incidence_ts$cases) + 200, 250),
-    labels = seq(0, max(incidence_ts$cases) + 200, 250)
+    breaks = seq(0, max(incidence_ts_by_date$cases) + 200, 250),
+    labels = seq(0, max(incidence_ts_by_date$cases) + 200, 250)
   ) +
   labs(x = "Date", y = "Daily cases (median)") +
   theme_minimal() 
