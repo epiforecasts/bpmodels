@@ -83,7 +83,8 @@ start_times <- unlist(mapply(
   days_since_index,
   covid19_sa$cases
 ))
-                       
+
+start_times
 ```
 
 
