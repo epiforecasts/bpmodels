@@ -132,8 +132,8 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring = 100, ...) {
 #' @return likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or
 #'  a list of individual likelihood contributions (if \code{individual=TRUE})
 #' @inheritParams chain_sim
-#' @seealso pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
-#'   geom_length_ll offspring_ll
+#' @seealso pois_size_ll, nbinom_size_ll, gborel_size_ll, pois_length_ll,
+#'   geom_length_ll, offspring_ll
 #' @author Sebastian Funk
 #' @export
 #' @examples
