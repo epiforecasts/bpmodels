@@ -229,19 +229,23 @@ sim_chain_sizes <- lapply(
 )
 
 sim_output <- bind_rows(sim_chain_sizes)
+```
 
+Let us view the first few rows of the simulation results.
+```{r sim_output_head}
 head(sim_output)
 ```
 
 ## Post-processing
 
-From the simulated data, we will count the median daily cases 
-(`median_daily_cases`) across all simulations and overlay that on the results 
-of all the projections through time (`incidence_ts`).
+Now, we will summarise the simulation results. 
 
+We want to plot the individual simulated daily time series and show 
+the median cases per day aggregated over all simulations.
+
+First, we will create the daily time series per simulation by
+aggregating the number of cases per day of each simulation.
 ```{r post_processing}
-index_date <- min(covid19_sa$date)
-index_date
 # Daily number of cases for each simulation
 incidence_ts <- sim_output %>%
   mutate(day = ceiling(time)) %>%
