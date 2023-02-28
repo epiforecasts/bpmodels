@@ -198,6 +198,15 @@ chain_threshold <- 1000
 1. No interventions have been implemented
 1. Population is homogeneous and well-mixed
 
+To summarise the whole set up so far, we are going to simulate 
+each chain `r sim_rep` times, projecting COVID-19 cases over
+`r projection_window` days after the first $15$ days, and 
+assuming that no outbreak size exceeds `r chain_threshold` cases. 
+
+## Running the simulations
+
+We will use the function `lapply()` to run the simulations and bind them
+by rows with `dplyr::bind_rows()`.
 ```{r simulations, message=FALSE}
 set.seed(1234)
 sim_chain_sizes <- lapply(
