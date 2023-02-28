@@ -33,7 +33,7 @@ Branching processes can be used to project infectious disease trends provided
 we can characterize the distribution of times between 
 successive cases (serial interval), and the distribution of secondary cases 
 produced by a single individual (offspring distribution). Such simulations can 
-be achieved in `bpmodels` with the `chain_sim()` function. @Pearson2020, and 
+be achieved in `bpmodels` with the `chain_sim()` function and @Pearson2020, and 
 @abbott2020 illustrate its application to COVID-19. 
 
 The purpose of this vignette is to use early data on COVID-19 in South Africa 
