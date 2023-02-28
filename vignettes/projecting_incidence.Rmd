@@ -254,14 +254,29 @@ incidence_ts <- sim_output %>%
   ungroup()
 
 head(incidence_ts)
+```
 
-# Add dates
+Next, we will add a date column to the results of each simulation 
+set. We will use the date of the first case in the observed data 
+as the reference start date.
+```{r}
+# Get start date from the observed data
+index_date <- min(covid19_sa$date)
+index_date
+
+# Add a dates column to each simulation result
 incidence_ts_by_date <- incidence_ts %>%
   group_by(sim) %>%
   mutate(date = index_date + days(seq(0, n() - 1))) %>%
   ungroup()
 
 head(incidence_ts_by_date)
+```
+
+
+Now we will aggregate the simulations by day and evaluate the median 
+daily cases across all simulations.
+```{r}
 # Median daily number of cases aggregated across all simulations
 median_daily_cases <- incidence_ts %>%
   group_by(day) %>%
@@ -270,7 +285,11 @@ median_daily_cases <- incidence_ts %>%
   arrange(day)
 
 head(median_daily_cases)
+```
 
+As was done for the individual simulations, we will add a date column in the
+same manner.
+```{r}
 # Add dates
 median_daily_cases <- median_daily_cases %>%
   mutate(date = index_date + days(seq(0, projection_end_day))) %>%
