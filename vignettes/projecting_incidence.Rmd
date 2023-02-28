@@ -52,31 +52,38 @@ library("lubridate")
 
 ## Data
 
-We will get and clean the first $15$ days of the COVID-19 
-outbreak in South Africa to seed the simulation for this example.
-
-```{r data, message=FALSE}
-data_url <- "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv" # nolint: line_length_linter. 
-
-#Read the data in using the url
-covid19_sa <- read.csv(data_url)
-
-# Subset the first 15 days and count the number of cases per date
-covid19_sa <- covid19_sa %>% 
-  select(date) %>% 
-  mutate(date = lubridate::dmy(date)) %>%
-  filter(date <= min(date) + lubridate::days(15)) %>%   
-  group_by(date) %>% 
-  summarise(cases = n()) %>%   
-  ungroup()
+Included in `bpmodels` is a cleaned time series of the first 15 days of 
+the COVID-19 outbreak in South Africa. This can be loaded into 
+memory as follows: 
+```{r}
+data('covid19_sa', package = 'bpmodels')
 ```
 
-## Inputs  
-Using the data above, we will set up a vector of start times for each case.
+Let us examine the first 6 entries of the dataset.
+```{r}
+head(covid19_sa)
+```
 
+## Setting up the inputs  
+
+### Onset times 
+`chain_sim()` requires a vector of onset times, `t0`, for each 
+chain/individual/simulation. 
+
+The `covid19_sa` dataset above is aggregated, so we will have to disaggregate
+it into a linelist with each row representing a case and their onset time. 
+
+To achieve this, we will first use the date of the index case as the reference 
+and find the difference between each date and the reference. 
 ```{r linelist_gen, message=FALSE}
 days_since_index <- as.integer(covid19_sa$date - min(covid19_sa$date))
+days_since_index
+```
 
+Using the times created above, we will then create the linelist
+by disaggregating the time series so that each case has a 
+corresponding start time.
+```{r}
 start_times <- unlist(mapply(
   function(x, y) rep(x, times = ifelse(y == 0, 1, y)),
   days_since_index,
