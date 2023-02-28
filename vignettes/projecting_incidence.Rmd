@@ -144,20 +144,51 @@ serial_interval <- function(sample_size) {
 
 ### Offspring distribution
 
-We will also assume that the offspring distribution is characterised by a 
-negative binomial with $\mathcal{R} = 2.5$ [@abbott2020] and 
-$\mathcal{k} = 0.58$ [@Wang2020]. In this parameterization, $\mathcal{R}$ 
-represents the $\mathcal{R_0}$, which is defined as the average number of 
+The negative binomial distribution is commonly used in epidemiology to
+account for [individual variation in transmissibility](https://www.nature.com/articles/nature04153), also known as superspreading.
+
+For this example, we will assume that the offspring distribution is 
+characterised by a negative binomial with $R = 2.5$ [@abbott2020] and 
+$k = 0.58$ [@Wang2020]. In this parameterization, $R$ 
+represents the $R_0$, which is defined as the average number of 
 cases produced by a single individual in an entirely susceptible population. 
 The parameter $k$ represents superspreading, that is, the degree of 
 heterogeneity in transmission by single individuals.
 
-## Simulations
-To summarize the simulation set up, for each of the `r sim_rep` simulations,
-we want to project cases over a `r projection_window` day period since the 
-last case, assuming that no chain would exceed `r chain_threshold`. 
 
-### Model assumptions
+### Simulation controls
+
+`chain_sim()` also requires the end time for the simulations. For this 
+example, we will simulate outbreaks that end 14 days after the last date 
+of observations in `covid19_sa`.   
+```{r input_prep2, message=FALSE}
+#' Date to end simulation (14 day projection in this case)
+projection_window <- 14 # 14 days/ 2-week ahead projection
+projection_end_day <- max(days_since_index) + projection_window
+projection_end_day
+```
+
+`chain_sim()` is stochastic, meaning the results are different every 
+time it is run for the same set of parameters, so we will run the simulations
+many times and summarise the results. 
+
+We will, therefore, run each simulation $100$ times.
+```{r}
+#' Number of simulations
+sim_rep <- 100
+```
+
+Lastly, `chain_sim()` requires the maximum size of each chain. 
+Above this value, the simulation is cut off. If this value is 
+not specified, it assumes a value of infinity. Here, we will
+assume a maximum chain size of $1000$.
+```{r}
+#' Maximum chain size allowed
+chain_threshold <- 1000
+```
+
+
+## Modelling assumptions
 
 `chain_sim()` makes the following simplifying assumptions:
 
