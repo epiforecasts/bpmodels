@@ -93,54 +93,48 @@ start_times <- unlist(mapply(
 start_times
 ```
 
-
-Additionally, `chain_sim()` requires the end time for the simulations and the 
-maximum size of each chain. Since each result of `chain_sim()` is stochastic,
-it is also best to run it many times. 
-
-We will specify these as follows:
-
-```{r input_prep2, message=FALSE}
-#' Date to end simulation (14 day projection in this case)
-
-projection_window <- 14 # 14 days/ 2-week ahead projection
-
-projection_end_day <- max(days_since_index) + projection_window
-
-#' Number of simulations
-sim_rep <- 100
-
-#' Maximum chain size allowed
-chain_threshold <- 1000
-
-```
-
 ### Serial interval
 
+The log-normal distribution is [commonly used in epidemiology](https://ete-online.biomedcentral.com/articles/10.1186/1742-7622-4-2) 
+to characterise quantities such as the serial interval because it tends to 
+have a large variance and can only be positive-valued. The log-normal 
+distribution is right-skewed and assumes positive real-numbered values, hence
+often models the serial interval appropriately. 
+
 In this example, we will assume based on COVID-19 literature that the 
-serial interval, $\mathcal{S}$, is log-normal distributed with parameters, 
-$\mu = 4.7$ and $\sigma = 2.9$ [@Pearson2020]. The log-normal mean, 
-$E[ \mathcal{S} ]$ and standard deviation $SD[ \mathcal{S} ]$ are 
-characterised as:
+serial interval, S, is log-normal distributed with parameters, 
+$\mu = 4.7$ and $\sigma = 2.9$ [@Pearson2020]. Note that when the distribution
+is described this way, it means $\mu$ and $\sigma$ are the expected value 
+and standard deviation of the natural logarithm of the serial interval. Hence, 
+in order to sample the untransformed serial interval with expectation/mean, 
+$E[S]$ and standard deviation, $SD [S]$, we can use the following 
+parametrisation:
 
 \begin{align}
-E[ \mathcal{S} ] &= \ln \left( \dfrac{\mu^2}{(\sqrt{\mu^2 + \sigma^2}} \right) \\
+E[S] &= \ln \left( \dfrac{\mu^2}{(\sqrt{\mu^2 + \sigma^2}} \right) \\
 
-SD [ \mathcal{S} ] &= \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}
+SD [S] &= \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}
  
 \end{align}
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Log-normal_distribution) for a 
 detailed explanation of this parametrisation.
 
-The following is how we set up the serial interval function using the
-information provided above:
+The [epiparameter](https://github.com/epiverse-trace/epiparameter) R package 
+provides the function `epiparameter::lnorm_meansd2musigma()` for implementing 
+this parametrisation. It takes as inputs the mean, $\mu$ and standard 
+deviation, $\sigma$ and returns a list with the transformed mean and 
+standard deviation. Refer to `?epiparamete::lnorm_meansd2musigma` 
+for more details.
 
+Let us set up the serial interval with this information:
 ```{r input_prep3, message=FALSE}
 mu <- 4.7
 sgma <- 2.9
-log_sd <- sqrt(log(1 + (sgma / mu)^2)) # log standard deviation
-log_mean <- log((mu^2) / (sqrt(sgma^2 + mu^2))) # log mean
+
+log_mean <- epiparameter::lnorm_meansd2musigma(mu, sgma)[[1]]  # log mean
+log_sd <- epiparameter::lnorm_meansd2musigma(mu, sgma)[[2]] # log standard deviation
+
 #' serial interval function
 serial_interval <- function(sample_size) {
   si <- rlnorm(sample_size, meanlog = log_mean, sdlog = log_sd)
