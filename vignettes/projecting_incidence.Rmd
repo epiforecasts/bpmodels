@@ -79,9 +79,9 @@ days_since_index <- as.integer(covid19_sa$date - min(covid19_sa$date))
 days_since_index
 ```
 
-Using the times created above, we will then create the linelist
-by disaggregating the time series so that each case has a 
-corresponding start time.
+Using the vector of start times for the time series, we will then 
+create the linelist by disaggregating the time series so 
+that each case has a corresponding start time.
 ```{r}
 start_times <- unlist(mapply(
   function(x, y) rep(x, times = ifelse(y == 0, 1, y)),
