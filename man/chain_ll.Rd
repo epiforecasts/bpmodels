@@ -51,8 +51,8 @@ chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
 }
 \seealso{
-pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
-geom_length_ll offspring_ll
+pois_size_ll, nbinom_size_ll, gborel_size_ll, pois_length_ll,
+geom_length_ll, offspring_ll
 }
 \author{
 Sebastian Funk
