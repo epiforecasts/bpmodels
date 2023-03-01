@@ -8,7 +8,7 @@ link-citations: true
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = file.path("man", "figures", "README-"),
   out.width = "100%"
 )
 ```
@@ -42,13 +42,13 @@ secondary infections caused by an infected individual.
 The latest development version of the _bpmodels_ package can be installed via
 
 ```{r include=TRUE,eval=FALSE}
-devtools::install_github('epiverse-trace/bpmodels')
+devtools::install_github(file.path("epiverse-trace", "bpmodels"))
 ```
 
 To load the package, use
 
 ```{r eval=TRUE}
-library('bpmodels')
+library("bpmodels")
 ```
 
 # Quick start
