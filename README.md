@@ -32,13 +32,13 @@ The latest development version of the *bpmodels* package can be
 installed via
 
 ``` r
-devtools::install_github('epiverse-trace/bpmodels')
+devtools::install_github(file.path("epiverse-trace", "bpmodels"))
 ```
 
 To load the package, use
 
 ``` r
-library('bpmodels')
+library("bpmodels")
 ```
 
 # Quick start
@@ -64,7 +64,7 @@ To do this, we run
 set.seed(13)
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(x = chain_sizes, offspring = "pois", stat = "size", lambda = 0.5)
-#> [1] -8.607
+#> [1] -8.607196
 ```
 
 The first argument of `chain_ll()` is the chain size (or length, in
@@ -103,10 +103,11 @@ For example, if the probability of observing each case is
 
 ``` r
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
-ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5, 
+ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5,
                nsim_obs = 10)
 ll
-#>  [1] -26.54 -23.26 -24.33 -20.80 -30.76 -26.47 -23.79 -19.14 -32.09 -22.23
+#>  [1] -26.54167 -23.26117 -24.33027 -20.80310 -30.76152 -26.46751 -23.79326
+#>  [8] -19.14490 -32.08875 -22.23401
 ```
 
 This returns `10` likelihood values (because `nsim_obs = 10`), which can
@@ -139,7 +140,7 @@ probability `prob = 0.5`, we run
 
 ``` r
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
-chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5, 
+chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5,
          nsim_offspring = 100)
 #> [1] -Inf
 ```
@@ -151,10 +152,10 @@ function follows the same syntax as `chain_ll()`.
 
 Below, we are simulating $5$ chains, assuming the offspring are
 generated using a Poisson distribution with mean, `lambda = 0.5`. By
-default, `chain_sim()` returns a vector of chain sizes/lengths. However,
-to override that so that a tree of infectees and infectors is returned,
-we need to specify a function for the serial interval and set
-`tree = TRUE`.
+default, `chain_sim()` returns a vector of chain sizes/lengths. If we
+instead want to return a tree of infectees and infectors, we need to
+specify a function for the serial interval and set `tree = TRUE` (see
+next section).
 
 ``` r
 chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
@@ -168,17 +169,21 @@ interval generation function and set `tree = TRUE` as follows:
 
 ``` r
 set.seed(13)
-serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
-chains_df <- chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', 
-                       infinite = 100, serial = serial_interval, tree = TRUE)
+serial_interval <- function(n) {
+  rlnorm(n, meanlog = 0.58, sdlog = 1.58)
+}
+chains_df <- chain_sim(
+  n = 5, offspring = "pois", lambda = 0.5, stat = "length",
+  infinite = 100, serial = serial_interval, tree = TRUE
+)
 head(chains_df)
-#>   n id ancestor generation    time
-#> 1 1  1       NA          1 0.00000
-#> 2 2  1       NA          1 0.00000
-#> 3 3  1       NA          1 0.00000
-#> 4 4  1       NA          1 0.00000
-#> 5 5  1       NA          1 0.00000
-#> 6 1  2        1          2 0.04772
+#>   n id ancestor generation       time
+#> 1 1  1       NA          1 0.00000000
+#> 2 2  1       NA          1 0.00000000
+#> 3 3  1       NA          1 0.00000000
+#> 4 4  1       NA          1 0.00000000
+#> 5 5  1       NA          1 0.00000000
+#> 6 1  2        1          2 0.04771887
 ```
 
 ## Package vignettes
@@ -213,17 +218,16 @@ citation("bpmodels")
 #> 
 #> To cite package 'bpmodels' in publications use:
 #> 
-#>   Funk S, Finger F, Azam JM (2023). _bpmodels: Analysing chain
+#>   Funk S, Finger F, Azam J (????). _bpmodels: Analysing chain
 #>   statistics using branching process models_. R package version 0.1.0,
-#>   <https://github.com/sbfnk/bpmodels>.
+#>   <https://github.com/epiverse-trace/bpmodels>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {bpmodels: Analysing chain statistics using branching process models},
-#>     author = {Sebastian Funk and Flavio Finger and James Mba Azam},
-#>     year = {2023},
+#>     author = {Sebastian Funk and Flavio Finger and James M. Azam},
 #>     note = {R package version 0.1.0},
-#>     url = {https://github.com/sbfnk/bpmodels},
+#>     url = {https://github.com/epiverse-trace/bpmodels},
 #>   }
 ```
