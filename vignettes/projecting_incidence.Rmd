@@ -1,5 +1,5 @@
 ---
-title: "Projecting infectious disease incidence using early outbreak data"
+title: "Projecting infectious disease incidence: a COVID-19 example"
 author: "James Azam, Sebastian Funk"
 output:
   bookdown::html_vignette2:
@@ -10,7 +10,7 @@ pkgdown:
 bibliography: references.bib
 link-citations: true
 vignette: >
-  %\VignetteIndexEntry{Projecting infectious disease incidence using early outbreak data}
+  %\VignetteIndexEntry{Projecting infectious disease incidence: a COVID-19 example}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
