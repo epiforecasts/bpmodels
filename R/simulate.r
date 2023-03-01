@@ -42,8 +42,8 @@
 #' `chain_sim()` either returns a vector or a data.frame. The output is
 #' either a vector if `serial` is not provided, which automatically sets
 #' \code{tree = FALSE}, or a `data.frame`, which means that `serial` was
-#' provided as a function. When `serial` is provided, it means 
-#' \code{tree = TRUE} automatically. However, setting \code{tree = TRUE} 
+#' provided as a function. When `serial` is provided, it means
+#' \code{tree = TRUE} automatically. However, setting \code{tree = TRUE}
 #' would require providing a function for `serial`.
 #'
 #' # The serial interval (`serial`):
@@ -51,12 +51,12 @@
 #' ## Assumptions/disambiguation
 #'
 #' In epidemiology, the generation interval is the duration between successive
-#' infectious events in a chain of transmission. Similarly, the serial 
-#' interval is the duration between observed symptom onset times between 
-#' successive cases in a transmission chain. The generation interval is 
-#' often hard to observe because exact times of infection are hard to 
-#' measure hence, the serial interval is often used instead. Here, we 
-#' use the serial interval to represent what would normally be called the 
+#' infectious events in a chain of transmission. Similarly, the serial
+#' interval is the duration between observed symptom onset times between
+#' successive cases in a transmission chain. The generation interval is
+#' often hard to observe because exact times of infection are hard to
+#' measure hence, the serial interval is often used instead. Here, we
+#' use the serial interval to represent what would normally be called the
 #' generation interval, that is, the time between successive cases.
 #'
 #' ## Specifying `serial` in `chain_sim()`
@@ -66,29 +66,29 @@
 #' with one argument.
 #'
 #' If `serial` is specified, `chain_sim()` returns times of
-#' infection as a column in the output. Moreover, specifying a function 
-#' for `serial` implies \code{tree = TRUE} and a tree of 
+#' infection as a column in the output. Moreover, specifying a function
+#' for `serial` implies \code{tree = TRUE} and a tree of
 #' infectors (`ancestor`) and infectees (`id`) will be generated in the output.
 #'
 #' For example, assuming we want to specify the serial interval
-#' generator as a random log-normally distributed variable with 
-#' `meanlog = 0.58` and `sdlog = 1.58`, we could define a named function, 
-#' let's call it "serial_interval", with only one argument representing the 
-#' number of serial intervals to sample: 
+#' generator as a random log-normally distributed variable with
+#' `meanlog = 0.58` and `sdlog = 1.58`, we could define a named function,
+#' let's call it "serial_interval", with only one argument representing the
+#' number of serial intervals to sample:
 #' \code{serial_interval <- function(n){rlnorm(n, 0.58, 1.38)}},
 #' and assign the name of the function to serial in `chain_sim()` like so
 #' \code{chain_sim(..., serial = serial_interval)},
 #' where `...` are the other arguments to `chain_sim()`. Alternatively, we
-#' could assign an anonymous function to serial in the `chain_sim()` call 
+#' could assign an anonymous function to serial in the `chain_sim()` call
 #' like so \code{chain_sim(..., serial = function(n){rlnorm(n, 0.58, 1.38)})},
 #' where `...` are the other arguments to `chain_sim()`.
 #' @examples
 #' # Specifying no `serial` and `tree == FALSE` (default) returns a vector
 #' set.seed(123)
-#' chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5, 
+#' chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5,
 #' tree = FALSE)
 #'
-#' # Specifying `serial` without specifying `tree` will set `tree = TRUE` 
+#' # Specifying `serial` without specifying `tree` will set `tree = TRUE`
 #' # internally.
 #'
 #' # We'll first define the serial function
@@ -97,7 +97,7 @@
 #'   rlnorm(n, meanlog = 0.58, sdlog = 1.58)
 #' }
 #' chain_sim(
-#'   n = 5, offspring = "pois", lambda = 0.5, stat = "length", 
+#'   n = 5, offspring = "pois", lambda = 0.5, stat = "length",
 #'   infinite = 100,
 #'   serial = serial_interval
 #' )
