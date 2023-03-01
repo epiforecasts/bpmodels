@@ -91,10 +91,11 @@ test_that("Chains can be simulated", {
         serial = function(x) 3,
         pop = 1
       )
-    ) == 1
+    ), 
+    1
   )
 
-  expect_true(
+  expect_equal(
     nrow(
       chain_sim_susc(
         "pois",
@@ -103,10 +104,11 @@ test_that("Chains can be simulated", {
         serial = function(x) 3,
         pop = 999
       )
-    ) == 1
+    ),
+    1
   )
 
-  expect_true(
+  expect_equal(
     nrow(
       chain_sim_susc(
         "pois",
@@ -115,7 +117,8 @@ test_that("Chains can be simulated", {
         pop = 999,
         initial_immune = 998
       )
-    ) == 1
+    ),
+    1
   )
 })
 
