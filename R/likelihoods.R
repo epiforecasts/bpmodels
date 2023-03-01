@@ -139,7 +139,7 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring = 100, ...) {
 #' chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 #' chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
 chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
-                     infinite = Inf, exclude = c(), individual = FALSE,
+                     infinite = Inf, exclude = NULL, individual = FALSE,
                      nsim_obs, ...) {
   stat <- match.arg(stat)
 
