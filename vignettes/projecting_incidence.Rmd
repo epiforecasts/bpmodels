@@ -142,7 +142,8 @@ serial_interval <- function(sample_size) {
 ### Offspring distribution
 
 The negative binomial distribution is commonly used in epidemiology to
-account for [individual variation in transmissibility](https://www.nature.com/articles/nature04153), also known as superspreading.
+account for individual variation in transmissibility, 
+also known as superspreading [@Lloyd-Smith2005a].
 
 For this example, we will assume that the offspring distribution is 
 characterised by a negative binomial with $R = 2.5$ [@abbott2020] and 
