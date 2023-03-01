@@ -109,7 +109,7 @@ we use
 
 ```{r}
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
-ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5, 
+ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5,
                nsim_obs = 10)
 ll
 ```
@@ -143,7 +143,7 @@ probability `prob = 0.5`, we run
 
 ```{r}
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
-chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5, 
+chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5,
          nsim_offspring = 100)
 ```
 
@@ -169,9 +169,13 @@ generation function and set `tree = TRUE` as follows:
 
 ```{r}
 set.seed(13)
-serial_interval <- function(n){rlnorm(n, meanlog = 0.58, sdlog = 1.58)}
-chains_df <- chain_sim(n = 5, offspring = 'pois', lambda = 0.5, stat = 'length', 
-                       infinite = 100, serial = serial_interval, tree = TRUE)
+serial_interval <- function(n) {
+  rlnorm(n, meanlog = 0.58, sdlog = 1.58)
+}
+chains_df <- chain_sim(
+  n = 5, offspring = "pois", lambda = 0.5, stat = "length",
+  infinite = 100, serial = serial_interval, tree = TRUE
+)
 head(chains_df)
 ```
 
