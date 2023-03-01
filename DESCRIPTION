@@ -21,6 +21,7 @@ Suggests:
     bookdown,
     covr,
     dplyr,
+    epiparameter,
     ggplot2,
     knitr,
     lubridate,
