@@ -363,7 +363,8 @@ ggplot(data = incidence_ts_by_date) +
     ),
     labels = seq(
       0,
-      max(incidence_ts_by_date$cases) + 200, 250
+      max(incidence_ts_by_date$cases) + 200, 
+      250
     )
   ) +
   labs(x = "Date", y = "Daily cases (median)")
