@@ -21,7 +21,7 @@ test_that("Likelihoods can be calculated", {
   expect_lt(chain_ll(chains, "binom", "size", size = 1, prob = 0.5), 0)
 })
 
-test_that("Analytical size/length distributions are implemented", {
+test_that("Analytical size or length distributions are implemented", {
   expect_true(all(pois_size_ll(chains, lambda = 0.5) < 0))
   expect_true(all(nbinom_size_ll(chains, mu = 0.5, size = 0.2) < 0))
   expect_true(all(nbinom_size_ll(chains, prob = 0.5, size = 0.2) < 0))

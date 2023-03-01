@@ -31,7 +31,7 @@ test_that("Errors are thrown", {
   )
   expect_error(chain_sim(
     n = 2, offspring = "pois", "size", lambda = 0.9,
-    serial = c(1:2), "must be a function"
+    serial = c(1, 2), "must be a function"
   ))
   expect_error(
     chain_sim(n = 2, offspring = c(1, 2), "length", lambda = 0.9),
