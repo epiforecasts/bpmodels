@@ -10,7 +10,7 @@ chain_ll(
   stat = c("size", "length"),
   obs_prob = 1,
   infinite = Inf,
-  exclude = c(),
+  exclude = NULL,
   individual = FALSE,
   nsim_obs,
   ...

@@ -116,10 +116,10 @@ where \code{...} are the other arguments to \code{chain_sim()}.
 \examples{
 # Specifying no `serial` and `tree == FALSE` (default) returns a vector
 set.seed(123)
-chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5, 
+chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5,
 tree = FALSE)
 
-# Specifying `serial` without specifying `tree` will set `tree = TRUE` 
+# Specifying `serial` without specifying `tree` will set `tree = TRUE`
 # internally.
 
 # We'll first define the serial function
@@ -128,7 +128,7 @@ serial_interval <- function(n) {
   rlnorm(n, meanlog = 0.58, sdlog = 1.58)
 }
 chain_sim(
-  n = 5, offspring = "pois", lambda = 0.5, stat = "length", 
+  n = 5, offspring = "pois", lambda = 0.5, stat = "length",
   infinite = 100,
   serial = serial_interval
 )
