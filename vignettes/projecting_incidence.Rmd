@@ -94,20 +94,18 @@ start_times
 
 ### Serial interval
 
-The log-normal distribution is [commonly used in epidemiology](https://ete-online.biomedcentral.com/articles/10.1186/1742-7622-4-2) 
-to characterise quantities such as the serial interval because it tends to 
-have a large variance and can only be positive-valued. The log-normal 
-distribution is right-skewed and assumes positive real-numbered values, hence
-often models the serial interval appropriately. 
+The log-normal distribution is commonly used in epidemiology to characterise 
+quantities such as the serial interval because it has a large variance 
+and can only be positive-valued [@Nishiura2007; @Limpert2001]. 
 
 In this example, we will assume based on COVID-19 literature that the 
 serial interval, S, is log-normal distributed with parameters, 
 $\mu = 4.7$ and $\sigma = 2.9$ [@Pearson2020]. Note that when the distribution
 is described this way, it means $\mu$ and $\sigma$ are the expected value 
 and standard deviation of the natural logarithm of the serial interval. Hence, 
-in order to sample the untransformed serial interval with expectation/mean, 
-$E[S]$ and standard deviation, $SD [S]$, we can use the following 
-parametrisation:
+in order to sample the "back-transformed" measured serial interval with 
+expectation/mean, $E[S]$ and standard deviation, $SD [S]$, 
+we can use the following parametrisation:
 
 \begin{align}
 E[S] &= \ln \left( \dfrac{\mu^2}{(\sqrt{\mu^2 + \sigma^2}} \right) \\
@@ -123,10 +121,10 @@ The [epiparameter](https://github.com/epiverse-trace/epiparameter) R package
 provides the function `epiparameter::lnorm_meansd2musigma()` for implementing 
 this parametrisation. It takes as inputs the mean, $\mu$ and standard 
 deviation, $\sigma$ and returns a list with the transformed mean and 
-standard deviation. Refer to `?epiparamete::lnorm_meansd2musigma` 
+standard deviation. Refer to `?epiparameter::lnorm_meansd2musigma` 
 for more details.
 
-Let us set up the serial interval with this information:
+Let us set up the serial interval function with the appropriate inputs:
 ```{r input_prep3, message=FALSE}
 mu <- 4.7
 sgma <- 2.9
