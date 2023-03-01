@@ -18,9 +18,9 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, 
-                      message = FALSE, 
-                      warning = FALSE, 
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
                       collapse = TRUE,
                       comment = "#>"
                       )
@@ -67,6 +67,7 @@ head(covid19_sa)
 ## Setting up the inputs  
 
 ### Onset times 
+
 `chain_sim()` requires a vector of onset times, `t0`, for each 
 chain/individual/simulation. 
 
@@ -154,7 +155,6 @@ cases produced by a single individual in an entirely susceptible population.
 The parameter $k$ represents superspreading, that is, the degree of 
 heterogeneity in transmission by single individuals.
 
-
 ### Simulation controls
 
 `chain_sim()` also requires the end time for the simulations. For this 
@@ -185,7 +185,6 @@ assume a maximum chain size of $1000$.
 #' Maximum chain size allowed
 chain_threshold <- 1000
 ```
-
 
 ## Modelling assumptions
 
@@ -272,7 +271,6 @@ incidence_ts_by_date <- incidence_ts %>%
 head(incidence_ts_by_date)
 ```
 
-
 Now we will aggregate the simulations by day and evaluate the median 
 daily cases across all simulations.
 ```{r}
@@ -296,7 +294,6 @@ median_daily_cases <- median_daily_cases %>%
 
 head(median_daily_cases)
 ```
-
 
 ## Visualization
 
