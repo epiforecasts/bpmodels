@@ -176,7 +176,7 @@ chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
   }
 
   ## get likelihood function as given by `offspring` and `stat``
-  likelihoods <- c()
+  likelihoods <- vector(mode = "numeric")
   ll_func <- paste(offspring, stat, "ll", sep = "_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists
 
