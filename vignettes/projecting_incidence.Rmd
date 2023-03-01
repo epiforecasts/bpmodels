@@ -129,8 +129,8 @@ Let us set up the serial interval function with the appropriate inputs:
 mu <- 4.7
 sgma <- 2.9
 
-log_mean <- epiparameter::lnorm_meansd2musigma(mu, sgma)[[1]]  # log mean
-log_sd <- epiparameter::lnorm_meansd2musigma(mu, sgma)[[2]] # log standard deviation
+log_mean <- lnorm_meansd2musigma(mu, sgma)[[1]]  # log mean
+log_sd <- lnorm_meansd2musigma(mu, sgma)[[2]] # log sd
 
 #' serial interval function
 serial_interval <- function(sample_size) {
