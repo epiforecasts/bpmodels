@@ -2,7 +2,7 @@ context("The Borel distribution is implemented")
 
 test_that("We can calculate probabilities and sample", {
   expect_gt(dborel(1, 0.5), 0)
-  expect_equal(dborel(1, 0.5, log = TRUE), -0.5)
+  expect_identical(dborel(1, 0.5, log = TRUE), -0.5)
   expect_length(rborel(2, 0.9), 2)
 })
 
