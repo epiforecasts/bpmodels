@@ -2,6 +2,7 @@
 
 library(dplyr)
 library(lubridate)
+library(usethis)
 
 # Link to data
 data_url <- "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv" # nolint: line_length_linter.
@@ -18,4 +19,4 @@ covid19_sa <- covid19_sa %>%
   summarise(cases = n()) %>%
   ungroup()
 
-usethis::use_data(covid19_sa, overwrite = TRUE)
+use_data(covid19_sa, overwrite = TRUE)
