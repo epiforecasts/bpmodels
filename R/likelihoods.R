@@ -81,7 +81,6 @@ pois_length_ll <- function(x, lambda) {
 #' @keywords internal
 geom_length_ll <- function(x, prob) {
   lambda <- 1 / prob
-  ## G(k) - G(k - 1)
   GkmGkm1 <- (1 - lambda^(x)) / (1 - lambda^(x + 1)) -
     (1 - lambda^(x - 1)) / (1 - lambda^(x))
 
