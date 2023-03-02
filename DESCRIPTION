@@ -27,7 +27,8 @@ Suggests:
     lubridate,
     rmarkdown,
     testthat,
-    truncdist
+    truncdist,
+    usethis
 VignetteBuilder: 
     knitr
 Remotes: 
