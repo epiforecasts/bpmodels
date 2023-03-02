@@ -91,7 +91,7 @@ test_that("Chains can be simulated", {
         serial = function(x) 3,
         pop = 1
       )
-    ), 
+    ),
     1
   )
 
