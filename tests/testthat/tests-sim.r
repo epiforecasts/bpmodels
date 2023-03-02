@@ -83,7 +83,7 @@ test_that("Chains can be simulated", {
       "data.frame"
   )
 
-  expect_equal(
+  expect_identical(
     nrow(
       chain_sim_susc(
         "pois",
@@ -92,10 +92,10 @@ test_that("Chains can be simulated", {
         pop = 1
       )
     ),
-    1
+    1L
   )
 
-  expect_equal(
+  expect_identical(
     nrow(
       chain_sim_susc(
         "pois",
@@ -105,10 +105,10 @@ test_that("Chains can be simulated", {
         pop = 999
       )
     ),
-    1
+    1L
   )
 
-  expect_equal(
+  expect_identical(
     nrow(
       chain_sim_susc(
         "pois",
@@ -118,7 +118,7 @@ test_that("Chains can be simulated", {
         initial_immune = 998
       )
     ),
-    1
+    1L
   )
 })
 
