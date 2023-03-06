@@ -1,5 +1,3 @@
-context("Calculating the likelihood from a branching process model")
-
 chains <- c(1, 1, 4, 7)
 
 test_that("Likelihoods can be calculated", {
