@@ -32,14 +32,14 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/introduction.html">Analysing chain statistics using branching process models</a>
+      <a href="../articles/projecting_incidence.html">Projecting infectious disease incidence: a COVID-19 example</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/sbfnk/bpmodels/" class="external-link">
+  <a href="https://github.com/epiverse-trace/bpmodels/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -54,7 +54,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Likelihood for the outcome of a branching process</h1>
-    <small class="dont-index">Source: <a href="https://github.com/sbfnk/bpmodels/blob/HEAD/R/likelihoods.R" class="external-link"><code>R/likelihoods.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/bpmodels/blob/HEAD/R/likelihoods.R" class="external-link"><code>R/likelihoods.R</code></a></small>
     <div class="hidden name"><code>chain_ll.Rd</code></div>
     </div>
 
@@ -69,7 +69,7 @@
 <span>  stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"length"</span><span class="op">)</span>,</span>
 <span>  obs_prob <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  infinite <span class="op">=</span> <span class="cn">Inf</span>,</span>
-<span>  exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  exclude <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  individual <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">nsim_obs</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -105,7 +105,8 @@ the R distribution function (e.g., "pois" for Poisson, where
 
 
 <dt>individual</dt>
-<dd><p>if TRUE, a vector of individual log-likelihood contributions will be returned rather than the sum</p></dd>
+<dd><p>if TRUE, a vector of individual log-likelihood
+contributions will be returned rather than the sum</p></dd>
 
 
 <dt>nsim_obs</dt>
@@ -121,12 +122,13 @@ approximated for imperfect observations</p></dd>
     <h2>Value</h2>
     
 
-<p>likelihood, or vector of likelihoods (if <code>obs_prob</code> &lt; 1), or a list of individual likelihood contributions (if <code>individual=TRUE</code>)</p>
+<p>likelihood, or vector of likelihoods (if <code>obs_prob</code> &lt; 1), or
+a list of individual likelihood contributions (if <code>individual=TRUE</code>)</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>pois_size_ll nbinom_size_ll gborel_size_ll pois_length_ll
-geom_length_ll offspring_ll</p></div>
+    <div class="dont-index"><p>pois_size_ll, nbinom_size_ll, gborel_size_ll, pois_length_ll,
+geom_length_ll, offspring_ll</p></div>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -135,8 +137,8 @@ geom_length_ll offspring_ll</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span></span>
-<span class="r-in"><span><span class="fu">chain_ll</span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, lambda<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span></span>
+<span class="r-in"><span><span class="fu">chain_ll</span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -8.607196</span>
 </code></pre></div>
     </div>
@@ -148,7 +150,7 @@ geom_length_ll offspring_ll</p></div>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sebastian Funk, Flavio Finger, James Mba Azam.</p>
+  <p></p><p>Developed by Sebastian Funk, Flavio Finger, James M. Azam.</p>
 </div>
 
 <div class="pkgdown">

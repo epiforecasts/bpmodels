@@ -4,9 +4,6 @@
     <loc>/404.html</loc>
   </url>
   <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
@@ -16,7 +13,7 @@
     <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/introduction.html</loc>
+    <loc>/articles/projecting_incidence.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -26,6 +23,9 @@
   </url>
   <url>
     <loc>/news/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/bpmodels-package.html</loc>
   </url>
   <url>
     <loc>/reference/chain_ll.html</loc>
@@ -38,6 +38,9 @@
   </url>
   <url>
     <loc>/reference/complementary_logprob.html</loc>
+  </url>
+  <url>
+    <loc>/reference/covid19_sa.html</loc>
   </url>
   <url>
     <loc>/reference/dborel.html</loc>

@@ -35,14 +35,14 @@ for depletion of susceptibles."><!-- mathjax --><script src="https://cdnjs.cloud
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/introduction.html">Analysing chain statistics using branching process models</a>
+      <a href="../articles/projecting_incidence.html">Projecting infectious disease incidence: a COVID-19 example</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/sbfnk/bpmodels/" class="external-link">
+  <a href="https://github.com/epiverse-trace/bpmodels/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -58,7 +58,7 @@ for depletion of susceptibles."><!-- mathjax --><script src="https://cdnjs.cloud
     <div class="page-header">
     <h1>Simulate a single chain using a branching process while accounting
 for depletion of susceptibles.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/sbfnk/bpmodels/blob/HEAD/R/simulate_susceptibles.R" class="external-link"><code>R/simulate_susceptibles.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/bpmodels/blob/HEAD/R/simulate_susceptibles.R" class="external-link"><code>R/simulate_susceptibles.R</code></a></small>
     <div class="hidden name"><code>chain_sim_susc.Rd</code></div>
     </div>
 
@@ -144,7 +144,7 @@ the maximal length of chains is limited with pop instead of infinite.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">chain_sim_susc</span><span class="op">(</span><span class="st">"pois"</span>, mn_offspring<span class="op">=</span><span class="fl">0.5</span>, serial <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">3</span>, pop <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">chain_sim_susc</span><span class="op">(</span><span class="st">"pois"</span>, mn_offspring <span class="op">=</span> <span class="fl">0.5</span>, serial <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">3</span>, pop <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id ancestor generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1       NA          1    0</span>
 </code></pre></div>
@@ -157,7 +157,7 @@ the maximal length of chains is limited with pop instead of infinite.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sebastian Funk, Flavio Finger, James Mba Azam.</p>
+  <p></p><p>Developed by Sebastian Funk, Flavio Finger, James M. Azam.</p>
 </div>
 
 <div class="pkgdown">
