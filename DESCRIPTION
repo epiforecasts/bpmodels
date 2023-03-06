@@ -1,6 +1,6 @@
 Package: bpmodels
 Title: Analysing chain statistics using branching process models
-Version: 0.1.0
+Version: 0.1.9999
 Authors@R: c(
     person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut", "cre")),
     person("Zhian N.", "Kamvar", , "zkamvar@gmail.com", role = "ctb"),
