@@ -1,5 +1,3 @@
-context("Simulating from a branching process model")
-
 test_that("Chains can be simulated", {
   expect_length(chain_sim(n = 2, "pois", lambda = 0.5), 2)
   expect_length(chain_sim(n = 10, "pois", "length", lambda = 0.9), 10)
@@ -56,10 +54,6 @@ test_that("Errors are thrown", {
     "If `tf` is specified, `serial` must be specified too."
   )
 })
-
-context("Simulating from a branching process model
-    accounting for depletion of susceptibles")
-
 
 test_that("Chains can be simulated", {
   expect_s3_class(
