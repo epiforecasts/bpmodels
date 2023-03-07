@@ -58,7 +58,7 @@ To do this, we run
 set.seed(13)
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(x = chain_sizes, offspring = "pois", stat = "size", lambda = 0.5)
-#> [1] -8.607
+#> [1] -8.607196
 ```
 
 The first argument of `chain_ll()` is the chain size (or length, in
@@ -100,7 +100,8 @@ chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5,
                nsim_obs = 10)
 ll
-#>  [1] -26.54 -23.26 -24.33 -20.80 -30.76 -26.47 -23.79 -19.14 -32.09 -22.23
+#>  [1] -26.54167 -23.26117 -24.33027 -20.80310 -30.76152 -26.46751 -23.79326
+#>  [8] -19.14490 -32.08875 -22.23401
 ```
 
 This returns `10` likelihood values (because `nsim_obs = 10`), which can
@@ -170,13 +171,13 @@ chains_df <- chain_sim(
   infinite = 100, serial = serial_interval, tree = TRUE
 )
 head(chains_df)
-#>   n id ancestor generation    time
-#> 1 1  1       NA          1 0.00000
-#> 2 2  1       NA          1 0.00000
-#> 3 3  1       NA          1 0.00000
-#> 4 4  1       NA          1 0.00000
-#> 5 5  1       NA          1 0.00000
-#> 6 1  2        1          2 0.04772
+#>   n id ancestor generation       time
+#> 1 1  1       NA          1 0.00000000
+#> 2 2  1       NA          1 0.00000000
+#> 3 3  1       NA          1 0.00000000
+#> 4 4  1       NA          1 0.00000000
+#> 5 5  1       NA          1 0.00000000
+#> 6 1  2        1          2 0.04771887
 ```
 
 ## Package vignettes
@@ -212,8 +213,9 @@ citation("bpmodels")
 #> To cite package 'bpmodels' in publications use:
 #> 
 #>   Funk S, Finger F, Azam J (2023). _bpmodels: Analysing chain
-#>   statistics using branching process models_. R package version 0.1.0,
-#>   <https://github.com/epiverse-trace/bpmodels>.
+#>   statistics using branching process models_.
+#>   https://github.com/epiverse-trace/bpmodels,
+#>   https://epiverse-trace.github.io/bpmodels/.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -221,7 +223,7 @@ citation("bpmodels")
 #>     title = {bpmodels: Analysing chain statistics using branching process models},
 #>     author = {Sebastian Funk and Flavio Finger and James M. Azam},
 #>     year = {2023},
-#>     note = {R package version 0.1.0},
-#>     url = {https://github.com/epiverse-trace/bpmodels},
+#>     note = {https://github.com/epiverse-trace/bpmodels,
+#> https://epiverse-trace.github.io/bpmodels/},
 #>   }
 ```
