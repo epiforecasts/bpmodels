@@ -58,11 +58,15 @@ chain_sim_susc <- function(offspring = c("pois", "nbinom"),
       )
     }
   } else if (offspring == "nbinom") {
-    if (disp_offspring <= 1) { ## dispersion index
-      stop("Offspring distribution 'nbinom' requires argument
-                disp_offspring > 1. Use 'pois' if there is no overdispersion.")
-    }
-
+  if (missing(disp_offspring)) {
+    stop(paste("Argument 'disp_offspring' was not specified."))
+  } else if (disp_offspring <= 1) { ## dispersion index
+    stop(paste(
+      "Offspring distribution 'nbinom' requires",
+      "argument 'disp_offspring' > 1.",
+      "Use 'pois' if there is no overdispersion."
+    ))
+  }
     offspring_fun <- function(n, susc) {
       ## get distribution params from mean and dispersion
       ## see ?rnbinom for parameter definition
