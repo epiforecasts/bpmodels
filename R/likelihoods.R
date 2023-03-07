@@ -145,7 +145,7 @@ chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
 
   ## checks
   if (!is.character(offspring)) {
-    stop("object passed as 'offspring' is not a character string.")
+    stop("Object passed as 'offspring' is not a character string.")
   }
   if (obs_prob <= 0 || obs_prob > 1) stop("'obs_prob' must be within (0,1]")
   if (obs_prob < 1) {
