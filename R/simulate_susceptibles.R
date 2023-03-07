@@ -42,8 +42,9 @@ chain_sim_susc <- function(offspring = c("pois", "nbinom"),
 
   if (offspring == "pois") {
     if (!missing(disp_offspring)) {
-      warning("argument disp_offspring not used for
-                poisson offspring distribution.")
+      warning(paste("Argument 'disp_offspring' not used for",
+                    "poisson offspring distribution.")
+              )
     }
 
     ## using a right truncated poisson distribution

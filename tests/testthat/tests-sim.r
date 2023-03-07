@@ -134,9 +134,11 @@ test_that("Errors are thrown", {
       serial = function(x) 3,
       pop = 100
     ),
-    "Offspring distribution 'nbinom' requires argument
-                disp_offspring > 1. Use 'pois' if there is no overdispersion."
-  )
+    paste("Offspring distribution 'nbinom'",
+          "requires argument 'disp_offspring' > 1.",
+          "Use 'pois' if there is no overdispersion."
+          )
+    )
   expect_error(
     chain_sim_susc(
       "nbinom",
@@ -144,7 +146,7 @@ test_that("Errors are thrown", {
       serial = function(x) 3,
       pop = 100
     ),
-    "argument \"disp_offspring\" is missing, with no default"
+    "Argument 'disp_offspring' was not specified."
   )
 })
 
@@ -157,7 +159,6 @@ test_that("warnings work as expected", {
       serial = function(x) 3,
       pop = 100
     ),
-    "argument disp_offspring not used for
-                poisson offspring distribution."
+    "Argument 'disp_offspring' not used for poisson offspring distribution."
   )
 })
