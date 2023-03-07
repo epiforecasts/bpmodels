@@ -3,20 +3,14 @@
 
 <!-- badges: start -->
 
-![CRAN/METACRAN](https://img.shields.io/cran/v/bpmodels) ![GitHub R
-package
+![GitHub R package
 version](https://img.shields.io/github/r-package/v/epiverse-trace/bpmodels)
-![GitHub all
-releases](https://img.shields.io/github/downloads/epiverse-trace/bpmodels/total?style=flat)
-![GitHub
-issues](https://img.shields.io/github/issues/epiverse-trace/bpmodels)
 [![R-CMD-check](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/main/graphs/badge.svg)](https://codecov.io/github/epiverse-trace/bpmodels)
 ![GitHub
 contributors](https://img.shields.io/github/contributors/epiverse-trace/bpmodels)
-![GitHub commit
-activity](https://img.shields.io/github/commit-activity/m/epiverse-trace/bpmodels)
-![GitHub](https://img.shields.io/github/license/epiverse-trace/bpmodels)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 *bpmodels* is an R package to simulate and analyse the size and length
@@ -64,7 +58,7 @@ To do this, we run
 set.seed(13)
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(x = chain_sizes, offspring = "pois", stat = "size", lambda = 0.5)
-#> [1] -8.607196
+#> [1] -8.607
 ```
 
 The first argument of `chain_ll()` is the chain size (or length, in
@@ -106,8 +100,7 @@ chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 ll <- chain_ll(chain_sizes, "pois", "size", obs_prob = 0.3, lambda = 0.5,
                nsim_obs = 10)
 ll
-#>  [1] -26.54167 -23.26117 -24.33027 -20.80310 -30.76152 -26.46751 -23.79326
-#>  [8] -19.14490 -32.08875 -22.23401
+#>  [1] -26.54 -23.26 -24.33 -20.80 -30.76 -26.47 -23.79 -19.14 -32.09 -22.23
 ```
 
 This returns `10` likelihood values (because `nsim_obs = 10`), which can
@@ -177,13 +170,13 @@ chains_df <- chain_sim(
   infinite = 100, serial = serial_interval, tree = TRUE
 )
 head(chains_df)
-#>   n id ancestor generation       time
-#> 1 1  1       NA          1 0.00000000
-#> 2 2  1       NA          1 0.00000000
-#> 3 3  1       NA          1 0.00000000
-#> 4 4  1       NA          1 0.00000000
-#> 5 5  1       NA          1 0.00000000
-#> 6 1  2        1          2 0.04771887
+#>   n id ancestor generation    time
+#> 1 1  1       NA          1 0.00000
+#> 2 2  1       NA          1 0.00000
+#> 3 3  1       NA          1 0.00000
+#> 4 4  1       NA          1 0.00000
+#> 5 5  1       NA          1 0.00000
+#> 6 1  2        1          2 0.04772
 ```
 
 ## Package vignettes
@@ -202,7 +195,7 @@ To report a bug please open an
 
 We welcome contributions to enhance the package’s functionalities. If
 you wish to do so, please follow the [package contributing
-guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
+guide](https://github.com/epiverse-trace/bpmodels/blob/main/.github/CONTRIBUTING.md).
 
 ## Code of conduct
 
@@ -218,7 +211,7 @@ citation("bpmodels")
 #> 
 #> To cite package 'bpmodels' in publications use:
 #> 
-#>   Funk S, Finger F, Azam J (????). _bpmodels: Analysing chain
+#>   Funk S, Finger F, Azam J (2023). _bpmodels: Analysing chain
 #>   statistics using branching process models_. R package version 0.1.0,
 #>   <https://github.com/epiverse-trace/bpmodels>.
 #> 
@@ -227,6 +220,7 @@ citation("bpmodels")
 #>   @Manual{,
 #>     title = {bpmodels: Analysing chain statistics using branching process models},
 #>     author = {Sebastian Funk and Flavio Finger and James M. Azam},
+#>     year = {2023},
 #>     note = {R package version 0.1.0},
 #>     url = {https://github.com/epiverse-trace/bpmodels},
 #>   }
