@@ -2,10 +2,10 @@ Package: bpmodels
 Title: Analysing chain statistics using branching process models
 Version: 0.1.9999
 Authors@R: c(
-    person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut", "cre")),
+    person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = "aut"),
     person("Zhian N.", "Kamvar", , "zkamvar@gmail.com", role = "ctb"),
     person("Flavio", "Finger", , "flavio.finger@epicentre.msf.org", role = "aut"),
-    person("James M.", "Azam", , "james.azam@lshtm.ac.uk", role = "aut")
+    person("James M.", "Azam", , "james.azam@lshtm.ac.uk", role = c("aut", "cre"))
   )
 Description: Provides methods to analyse and simulate the size and length
     of branching processes with an arbitrary offspring distribution. These
@@ -13,7 +13,7 @@ Description: Provides methods to analyse and simulate the size and length
     or length of infectious disease outbreaks, as discussed in Farrington
     et al. (2003) <doi:10.1093/biostatistics/4.2.279>.
 License: MIT + file LICENSE
-URL: https://github.com/epiverse-trace/bpmodels
+URL: https://github.com/epiverse-trace/bpmodels, https://epiverse-trace.github.io/bpmodels/
 BugReports: https://github.com/epiverse-trace/bpmodels/issues
 Depends: 
     R (>= 3.0.0)
