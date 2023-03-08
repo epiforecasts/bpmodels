@@ -12,22 +12,23 @@ Provides methods to analyse and simulate the size and length of branching proces
 Useful links:
 \itemize{
   \item \url{https://github.com/epiverse-trace/bpmodels}
+  \item \url{https://epiverse-trace.github.io/bpmodels/}
   \item Report bugs at \url{https://github.com/epiverse-trace/bpmodels/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Sebastian Funk \email{sebastian.funk@lshtm.ac.uk}
+\strong{Maintainer}: James M. Azam \email{james.azam@lshtm.ac.uk} (\href{https://orcid.org/0000-0001-5782-7330}{ORCID})
 
 Authors:
 \itemize{
-  \item Flavio Finger \email{flavio.finger@epicentre.msf.org}
-  \item James M. Azam \email{james.azam@lshtm.ac.uk}
+  \item Sebastian Funk \email{sebastian.funk@lshtm.ac.uk} (\href{https://orcid.org/0000-0002-2842-3406}{ORCID})
+  \item Flavio Finger \email{flavio.finger@epicentre.msf.org} (\href{https://orcid.org/0000-0002-8613-5170}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Zhian N. Kamvar \email{zkamvar@gmail.com} [contributor]
+  \item Zhian N. Kamvar \email{zkamvar@gmail.com} (\href{https://orcid.org/0000-0003-1458-7108}{ORCID}) [contributor]
 }
 
 }

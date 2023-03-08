@@ -2,10 +2,33 @@ Package: bpmodels
 Title: Analysing chain statistics using branching process models
 Version: 0.1.9999
 Authors@R: c(
-    person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = "aut"),
-    person("Zhian N.", "Kamvar", , "zkamvar@gmail.com", role = "ctb"),
-    person("Flavio", "Finger", , "flavio.finger@epicentre.msf.org", role = "aut"),
-    person("James M.", "Azam", , "james.azam@lshtm.ac.uk", role = c("aut", "cre"))
+    person(
+    given = "Sebastian",
+    family = "Funk",
+    email = "sebastian.funk@lshtm.ac.uk",
+    role = "aut",
+    comment = c(ORCHID = "https://orcid.org/0000-0002-2842-3406")
+    ),
+    person(
+    given = "Zhian N.",
+    family = "Kamvar",
+    email = "zkamvar@gmail.com",
+    role = "ctb",
+    comment = c(ORCHID = "https://orcid.org/0000-0003-1458-7108")
+    ),
+    person(
+    given = "Flavio",
+    family = "Finger",
+    email = "flavio.finger@epicentre.msf.org",
+    role = "aut",
+    comment = c(ORCHID = "https://orcid.org/0000-0002-8613-5170")
+    ),
+    person(
+    given = "James M.",
+    family = "Azam",
+    email = "james.azam@lshtm.ac.uk",
+    role = c("aut", "cre"),
+    comment = c(ORCHID = "https://orcid.org/0000-0001-5782-7330"))
   )
 Description: Provides methods to analyse and simulate the size and length
     of branching processes with an arbitrary offspring distribution. These
@@ -15,9 +38,9 @@ Description: Provides methods to analyse and simulate the size and length
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/bpmodels, https://epiverse-trace.github.io/bpmodels/
 BugReports: https://github.com/epiverse-trace/bpmodels/issues
-Depends: 
+Depends:
     R (>= 3.0.0)
-Suggests: 
+Suggests:
     bookdown,
     covr,
     dplyr,
@@ -29,9 +52,10 @@ Suggests:
     testthat,
     truncdist,
     usethis
-VignetteBuilder: 
+Config/testthat/edition: 3
+VignetteBuilder:
     knitr
-Remotes: 
+Remotes:
     github::epiverse-trace/epiparameter
 Encoding: UTF-8
 LazyData: true
