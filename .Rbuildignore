@@ -5,6 +5,7 @@
 ^codecov\.yml$
 ^README\.Rmd$
 ^\.lintr$
+^\.gitattributes$
 ^\_pkgdown.yml$
 ^cran-comments\.md$
 ^doc$
