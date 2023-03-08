@@ -116,8 +116,9 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
 
   ## first, get random function as given by `offspring`
   if (!is.character(offspring)) {
-    stop(paste("Object passed as 'offspring' is not a character string.",
-               "Did you forget to enclose it in quotes?"
+    stop(sprintf("%s %s",
+                 "Object passed as 'offspring' is not a character string.",
+                 "Did you forget to enclose it in quotes?"
                )
          )
   }
@@ -129,7 +130,8 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
 
   if (!missing(serial)) {
     if (!is.function(serial)) {
-      stop(paste("The `serial` argument must be a function",
+      stop(sprintf("%s %s",
+                   "The `serial` argument must be a function",
                  "(see details in ?chain_sim)."
                  )
            )
