@@ -42,8 +42,10 @@ chain_sim_susc <- function(offspring = c("pois", "nbinom"),
 
   if (offspring == "pois") {
     if (!missing(disp_offspring)) {
-      warning(paste("Argument 'disp_offspring' not used for",
-                    "poisson offspring distribution.")
+      warning(sprintf("%s %s",
+                     "Argument 'disp_offspring' not used for",
+                    "poisson offspring distribution."
+                    )
               )
     }
 
@@ -59,9 +61,9 @@ chain_sim_susc <- function(offspring = c("pois", "nbinom"),
     }
   } else if (offspring == "nbinom") {
   if (missing(disp_offspring)) {
-    stop(paste("Argument 'disp_offspring' was not specified."))
+    stop(sprintf("%s", "Argument 'disp_offspring' was not specified."))
   } else if (disp_offspring <= 1) { ## dispersion index
-    stop(paste(
+    stop(sprintf("%s %s %s",
       "Offspring distribution 'nbinom' requires",
       "argument 'disp_offspring' > 1.",
       "Use 'pois' if there is no overdispersion."
