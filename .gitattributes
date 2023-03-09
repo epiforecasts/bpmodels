@@ -1,2 +1,3 @@
 *.[Rr]md linguist-language=R
 *.md linguist-language=R
+vignettes/* linguist-documentation
