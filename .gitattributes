@@ -1,9 +1,2 @@
-*.md linguist-vendored=false
-*.md linguist-generated=false
-*.md linguist-documentation=false
-*.md linguist-detectable=true
-*.Rmd linguist-vendored=false
-*.Rmd linguist-generated=false
-*.Rmd linguist-documentation=false
-*.Rmd linguist-detectable=true
-
+*.[Rr]md linguist-language=R
+*.md linguist-language=R
