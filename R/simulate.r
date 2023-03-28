@@ -136,10 +136,14 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
                  )
            )
     }
-    if (!missing(tree) && tree == FALSE) {
-      stop("If `serial` is specified, then `tree` cannot be set to `FALSE`.")
-    }
-    tree <- TRUE
+      if (!missing(tree) && isFALSE(tree)) {
+            warning(sprintf("%s %s",
+                            "`serial` can't be used with `tree = FALSE`;",
+                          "Setting `tree = TRUE` internally."
+                          )
+                    )
+          tree <- TRUE
+          }
   } else if (!missing(tf)) {
     stop("If `tf` is specified, `serial` must be specified too.")
   }
