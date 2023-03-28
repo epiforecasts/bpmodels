@@ -41,15 +41,12 @@ test_that("Errors are thrown", {
   )
   expect_error(
     chain_sim(
-      n = 2, offspring = "pois", "size", lambda = 0.9,
-      serial = function(x) rpois(x, 0.9), tree = FALSE
-    ),
-    "If `serial` is specified, then `tree` cannot be set to `FALSE`."
-  )
-  expect_error(
-    chain_sim(
-      n = 2, offspring = "pois", "size", lambda = 0.9,
-      tf = 5, tree = FALSE
+      n = 2,
+      offspring = "pois",
+      "size",
+      lambda = 0.9,
+      tf = 5,
+      tree = FALSE
     ),
     "If `tf` is specified, `serial` must be specified too."
   )
@@ -160,5 +157,19 @@ test_that("warnings work as expected", {
       pop = 100
     ),
     "Argument 'disp_offspring' not used for poisson offspring distribution."
+  )
+  expect_warning(
+    chain_sim(
+      n = 2,
+      offspring = "pois",
+      "size",
+      lambda = 0.9,
+      serial = function(x) rpois(x, 0.9),
+      tree = FALSE
+    ),
+    sprintf("%s %s",
+            "`serial` can't be used with `tree = FALSE`;",
+            "Setting `tree = TRUE` internally."
+    )
   )
 })
