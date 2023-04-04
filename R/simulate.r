@@ -142,8 +142,8 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
                           "Setting `tree = TRUE` internally."
                           )
                     )
-          tree <- TRUE
-          }
+      }
+    tree <- TRUE
   } else if (!missing(tf)) {
     stop("If `tf` is specified, `serial` must be specified too.")
   }
