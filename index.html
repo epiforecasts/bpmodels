@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Analysing chain statistics using branching process models • bpmodels</title>
+<title>Analysing transmission chain statistics using branching process models • bpmodels</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Analysing chain statistics using branching process models">
+<script src="pkgdown.js"></script><meta property="og:title" content="Analysing transmission chain statistics using branching process models">
 <meta property="og:description" content="Provides methods to analyse and simulate the size and length
     of branching processes with an arbitrary offspring distribution. These
     can be used, for example, to analyse the distribution of chain sizes
@@ -83,8 +83,8 @@
   <div class="contents col-md-9">
 
 <div class="section level1">
-<div class="page-header"><h1 id="bpmodels-methods-for-analysing-the-size-and-length-of-chains-from-branching-process-models">
-<em>bpmodels</em>: Methods for analysing the size and length of chains from branching process models<a class="anchor" aria-label="anchor" href="#bpmodels-methods-for-analysing-the-size-and-length-of-chains-from-branching-process-models"></a>
+<div class="page-header"><h1 id="bpmodels-methods-for-analysing-the-size-and-length-of-transmission-chains-from-branching-process-models">
+<em>bpmodels</em>: Methods for analysing the size and length of transmission chains from branching process models<a class="anchor" aria-label="anchor" href="#bpmodels-methods-for-analysing-the-size-and-length-of-transmission-chains-from-branching-process-models"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -204,21 +204,19 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"bpmodels"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; To cite package 'bpmodels' in publications use:</span></span>
+<span><span class="co">#&gt; To cite package bpmodels in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Funk S, Finger F, Azam J (2023). _bpmodels: Analysing chain</span></span>
-<span><span class="co">#&gt;   statistics using branching process models_.</span></span>
-<span><span class="co">#&gt;   https://github.com/epiverse-trace/bpmodels,</span></span>
-<span><span class="co">#&gt;   https://epiverse-trace.github.io/bpmodels/.</span></span>
+<span><span class="co">#&gt;   Sebastian Funk, Flavio Finger, and James M. Azam (2023). bpmodels:</span></span>
+<span><span class="co">#&gt;   Analysing transmission chain statistics using branching process</span></span>
+<span><span class="co">#&gt;   models, website: https://github.com/epiverse-trace/bpmodels/</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Manual{,</span></span>
-<span><span class="co">#&gt;     title = {bpmodels: Analysing chain statistics using branching process models},</span></span>
-<span><span class="co">#&gt;     author = {Sebastian Funk and Flavio Finger and James M. Azam},</span></span>
+<span><span class="co">#&gt;     title = {bpmodels: Analysing transmission chain statistics using branching process models},</span></span>
+<span><span class="co">#&gt;     author = {{Sebastian Funk} and {Flavio Finger} and {James M. Azam}},</span></span>
 <span><span class="co">#&gt;     year = {2023},</span></span>
-<span><span class="co">#&gt;     note = {https://github.com/epiverse-trace/bpmodels,</span></span>
-<span><span class="co">#&gt; https://epiverse-trace.github.io/bpmodels/},</span></span>
+<span><span class="co">#&gt;     url = {https://github.com/epiverse-trace/bpmodels/},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 </div>
