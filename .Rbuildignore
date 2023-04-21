@@ -13,3 +13,4 @@
 ^Meta$
 ^pkgdown$
 ^data-raw$
+^CITATION\.cff$
