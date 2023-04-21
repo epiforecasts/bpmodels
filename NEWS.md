@@ -1,3 +1,16 @@
+# bpmodels 0.2.1
+
+## Minor functionality change
+
+* `chain_sim()` now throws a warning, instead of an error, when `tree` is set 
+to `FALSE` with `serial` also specified. We assume that providing a serial 
+interval means you want the tree of transmissions to be simulated, 
+so `chain_sim()` internally sets `tree = TRUE` and throws a warning explaining 
+what happened. This behaviour should not break any simulations with previous 
+versions with `bpmodels`, but if it does, please submit an issue. 
+To remove the warning, the user should explicitly set `tree = TRUE` when 
+they specify `serial`. 
+
 # bpmodels 0.2.0
 
 ## Documentation
@@ -12,17 +25,6 @@ has been added and can be accessed on the
 
 * The README's "quick start" section has been updated with what was 
 previously the introduction vignette.
-
-## Minor functionality change
-
-* `chain_sim()` now throws a warning, instead of an error, when `tree` is set 
-to `FALSE` with `serial` also specified. Providing a serial interval implicitly
-means you want the tree of transmissions to be simulated, so `chain_sim()`
-internally sets `tree = TRUE` and throws a warning explaining what happened. 
-This behaviour should not break any simulations with previous versions 
-with `bpmodels`, but if it does, please submit an issue. 
-To remove the warning, the user should explicitly set `tree = TRUE` when 
-they specify `serial`. 
 
 # bpmodels 0.1.9999
 
