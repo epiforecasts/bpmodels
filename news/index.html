@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bpmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
       </span>
     </div>
 
@@ -58,17 +58,20 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.1" id="bpmodels-021">bpmodels 0.2.1<a class="anchor" aria-label="anchor" href="#bpmodels-021"></a></h2>
+<div class="section level3">
+<h3 id="minor-functionality-change-0-2-1">Minor functionality change<a class="anchor" aria-label="anchor" href="#minor-functionality-change-0-2-1"></a></h3>
+<ul><li>
+<code><a href="../reference/chain_sim.html">chain_sim()</a></code> now throws a warning, instead of an error, when <code>tree</code> is set to <code>FALSE</code> with <code>serial</code> also specified. We assume that providing a serial interval means you want the tree of transmissions to be simulated, so <code><a href="../reference/chain_sim.html">chain_sim()</a></code> internally sets <code>tree = TRUE</code> and throws a warning explaining what happened. This behaviour should not break any simulations with previous versions with <code>bpmodels</code>, but if it does, please submit an issue. To remove the warning, the user should explicitly set <code>tree = TRUE</code> when they specify <code>serial</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0" id="bpmodels-020">bpmodels 0.2.0<a class="anchor" aria-label="anchor" href="#bpmodels-020"></a></h2>
 <div class="section level3">
 <h3 id="documentation-0-2-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-2-0"></a></h3>
 <ul><li><p><code><a href="../reference/chain_sim.html">chain_sim()</a></code>’s help file has been updated with more details. In particular, we describe in detail how to specify the <code>serial</code> argument as a function. We have also added more examples.</p></li>
 <li><p>A new vignette describing how to project COVID-19 incidence with <code><a href="../reference/chain_sim.html">chain_sim()</a></code> has been added and can be accessed on the <a href="https://epiverse-trace.github.io/bpmodels/" class="external-link">bpmodels website</a> under “Articles”.</p></li>
 <li><p>The README’s “quick start” section has been updated with what was previously the introduction vignette.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="minor-functionality-change-0-2-0">Minor functionality change<a class="anchor" aria-label="anchor" href="#minor-functionality-change-0-2-0"></a></h3>
-<ul><li>
-<code><a href="../reference/chain_sim.html">chain_sim()</a></code> now throws a warning, instead of an error, when <code>tree</code> is set to <code>FALSE</code> with <code>serial</code> also specified. Providing a serial interval implicitly means you want the tree of transmissions to be simulated, so <code><a href="../reference/chain_sim.html">chain_sim()</a></code> internally sets <code>tree = TRUE</code> and throws a warning explaining what happened. This behaviour should not break any simulations with previous versions with <code>bpmodels</code>, but if it does, please submit an issue. To remove the warning, the user should explicitly set <code>tree = TRUE</code> when they specify <code>serial</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
