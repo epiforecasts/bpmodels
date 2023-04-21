@@ -1,5 +1,5 @@
 
-# *bpmodels*: Methods for analysing the size and length of chains from branching process models
+# *bpmodels*: Methods for analysing the size and length of transmission chains from branching process models
 
 <!-- badges: start -->
 
@@ -210,20 +210,18 @@ By contributing to this project, you agree to abide by its terms.
 ``` r
 citation("bpmodels")
 #> 
-#> To cite package 'bpmodels' in publications use:
+#> To cite package bpmodels in publications use:
 #> 
-#>   Funk S, Finger F, Azam J (2023). _bpmodels: Analysing chain
-#>   statistics using branching process models_.
-#>   https://github.com/epiverse-trace/bpmodels,
-#>   https://epiverse-trace.github.io/bpmodels/.
+#>   Sebastian Funk, Flavio Finger, and James M. Azam (2023). bpmodels:
+#>   Analysing transmission chain statistics using branching process
+#>   models, website: https://github.com/epiverse-trace/bpmodels/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {bpmodels: Analysing chain statistics using branching process models},
-#>     author = {Sebastian Funk and Flavio Finger and James M. Azam},
+#>     title = {bpmodels: Analysing transmission chain statistics using branching process models},
+#>     author = {{Sebastian Funk} and {Flavio Finger} and {James M. Azam}},
 #>     year = {2023},
-#>     note = {https://github.com/epiverse-trace/bpmodels,
-#> https://epiverse-trace.github.io/bpmodels/},
+#>     url = {https://github.com/epiverse-trace/bpmodels/},
 #>   }
 ```
