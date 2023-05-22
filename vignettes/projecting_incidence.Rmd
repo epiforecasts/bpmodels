@@ -120,10 +120,10 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Log-normal_distribution) for a
 detailed explanation of this parametrisation.
 
 The [epiparameter](https://github.com/epiverse-trace/epiparameter) R package 
-provides the function `epiparameter::lnorm_meansd2musigma()` for implementing 
+provides the function `epiparameter::lnorm_meansd2meanlogsdlog()` for implementing 
 this parametrisation. It takes as inputs the mean, $\mu$ and standard 
 deviation, $\sigma$ and returns a list with the transformed mean and 
-standard deviation. Refer to `?epiparameter::lnorm_meansd2musigma` 
+standard deviation. Refer to `?epiparameter::lnorm_meansd2meanlogsdlog` 
 for more details.
 
 Let us set up the serial interval function with the appropriate inputs:
@@ -131,8 +131,8 @@ Let us set up the serial interval function with the appropriate inputs:
 mu <- 4.7
 sgma <- 2.9
 
-log_mean <- lnorm_meansd2musigma(mu, sgma)[[1]]  # log mean
-log_sd <- lnorm_meansd2musigma(mu, sgma)[[2]] # log sd
+log_mean <- lnorm_meansd2meanlogsdlog(mu, sgma)[[1]]  # log mean
+log_sd <- lnorm_meansd2meanlogsdlog(mu, sgma)[[2]] # log sd
 
 #' serial interval function
 serial_interval <- function(sample_size) {
