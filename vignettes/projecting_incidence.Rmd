@@ -7,7 +7,7 @@ output:
     code_folding: show
 pkgdown:
   as_is: true
-bibliography: references.bib
+bibliography: references.json
 link-citations: true
 vignette: >
   %\VignetteIndexEntry{Projecting infectious disease incidence: a COVID-19 example}
