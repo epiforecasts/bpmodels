@@ -33,7 +33,7 @@ Branching processes can be used to project infectious disease trends in time
 provided we can characterize the distribution of times between 
 successive cases (serial interval), and the distribution of secondary cases 
 produced by a single individual (offspring distribution). Such simulations can 
-be achieved in `bpmodels` with the `chain_sim()` function and @Pearson2020, and 
+be achieved in `bpmodels` with the `chain_sim()` function and @pearson2020, and 
 @abbott2020 illustrate its application to COVID-19. 
 
 The purpose of this vignette is to use early data on COVID-19 in South Africa 
@@ -98,11 +98,11 @@ start_times
 
 The log-normal distribution is commonly used in epidemiology to characterise 
 quantities such as the serial interval because it has a large variance 
-and can only be positive-valued [@Nishiura2007; @Limpert2001]. 
+and can only be positive-valued [@nishiura2007; @limpert2001]. 
 
 In this example, we will assume based on COVID-19 literature that the 
 serial interval, S, is log-normal distributed with parameters, 
-$\mu = 4.7$ and $\sigma = 2.9$ [@Pearson2020]. Note that when the distribution
+$\mu = 4.7$ and $\sigma = 2.9$ [@pearson2020]. Note that when the distribution
 is described this way, it means $\mu$ and $\sigma$ are the expected value 
 and standard deviation of the natural logarithm of the serial interval. Hence, 
 in order to sample the "back-transformed" measured serial interval with 
@@ -145,11 +145,11 @@ serial_interval <- function(sample_size) {
 
 The negative binomial distribution is commonly used in epidemiology to
 account for individual variation in transmissibility, 
-also known as superspreading [@Lloyd-Smith2005a].
+also known as superspreading [@lloyd-smith2005].
 
 For this example, we will assume that the offspring distribution is 
 characterised by a negative binomial with $R = 2.5$ [@abbott2020] and 
-$k = 0.58$ [@Wang2020]. In this parameterization, $R$ 
+$k = 0.58$ [@wang2020]. In this parameterization, $R$ 
 represents the $R_0$, which is defined as the average number of 
 cases produced by a single individual in an entirely susceptible population. 
 The parameter $k$ represents superspreading, that is, the degree of 
