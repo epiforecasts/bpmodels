@@ -37,9 +37,9 @@ secondary infections caused by an infected individual.
 
 The latest development version of the _bpmodels_ package can be installed via
 
-```{r include=TRUE,eval=FALSE}
+```{r eval=FALSE}
 # check whether {pak} is installed
-if(!require("pak")) install.packages("pak")
+if (!require("pak")) install.packages("pak")
 pak::pkg_install("epiverse-trace/bpmodels")
 ```
 
