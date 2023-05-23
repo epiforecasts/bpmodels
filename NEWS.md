@@ -1,3 +1,25 @@
+# bpmodels 0.3.0
+
+## Website
+
+* The website has been updated to use bootstrap 5. This means it has a slightly
+  new look.
+* Exported functions under "references" have been grouped into topics.
+
+## Vignettes
+
+* A new vignette has been added to compile a bibliography of papers that
+  apply branching processes to infectious disease epidemiology.
+* The "quickstart" section of the README has been moved to the "Getting started"
+  section of the website.
+* The README now only provides a quick description of the core functions in the
+  package and users are referred to the website for a quick start.
+
+## README
+
+* The README no longer has a quickstart section as it has been moved to the
+website. This is to give the README a minimalistic look.
+
 # bpmodels 0.2.1
 
 ## Minor functionality change
