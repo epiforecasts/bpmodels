@@ -1,4 +1,5 @@
 url: https://epiverse-trace.github.io/bpmodels/
+
 template:
   bootstrap: 5
   bslib:
@@ -13,14 +14,43 @@ template:
         gtag('js', new Date());
         gtag('config', 'G-XZ471458FQ');
       </script>
+
 development:
   mode: auto
+
+reference:
+  - title: Simulation
+
+  - subtitle: Branching processes
+    desc: Simulate branching processes
+    contents:
+    - chain_sim
+    - chain_sim_susc
+
+  - subtitle: Likelihood calculations
+    desc: Estimate likelihoods
+    contents:
+    - chain_ll
+
+  - subtitle: Reparametrized distributions
+    contents:
+    - dborel
+    - rborel
+    - rnbinom_mean_disp
+
+  - title: Miscellaneous
+
+  - subtitle: Data
+  - desc: Data used stored in the package
+    contents:
+    - covid19_sa
+
 articles:
-- title: Package vignettes
-  navbar: Package vignettes
+- title: Resources
+  navbar: Literature
   contents:
-  - bpmodels
-- title: Modelling
+  - branching_process_literature
+- title: Package vignettes
   navbar: Modelling
   contents:
   - projecting_incidence
