@@ -2,7 +2,7 @@
 % Please edit documentation in R/likelihoods.R
 \name{chain_ll}
 \alias{chain_ll}
-\title{Likelihood for the outcome of a branching process}
+\title{Calculate the likelihood for the outcome of a branching process}
 \usage{
 chain_ll(
   x,
@@ -44,7 +44,7 @@ likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or
 a list of individual likelihood contributions (if \code{individual=TRUE})
 }
 \description{
-Likelihood for the outcome of a branching process
+Calculate the likelihood for the outcome of a branching process
 }
 \examples{
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
