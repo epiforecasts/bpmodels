@@ -116,7 +116,7 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring = 100, ...) {
   log(lik)
 }
 
-#' Likelihood for the outcome of a branching process
+#' Calculate the likelihood for the outcome of a branching process
 #'
 #' @param x vector of sizes or lengths of transmission chains
 #' @param stat statistic given as \code{x} ("size" or "length" of chains)
