@@ -2,7 +2,7 @@
 % Please edit documentation in R/borel.r
 \name{rborel}
 \alias{rborel}
-\title{Generate random numbers from the Borel distribution}
+\title{Random number generator from the Borel distribution}
 \usage{
 rborel(n, mu, infinite = Inf)
 }
