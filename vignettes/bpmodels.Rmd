@@ -30,7 +30,8 @@ knitr::opts_chunk$set(echo = TRUE,
 _bpmodels_ provides methods to analyse and simulate the size and length
 of branching processes with an arbitrary offspring distribution. These
 can be used, for example, to analyse the distribution of chain sizes
-or length of infectious disease outbreaks, as discussed in @farrington2003.
+or length of infectious disease outbreaks, as discussed in @farrington2003 and 
+@blumberg2013.
     
 # Quick start
 
@@ -38,8 +39,7 @@ or length of infectious disease outbreaks, as discussed in @farrington2003.
 library("bpmodels")
 ```
 
-
-## Calculating log-likelihoods
+## `chain_ll()`: calculate log-likelihoods
 
 The `chain_ll()` function calculates the log-likelihood of a distribution of 
 chain sizes or lengths given an offspring distribution and its associated 
@@ -131,7 +131,7 @@ chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5,
          nsim_offspring = 100)
 ```
 
-## Simulating branching processes
+## `chain_sim()`: simulate transmission chains with branching processes
 
 To simulate a branching process, we use the `chain_sim()` function. This 
 function follows the same syntax as `chain_ll()`.
@@ -163,3 +163,4 @@ chains_df <- chain_sim(
 head(chains_df)
 ```
 
+## References
