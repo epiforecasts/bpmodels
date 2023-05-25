@@ -51,7 +51,7 @@ library("bpmodels")
 
 # Core functionality
 
-_bpmodels_ provides three functions: 
+_bpmodels_ provides three main functions: 
 
 * `chain_ll()`: calculates the likelihoods of observing a vector of chains 
   of given sizes or lengths.
