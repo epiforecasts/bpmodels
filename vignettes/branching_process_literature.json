@@ -335,5 +335,278 @@
 				]
 			]
 		}
-	}
+	},
+    {
+        "id": "blumberg2013",
+        "type": "article-journal",
+        "abstract": "Many diseases exhibit subcritical transmission (i.e. 0<R0<1) so that infections occur as self-limited ‘stuttering chains’. Given an ensemble of stuttering chains, information about the number of cases in each chain can be used to infer R0, which is of crucial importance for monitoring the risk that a disease will emerge to establish endemic circulation. However, the challenge of imperfect case detection has led authors to adopt a variety of work-around measures when inferring R0, such as discarding data on isolated cases or aggregating intermediate-sized chains together. Each of these methods has the potential to introduce bias, but a quantitative comparison of these approaches has not been reported. By adapting a model based on a negative binomial offspring distribution that permits a variable degree of transmission heterogeneity, we present a unified analysis of existing R0 estimation methods. Simulation studies show that the degree of transmission heterogeneity, when improperly modeled, can significantly impact the bias of R0 estimation methods designed for imperfect observation. These studies also highlight the importance of isolated cases in assessing whether an estimation technique is consistent with observed data. Analysis of data from measles outbreaks shows that likelihood scores are highest for models that allow a flexible degree of transmission heterogeneity. Aggregating intermediate sized chains often has similar performance to analyzing a complete chain size distribution. However, truncating isolated cases is beneficial only when surveillance systems clearly favor full observation of large chains but not small chains. Meanwhile, if data on the type and proportion of cases that are unobserved were known, we demonstrate that maximum likelihood inference of R0 could be adjusted accordingly. This motivates the need for future empirical and theoretical work to quantify observation error and incorporate relevant mechanisms into stuttering chain models used to estimate transmission parameters.",
+        "container-title": "Epidemics",
+        "DOI": "10.1016/j.epidem.2013.05.002",
+        "ISSN": "1755-4365",
+        "issue": 3,
+        "journalAbbreviation": "Epidemics",
+        "language": "en",
+        "page": "131-145",
+        "source": "ScienceDirect",
+        "title": "Comparing methods for estimating R0 from the size distribution of subcritical transmission chains",
+        "URL": "https://www.sciencedirect.com/science/article/pii/S1755436513000236",
+        "volume": 5,
+        "author": [
+            {
+                "family": "Blumberg",
+                "given": "S."
+            },
+            {
+                "family": "Lloyd-Smith",
+                "given": "J. O."
+            }
+        ],
+        "accessed": {
+            "date-parts": [
+                [
+                    2023,
+                    5,
+                    23
+                ]
+            ]
+        },
+        "issued": {
+            "date-parts": [
+                [
+                    2013,
+                    9,
+                    1
+                ]
+            ]
+        }
+    },
+    {
+        "id": "kucharski2016",
+        "type": "article-journal",
+        "abstract": "Using an Ebola virus disease transmission model, we found that addition of ring vaccination at the outset of the West Africa epidemic might not have led to containment of this disease. However, in later stages of the epidemic or in outbreaks with less intense transmission or more effective control, this strategy could help eliminate the disease.",
+        "container-title": "Emerging Infectious Diseases",
+        "DOI": "10.3201/eid2201.151410",
+        "ISSN": "1080-6040",
+        "issue": 1,
+        "journalAbbreviation": "Emerg Infect Dis",
+        "note": "PMID: 26691346\nPMCID: PMC4696719",
+        "page": "105-108",
+        "source": "PubMed Central",
+        "title": "Effectiveness of Ring Vaccination as Control Strategy for Ebola Virus Disease",
+        "URL": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4696719/",
+        "volume": 22,
+        "author": [
+            {
+                "family": "Kucharski",
+                "given": "Adam J."
+            },
+            {
+                "family": "Eggo",
+                "given": "Rosalind M."
+            },
+            {
+                "family": "Watson",
+                "given": "Conall H."
+            },
+            {
+                "family": "Camacho",
+                "given": "Anton"
+            },
+            {
+                "family": "Funk",
+                "given": "Sebastian"
+            },
+            {
+                "family": "Edmunds",
+                "given": "W. John"
+            }
+        ],
+        "accessed": {
+            "date-parts": [
+                [
+                    2023,
+                    5,
+                    23
+                ]
+            ]
+        },
+        "issued": {
+            "date-parts": [
+                [
+                    2016,
+                    1
+                ]
+            ]
+        }
+    },
+    {
+        "id": "kucharski2015",
+        "type": "article-journal",
+        "abstract": "The transmission potential of a novel infection depends on both the inherent transmissibility of a pathogen, and the level of susceptibility in the host population. However, distinguishing between these pathogen- and population-specific properties typically requires detailed serological studies, which are rarely available in the early stages of an outbreak. Using a simple transmission model that incorporates age-stratified social mixing patterns, we present a novel method for characterizing the transmission potential of subcritical infections, which have effective reproduction number R<1, from readily available data on the size of outbreaks. We show that the model can identify the extent to which outbreaks are driven by inherent pathogen transmissibility and pre-existing population immunity, and can generate unbiased estimates of the effective reproduction number. Applying the method to real-life infections, we obtained accurate estimates for the degree of age-specific immunity against monkeypox, influenza A(H5N1) and A(H7N9), and refined existing estimates of the reproduction number. Our results also suggest minimal pre-existing immunity to MERS-CoV in humans. The approach we describe can therefore provide crucial information about novel infections before serological surveys and other detailed analyses are available. The methods would also be applicable to data stratified by factors such as profession or location, which would make it possible to measure the transmission potential of emerging infections in a wide range of settings.",
+        "container-title": "PLOS Computational Biology",
+        "DOI": "10.1371/journal.pcbi.1004154",
+        "ISSN": "1553-7358",
+        "issue": 4,
+        "journalAbbreviation": "PLOS Computational Biology",
+        "language": "en",
+        "note": "publisher: Public Library of Science",
+        "page": "e1004154",
+        "source": "PLoS Journals",
+        "title": "Characterizing the Transmission Potential of Zoonotic Infections from Minor Outbreaks",
+        "URL": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004154",
+        "volume": 11,
+        "author": [
+            {
+                "family": "Kucharski",
+                "given": "Adam J."
+            },
+            {
+                "family": "Edmunds",
+                "given": "W. John"
+            }
+        ],
+        "accessed": {
+            "date-parts": [
+                [
+                    2023,
+                    5,
+                    23
+                ]
+            ]
+        },
+        "issued": {
+            "date-parts": [
+                [
+                    2015,
+                    4,
+                    10
+                ]
+            ]
+        }
+    },
+    {
+        "id": "hellewell2020",
+        "type": "article-journal",
+        "container-title": "The Lancet Global Health",
+        "DOI": "10.1016/S2214-109X(20)30074-7",
+        "ISSN": "2214-109X",
+        "issue": 4,
+        "journalAbbreviation": "The Lancet Global Health",
+        "language": "English",
+        "note": "publisher: Elsevier\nPMID: 32119825",
+        "page": "e488-e496",
+        "source": "www.thelancet.com",
+        "title": "Feasibility of controlling COVID-19 outbreaks by isolation of cases and contacts",
+        "URL": "https://www.thelancet.com/article/S2214-109X(20)30074-7/fulltext",
+        "volume": 8,
+        "author": [
+            {
+                "family": "Hellewell",
+                "given": "Joel"
+            },
+            {
+                "family": "Abbott",
+                "given": "Sam"
+            },
+            {
+                "family": "Gimma",
+                "given": "Amy"
+            },
+            {
+                "family": "Bosse",
+                "given": "Nikos I."
+            },
+            {
+                "family": "Jarvis",
+                "given": "Christopher I."
+            },
+            {
+                "family": "Russell",
+                "given": "Timothy W."
+            },
+            {
+                "family": "Munday",
+                "given": "James D."
+            },
+            {
+                "family": "Kucharski",
+                "given": "Adam J."
+            },
+            {
+                "family": "Edmunds",
+                "given": "W. John"
+            },
+            {
+                "family": "Sun",
+                "given": "Fiona"
+            },
+            {
+                "family": "Flasche",
+                "given": "Stefan"
+            },
+            {
+                "family": "Quilty",
+                "given": "Billy J."
+            },
+            {
+                "family": "Davies",
+                "given": "Nicholas"
+            },
+            {
+                "family": "Liu",
+                "given": "Yang"
+            },
+            {
+                "family": "Clifford",
+                "given": "Samuel"
+            },
+            {
+                "family": "Klepac",
+                "given": "Petra"
+            },
+            {
+                "family": "Jit",
+                "given": "Mark"
+            },
+            {
+                "family": "Diamond",
+                "given": "Charlie"
+            },
+            {
+                "family": "Gibbs",
+                "given": "Hamish"
+            },
+            {
+                "family": "Zandvoort",
+                "given": "Kevin",
+                "dropping-particle": "van"
+            },
+            {
+                "family": "Funk",
+                "given": "Sebastian"
+            },
+            {
+                "family": "Eggo",
+                "given": "Rosalind M."
+            }
+        ],
+        "accessed": {
+            "date-parts": [
+                [
+                    2023,
+                    5,
+                    23
+                ]
+            ]
+        },
+        "issued": {
+            "date-parts": [
+                [
+                    2020,
+                    4,
+                    1
+                ]
+            ]
+        }
+    }
 ]
