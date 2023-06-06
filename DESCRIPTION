@@ -42,7 +42,6 @@ Depends:
     R (>= 3.6.0)
 Suggests:
     bookdown,
-    covr,
     dplyr,
     epiparameter,
     ggplot2,
@@ -50,8 +49,7 @@ Suggests:
     lubridate,
     rmarkdown,
     testthat,
-    truncdist,
-    usethis
+    truncdist
 Config/testthat/edition: 3
 VignetteBuilder:
     knitr
