@@ -1,4 +1,4 @@
-#' Likelihood of the size of chains with Poisson offspring distribution
+#' Log-likelihood of the size of chains with Poisson offspring distribution
 #'
 #' @param x vector of sizes
 #' @param lambda rate of the Poisson distribution
@@ -9,7 +9,7 @@ pois_size_ll <- function(x, lambda) {
   (x - 1) * log(lambda) - lambda * x + (x - 2) * log(x) - lgamma(x)
 }
 
-#' Likelihood of the size of chains with Negative-Binomial offspring
+#' Log-likelihood of the size of chains with Negative-Binomial offspring
 #' distribution
 #'
 #' @param x vector of sizes
@@ -31,7 +31,7 @@ nbinom_size_ll <- function(x, size, prob, mu) {
     (size * x + (x - 1)) * log(1 + mu / size)
 }
 
-#' Likelihood of the size of chains with gamma-Borel offspring distribution
+#' Log-likelihood of the size of chains with gamma-Borel offspring distribution
 #'
 #' @param x vector of sizes
 #' @param size the dispersion parameter (often called \code{k} in ecological
@@ -52,7 +52,7 @@ gborel_size_ll <- function(x, size, prob, mu) {
     (x - 1) * log(x) - (size + x - 1) * log(x + size / mu)
 }
 
-#' Likelihood of the length of chains with Poisson offspring distribution
+#' Log-likelihood of the length of chains with Poisson offspring distribution
 #'
 #' @param x vector of sizes
 #' @param lambda rate of the Poisson distribution
@@ -71,7 +71,7 @@ pois_length_ll <- function(x, lambda) {
   log(Gk[x + 1] - Gk[x])
 }
 
-#' Likelihood of the length of chains with geometric offspring distribution
+#' Log-likelihood of the length of chains with geometric offspring distribution
 #'
 #' @param x vector of sizes
 #' @param prob probability of the geometric distribution with mean
@@ -87,7 +87,7 @@ geom_length_ll <- function(x, prob) {
   log(GkmGkm1)
 }
 
-#' Likelihood of the length of chains with generic offspring distribution
+#' Log-likelihood of the length of chains with generic offspring distribution
 #'
 #' The likelihoods are calculated with a crude approximation using simulated
 #'   chains by linearly approximating any missing values in the empirical
@@ -116,20 +116,22 @@ offspring_ll <- function(x, offspring, stat, nsim_offspring = 100, ...) {
   log(lik)
 }
 
-#' Calculate the likelihood for the outcome of a branching process
+#' Calculate the log-likelihood for the outcome of a branching process
 #'
 #' @param x vector of sizes or lengths of transmission chains
 #' @param stat statistic given as \code{x} ("size" or "length" of chains)
 #' @param obs_prob observation probability (assumed constant)
 #' @param infinite any chains of this size/length will be treated as infinite
-#' @param exclude any sizes/lengths to exclude from the likelihood calculation
+#' @param exclude any sizes/lengths to exclude from the log-likelihood
+#' calculation
 #' @param individual if TRUE, a vector of individual log-likelihood
 #' contributions will be returned rather than the sum
-#' @param nsim_obs number of simulations if the likelihood is to be
+#' @param nsim_obs number of simulations if the log-likelihood is to be
 #'   approximated for imperfect observations
 #' @param ... parameters for the offspring distribution
-#' @return likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or
-#'  a list of individual likelihood contributions (if \code{individual=TRUE})
+#' @return log-likelihood, or vector of log-likelihoods
+#' (if \code{obs_prob} < 1), or a list of individual log-likelihood
+#' contributions (if \code{individual=TRUE})
 #' @inheritParams chain_sim
 #' @seealso pois_size_ll, nbinom_size_ll, gborel_size_ll, pois_length_ll,
 #'   geom_length_ll, offspring_ll
@@ -168,24 +170,25 @@ chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
     sampled_x <- list(x)
   }
 
-  ## determine for which sizes to calculate the likelihood (for true chain size)
+  # determine for which sizes to calculate the log-likelihood (for true
+  # chain size)
   if (any(size_x == infinite)) {
     calc_sizes <- seq_len(infinite - 1)
   } else {
     calc_sizes <- unique(c(size_x, exclude))
   }
 
-  ## get likelihood function as given by `offspring` and `stat``
-  likelihoods <- vector(mode = "numeric")
+  ## get log-likelihood function as given by `offspring` and `stat``
+  loglikelihoods <- vector(mode = "numeric")
   ll_func <- paste(offspring, stat, "ll", sep = "_")
   pars <- as.list(unlist(list(...))) ## converts vectors to lists
 
-  ## calculate likelihoods
+  ## calculate log-likelihoods
   if (exists(ll_func, where = asNamespace("bpmodels"), mode = "function")) {
     func <- get(ll_func)
-    likelihoods[calc_sizes] <- do.call(func, c(list(x = calc_sizes), pars))
+    loglikelihoods[calc_sizes] <- do.call(func, c(list(x = calc_sizes), pars))
   } else {
-    likelihoods[calc_sizes] <-
+    loglikelihoods[calc_sizes] <-
       do.call(
         offspring_ll,
         c(list(
@@ -197,24 +200,25 @@ chain_ll <- function(x, offspring, stat = c("size", "length"), obs_prob = 1,
 
   ## assign probabilities to infinite outbreak sizes
   if (any(size_x == infinite)) {
-    likelihoods[infinite] <- complementary_logprob(likelihoods)
+    loglikelihoods[infinite] <- complementary_logprob(loglikelihoods)
   }
 
   if (!missing(exclude)) {
-    likelihoods <- likelihoods - log(-expm1(sum(likelihoods[exclude])))
-    likelihoods[exclude] <- -Inf
+    loglikelihoods <- loglikelihoods - log(-expm1(
+      sum(loglikelihoods[exclude])))
+    loglikelihoods[exclude] <- -Inf
 
     sampled_x <- lapply(sampled_x, function(y) {
       y[!(y %in% exclude)]
     })
   }
 
-  ## assign likelihoods
-  chains_likelihood <- lapply(sampled_x, function(sx) {
-    likelihoods[sx[!(sx %in% exclude)]]
+  ## assign log-likelihoods
+  chains_loglikelihood <- lapply(sampled_x, function(sx) {
+    loglikelihoods[sx[!(sx %in% exclude)]]
   })
 
-  if (!individual) chains_likelihood <- vapply(chains_likelihood, sum, 0)
+  if (!individual) chains_loglikelihood <- vapply(chains_loglikelihood, sum, 0)
 
-  return(chains_likelihood)
+  return(chains_loglikelihood)
 }
