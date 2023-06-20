@@ -2,7 +2,7 @@
 % Please edit documentation in R/likelihoods.R
 \name{offspring_ll}
 \alias{offspring_ll}
-\title{Likelihood of the length of chains with generic offspring distribution}
+\title{Log-likelihood of the length of chains with generic offspring distribution}
 \usage{
 offspring_ll(x, offspring, stat, nsim_offspring = 100, ...)
 }
