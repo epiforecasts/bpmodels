@@ -11,7 +11,7 @@ bibliography: references.json
 link-citations: true
 vignette: >
   %\VignetteEncoding{UTF-8}
-  %\VignetteIndexEntry{Analysing infectious disease transmission chains}
+  %\VignetteIndexEntry{Analysing infectious disease transmission chains with bpmodels}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
