@@ -1,5 +1,5 @@
 ---
-title: "Analysing infectious disease transmission chains with `bpmodels`"
+title: "Analysing infectious disease transmission chains with bpmodels"
 author: "Sebastian Funk, James Azam"
 output:
   bookdown::html_vignette2:
