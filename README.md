@@ -39,18 +39,68 @@ library("bpmodels")
 
 # Core functionality
 
-*bpmodels* provides three functions:
+*bpmodels* provides three main functions:
 
-- `chain_ll()`: calculates the likelihoods of observing a vector of
-  chains of given sizes or lengths.
+`chain_ll()`: calculates the likelihoods of observing a vector of chains
+of given sizes or lengths.
 
-- `chain_sim()`: simulates transmission chains until all chains die out.
+Here is a quick example of estimating the loglikelihood of an observed
+chain:
 
-- `chain_sim_susc()`: simulates transmission chains until a specified
-  initial susceptible pool runs out.
+``` r
+# example of observed chain sizes
+chain_sizes <- c(1, 2, 3, 4) 
+# estimate loglikelihood of the observed chain sizes
+chain_ll_eg <- chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
+chain_ll_eg
+#> [1] -7.772589
+```
 
-See the [“introduction vignette”](bpmodels) for a detailed illustration
-of each function.
+`chain_sim()`: simulates transmission chains until all chains stop
+producing offspring.
+
+Below is a quick example where we simulate the chain sizes of $5$ chains
+with a poisson offspring with mean, $\text{lambda} = 0.5$:
+
+``` r
+set.seed(123)
+
+chain_sim_eg <- chain_sim(n = 5, offspring = "pois", stat = "size", 
+                          lambda = 0.5, tree = TRUE)
+
+head(chain_sim_eg)
+#>   n id ancestor generation
+#> 1 1  1       NA          1
+#> 2 2  1       NA          1
+#> 3 3  1       NA          1
+#> 4 4  1       NA          1
+#> 5 5  1       NA          1
+#> 6 2  2        1          2
+```
+
+`chain_sim_susc()`: simulates transmission chains from a specified
+population size with pre-existing immunity until the susceptible pool
+runs out.
+
+Below is a quick example where we simulate chains with a poisson
+offspring with mean, $\text{lambda} = 0.5$, and serial interval of $3$:
+
+``` r
+set.seed(1234)
+
+chain_sim_susc_eg <- chain_sim_susc(pop = 1000, "pois",
+                                    mn_offspring = 0.5,
+                                    serial = function(x) 3
+                                    )
+
+head(chain_sim_susc_eg)
+#>   id ancestor generation time
+#> 1  1       NA          1    0
+```
+
+See the [“Get started
+vignette”](https://epiverse-trace.github.io/bpmodels/articles/bpmodels.html)
+for a detailed illustration of each function.
 
 ## Package vignettes
 
