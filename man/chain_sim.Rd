@@ -133,7 +133,8 @@ chain_sim(
   serial = serial_interval
 )
 
-# Specifying `serial` and `tree = FALSE` will throw an error
+# Specifying `serial` and `tree = FALSE` will throw a warning saying that
+# `tree` was set to `TRUE` internally.
 set.seed(123)
 \dontrun{
 try(chain_sim(
