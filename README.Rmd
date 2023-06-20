@@ -62,7 +62,7 @@ _bpmodels_ provides three main functions:
   susceptible pool runs out.
 
 
-See the ["introduction vignette"](bpmodels) for a detailed illustration of 
+See the ["Get started vignette"](https://epiverse-trace.github.io/bpmodels/articles/bpmodels.html) for a detailed illustration of 
 each function.
 
 ## Package vignettes
