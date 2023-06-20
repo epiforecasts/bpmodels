@@ -2,7 +2,7 @@
 % Please edit documentation in R/likelihoods.R
 \name{chain_ll}
 \alias{chain_ll}
-\title{Calculate the likelihood for the outcome of a branching process}
+\title{Calculate the log-likelihood for the outcome of a branching process}
 \usage{
 chain_ll(
   x,
@@ -29,22 +29,24 @@ the R distribution function (e.g., "pois" for Poisson, where
 
 \item{infinite}{any chains of this size/length will be treated as infinite}
 
-\item{exclude}{any sizes/lengths to exclude from the likelihood calculation}
+\item{exclude}{any sizes/lengths to exclude from the log-likelihood
+calculation}
 
 \item{individual}{if TRUE, a vector of individual log-likelihood
 contributions will be returned rather than the sum}
 
-\item{nsim_obs}{number of simulations if the likelihood is to be
+\item{nsim_obs}{number of simulations if the log-likelihood is to be
 approximated for imperfect observations}
 
 \item{...}{parameters for the offspring distribution}
 }
 \value{
-likelihood, or vector of likelihoods (if \code{obs_prob} < 1), or
-a list of individual likelihood contributions (if \code{individual=TRUE})
+log-likelihood, or vector of log-likelihoods
+(if \code{obs_prob} < 1), or a list of individual log-likelihood
+contributions (if \code{individual=TRUE})
 }
 \description{
-Calculate the likelihood for the outcome of a branching process
+Calculate the log-likelihood for the outcome of a branching process
 }
 \examples{
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
