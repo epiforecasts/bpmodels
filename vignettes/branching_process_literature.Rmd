@@ -36,6 +36,6 @@ If you would like to extend this list, the easiest way would be to [file an issu
 new additions and we'll take it from there,
 or [submit a pull request](https://github.com/epiverse-trace/bpmodels/pulls) 
 with an updated version of the bibliography file found in 
-"vignettes/bp_applications_literature.json".
+"vignettes/branching_process_literature.json".
 
 # Bibliography
