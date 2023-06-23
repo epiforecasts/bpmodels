@@ -4,7 +4,7 @@
 \name{bpmodels-package}
 \alias{bpmodels}
 \alias{bpmodels-package}
-\title{bpmodels: Analysing transmission chain statistics using branching process models}
+\title{bpmodels: Analysing Transmission Chain Statistics using Branching Process Models}
 \description{
 Provides methods to analyse and simulate the size and length of branching processes with an arbitrary offspring distribution. These can be used, for example, to analyse the distribution of chain sizes or length of infectious disease outbreaks, as discussed in Farrington et al. (2003) \doi{10.1093/biostatistics/4.2.279}.
 }
