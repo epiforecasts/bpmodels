@@ -118,14 +118,15 @@ SD [S] &= \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}
 See ["log-normal_distribution" on Wikipedia](https://en.wikipedia.org/wiki/Log-normal_distribution) for a
 detailed explanation of this parametrisation.
 
-The [epiparameter](https://github.com/epiverse-trace/epiparameter) R package 
-provides the function `epiparameter::lnorm_meansd2meanlogsdlog()` for implementing 
-this parametrisation. It takes as inputs the mean, $\mu$ and standard 
-deviation, $\sigma$ and returns a list with the transformed mean and 
-standard deviation. Refer to `?epiparameter::lnorm_meansd2meanlogsdlog` 
-for more details.
-
-Let us set up the serial interval function with the appropriate inputs:
+We will now set up the serial interval function with the appropriate inputs.
+We adopt R's random lognormal distribution generator (`rlnorm`) that
+takes `meanlog` and `sdlog` as arguments, which we define with the
+parametrisation above as `log_mean` and `log_sd` respectively and wrap it in 
+the `serial_interval` function. Moreover, `serial_interval` takes one
+argument `sample_size` as is required by `bpmodels` 
+(See `?bpmodels::chain_sim`), which is further passed to `rlnorm` as the 
+first argument to determine the number of observations to sample
+(See `?rlnorm`).
 ```{r input_prep3, message=FALSE}
 mu <- 4.7
 sgma <- 2.9
