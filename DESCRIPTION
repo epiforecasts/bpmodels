@@ -1,6 +1,6 @@
 Package: bpmodels
-Title: Analysing transmission chain statistics using branching process
-    models
+Title: Analysing Transmission Chain Statistics using Branching Process
+    Models
 Version: 0.3.0
 Authors@R: c(
     person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = "aut",
