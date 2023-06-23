@@ -116,7 +116,7 @@ SD [S] &= \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}
  
 \end{align}
 
-See [Wikipedia](https://en.wikipedia.org/wiki/Log-normal_distribution) for a 
+See ["log-normal_distribution" on Wikipedia](https://en.wikipedia.org/wiki/Log-normal_distribution) for a
 detailed explanation of this parametrisation.
 
 The [epiparameter](https://github.com/epiverse-trace/epiparameter) R package 
