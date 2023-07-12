@@ -22,6 +22,12 @@ infected individual.
 
 # Installation
 
+The package can be installed from CRAN using
+
+``` r
+install.packages("bpmodels")
+```
+
 The latest development version of the *bpmodels* package can be
 installed via
 

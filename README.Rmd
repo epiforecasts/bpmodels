@@ -35,6 +35,12 @@ secondary infections caused by an infected individual.
 
 # Installation
 
+The package can be installed from CRAN using
+
+```r
+install.packages("bpmodels")
+```
+
 The latest development version of the _bpmodels_ package can be installed via
 
 ```{r eval=FALSE}
