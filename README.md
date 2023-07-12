@@ -10,7 +10,7 @@ version](https://img.shields.io/github/r-package/v/epiverse-trace/bpmodels)
 ![GitHub
 contributors](https://img.shields.io/github/contributors/epiverse-trace/bpmodels)
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT/)
 <!-- badges: end -->
 
 *bpmodels* is an R package to simulate and analyse the size and length
