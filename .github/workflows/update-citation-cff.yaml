@@ -8,17 +8,17 @@ on:
   release:
     types: [published]
   push:
-    branches: [master, main]
     paths:
       - DESCRIPTION
       - inst/CITATION
+      - .github/workflows/update-citation-cff.yaml
   workflow_dispatch:
 
 name: Update CITATION.cff
 
 jobs:
   update-citation-cff:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -29,30 +29,21 @@ jobs:
           extra-packages: |
             any::cffr
             any::V8
-
       - name: Update CITATION.cff
         run: |
-
           library(cffr)
-
           # Customize with your own code
           # See https://docs.ropensci.org/cffr/articles/cffr.html
-
           # Write your own keys
           mykeys <- list()
-
           # Create your CITATION.cff file
           cff_write(keys = mykeys)
-
         shell: Rscript {0}
 
       - name: Commit results
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add CITATION.cff
           git commit -m 'Update CITATION.cff' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
-
-
-
