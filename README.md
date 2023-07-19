@@ -1,5 +1,5 @@
 
-# *bpmodels*: Methods for analysing the size and length of transmission chains from branching process models
+# *bpmodels*: Methods for simulating and analysing the size and length of transmission chains from branching process models
 
 <!-- badges: start -->
 
