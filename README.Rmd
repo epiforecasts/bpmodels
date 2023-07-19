@@ -67,7 +67,8 @@ Here is a quick example of estimating the loglikelihood of an observed chain:
 # example of observed chain sizes
 chain_sizes <- c(1, 2, 3, 4) 
 # estimate loglikelihood of the observed chain sizes
-chain_ll_eg <- chain_ll(chain_sizes, "pois", "size", lambda = 0.5)
+chain_ll_eg <- chain_ll(x = chain_sizes, offspring = "pois", 
+                        stat = "size", lambda = 0.5)
 chain_ll_eg
 ```
 
@@ -94,9 +95,9 @@ offspring with mean, $\text{lambda} = 0.5$, and serial interval of $3$:
 ```{r}
 set.seed(1234)
 
-chain_sim_susc_eg <- chain_sim_susc(pop = 1000, "pois",
+chain_sim_susc_eg <- chain_sim_susc(pop = 1000, offspring = "pois",
                                     mn_offspring = 0.5,
-                                    serial = function(x) 3
+                                    serial = function(x) {3}
                                     )
 
 head(chain_sim_susc_eg)
