@@ -33,11 +33,11 @@ Branching processes can be used to project infectious disease trends in time
 provided we can characterize the distribution of times between 
 successive cases (serial interval), and the distribution of secondary cases 
 produced by a single individual (offspring distribution). Such simulations can 
-be achieved in `bpmodels` with the `chain_sim()` function and @pearson2020, and 
+be achieved in _bpmodels_ with the `chain_sim()` function and @pearson2020, and 
 @abbott2020 illustrate its application to COVID-19. 
 
 The purpose of this vignette is to use early data on COVID-19 in South Africa 
-[@marivate2020] to illustrate how `bpmodels` can be used to forecast an 
+[@marivate2020] to illustrate how _bpmodels_ can be used to forecast an 
 outbreak. 
 
 Let's load the required packages
@@ -51,7 +51,7 @@ library("lubridate")
 
 ## Data
 
-Included in `bpmodels` is a cleaned time series of the first 15 days of 
+Included in _bpmodels_ is a cleaned time series of the first 15 days of 
 the COVID-19 outbreak in South Africa. This can be loaded into 
 memory as follows: 
 ```{r}
@@ -119,12 +119,12 @@ See ["log-normal_distribution" on Wikipedia](https://en.wikipedia.org/wiki/Log-n
 detailed explanation of this parametrisation.
 
 We will now set up the serial interval function with the appropriate inputs.
-We adopt R's random lognormal distribution generator (`rlnorm`) that
+We adopt R's random lognormal distribution generator (`rlnorm()`) that
 takes `meanlog` and `sdlog` as arguments, which we define with the
-parametrisation above as `log_mean` and `log_sd` respectively and wrap it in 
-the `serial_interval` function. Moreover, `serial_interval` takes one
-argument `sample_size` as is required by `bpmodels` 
-(See `?bpmodels::chain_sim`), which is further passed to `rlnorm` as the 
+parametrisation above as `log_mean()` and `log_sd()` respectively and wrap it in 
+the `serial_interval()` function. Moreover, `serial_interval()` takes one
+argument `sample_size` as is required by _bpmodels_ 
+(See `?bpmodels::chain_sim`), which is further passed to `rlnorm()` as the 
 first argument to determine the number of observations to sample
 (See `?rlnorm`).
 ```{r input_prep3, message=FALSE}
@@ -180,7 +180,7 @@ sim_rep <- 100
 Lastly, `chain_sim()` requires the maximum size of each chain. 
 Above this value, the simulation is cut off. If this value is 
 not specified, it assumes a value of infinity. Here, we will
-assume a maximum chain size of $1000$.
+assume a maximum chain size of $1000$. We will call it `chain_threhold`.
 ```{r}
 #' Maximum chain size allowed
 chain_threshold <- 1000
