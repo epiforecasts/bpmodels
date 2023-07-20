@@ -49,20 +49,21 @@ For example, if we have observed a distribution of chains of sizes
 $1, 1, 4, 7$, we can 
 calculate the log-likelihood of this observed chain by assuming the offspring 
 per generation is Poisson distributed with a mean number (which can 
-be interpreted as the reproduction number $\mathcal{R_0}$) of $0.5$. 
+be interpreted as the reproduction number, $R_0$) of $0.5$. 
 
 To do this, we run 
 
 ```{r}
-set.seed(13)
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(x = chain_sizes, offspring = "pois", stat = "size", lambda = 0.5)
 ```
 
 The first argument of `chain_ll()` is the chain size (or length, in number of 
 generations that a chain lasted) distribution to 
-analyse. The second argument, `offspring`, specifies the offspring 
-distribution. This is given as a function used to generate random offspring. 
+analyse. 
+
+The second argument, `offspring`, specifies the offspring 
+distribution. This is specified as a string of the name of the function used to generate random offspring. 
 It can be any probability distribution implemented in `R`, that is, one that 
 has a corresponding function for generating random numbers beginning with the 
 letter `r`. In the case of the example above, since random Poisson numbers are 
@@ -101,12 +102,8 @@ ll
 This returns `10` likelihood values (because `nsim_obs = 10`), which can be 
 averaged to come up with an overall likelihood estimate.
 
-To find out about usage of the `chain_ll()` function, you can use the `R` help 
-file
-
-```{r eval=FALSE}
-?chain_ll
-```
+To find out about the usage of the `chain_ll()` function, you can run `?chain_ll` 
+to access its `R` help file.
 
 ### How `chain_ll()` works
 
@@ -126,6 +123,7 @@ For example, to get offspring drawn from a binomial distribution with
 probability `prob = 0.5`, we run
 
 ```{r}
+set.seed(12)
 chain_sizes <- c(1, 1, 4, 7) # example of observed chain sizes
 chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5,
          nsim_offspring = 100)
@@ -134,7 +132,9 @@ chain_ll(chain_sizes, "binom", "size", size = 1, prob = 0.5,
 ## `chain_sim()`: simulate transmission chains with branching processes
 
 To simulate a branching process, we use the `chain_sim()` function. This 
-function follows the same syntax as `chain_ll()`.
+function follows the same syntax as `chain_ll()`. Note that `chain_sim()` is
+stochastic, so a seed needs to be set to ensure that the results can be
+reproduced.
 
 Below, we are simulating $5$ chains, assuming the offspring are generated using
 a Poisson distribution with mean, `lambda = 0.5`. By default, `chain_sim()` 
@@ -143,16 +143,17 @@ a tree of infectees and infectors, we need to specify a function for
 the serial interval and set `tree = TRUE` (see next section).
 
 ```{r}
+set.seed(12)
 chain_sim(n = 5, offspring = "pois", stat = "size", lambda = 0.5)
 ```
 
 ### Simulating trees
 
 To simulate a tree of transmission chains, we specify the serial interval 
-generation function and set `tree = TRUE` as follows:
+generation function (`serial_interval()`) and set `tree = TRUE` as follows:
 
 ```{r}
-set.seed(13)
+set.seed(12) 
 serial_interval <- function(n) {
   rlnorm(n, meanlog = 0.58, sdlog = 1.58)
 }
