@@ -7,10 +7,10 @@ cff-version: 1.2.0
 message: 'To cite package "bpmodels" in publications use:'
 type: software
 license: MIT
-title: 'bpmodels: Analysing Transmission Chain Statistics using Branching Process
-  Models'
+title: 'bpmodels: Simulating and Analysing Transmission Chain Statistics using Branching
+  Process Models'
 version: 0.3.0
-abstract: Provides methods to analyse and simulate the size and length of branching
+abstract: Provides methods to simulate and analyse the size and length of branching
   processes with an arbitrary offspring distribution. These can be used, for example,
   to analyse the distribution of chain sizes or length of infectious disease outbreaks,
   as discussed in Farrington et al. (2003) <doi:10.1093/biostatistics/4.2.279>.
@@ -44,6 +44,18 @@ contact:
   given-names: James M.
   email: james.azam@lshtm.ac.uk
   orcid: https://orcid.org/0000-0001-5782-7330
+keywords:
+- branching-process
+- epidemic-dynamics
+- epidemic-modelling
+- epidemic-simulations
+- epidemiology
+- epiverse
+- outbreak-simulator
+- r
+- r-package
+- transmission-chain
+- transmission-chain-reconstruction
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
