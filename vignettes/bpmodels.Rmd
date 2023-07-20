@@ -153,7 +153,7 @@ To simulate a tree of transmission chains, we specify the serial interval
 generation function (`serial_interval()`) and set `tree = TRUE` as follows:
 
 ```{r}
-set.seed(12) 
+set.seed(12)
 serial_interval <- function(n) {
   rlnorm(n, meanlog = 0.58, sdlog = 1.58)
 }
