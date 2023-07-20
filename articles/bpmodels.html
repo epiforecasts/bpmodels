@@ -113,17 +113,17 @@ parameters.</p>
 <span class="math inline">\(1, 1, 4, 7\)</span>, we can
 calculate the log-likelihood of this observed chain by assuming the offspring
 per generation is Poisson distributed with a mean number (which can
-be interpreted as the reproduction number <span class="math inline">\(\mathcal{R_0}\)</span>) of <span class="math inline">\(0.5\)</span>.</p>
+be interpreted as the reproduction number, <span class="math inline">\(R_0\)</span>) of <span class="math inline">\(0.5\)</span>.</p>
 <p>To do this, we run</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></span>
-<span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
+<code class="sourceCode R"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
 <span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">chain_sizes</span>, offspring <span class="op">=</span> <span class="st">"pois"</span>, stat <span class="op">=</span> <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -8.607196</span></span></code></pre></div>
 </details><p>The first argument of <code><a href="../reference/chain_ll.html">chain_ll()</a></code> is the chain size (or length, in number of
 generations that a chain lasted) distribution to
-analyse. The second argument, <code>offspring</code>, specifies the offspring
-distribution. This is given as a function used to generate random offspring.
+analyse.</p>
+<p>The second argument, <code>offspring</code>, specifies the offspring
+distribution. This is specified as a string of the name of the function used to generate random offspring.
 It can be any probability distribution implemented in <code>R</code>, that is, one that
 has a corresponding function for generating random numbers beginning with the
 letter <code>r</code>. In the case of the example above, since random Poisson numbers are
@@ -154,15 +154,12 @@ we use</p>
 <span><span class="va">ll</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, obs_prob <span class="op">=</span> <span class="fl">0.3</span>, lambda <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>               nsim_obs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">ll</span></span>
-<span><span class="co">#&gt;  [1] -26.54167 -23.26117 -24.33027 -20.80310 -30.76152 -26.46751 -23.79326</span></span>
-<span><span class="co">#&gt;  [8] -19.14490 -32.08875 -22.23401</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] -36.98392 -27.21489 -25.67522 -23.90824 -25.85198 -25.53920 -25.62246</span></span>
+<span><span class="co">#&gt;  [8] -32.96724 -30.82938 -19.56722</span></span></code></pre></div>
 </details><p>This returns <code>10</code> likelihood values (because <code>nsim_obs = 10</code>), which can be
 averaged to come up with an overall likelihood estimate.</p>
-<p>To find out about usage of the <code><a href="../reference/chain_ll.html">chain_ll()</a></code> function, you can use the <code>R</code> help
-file</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">?</span><span class="va">chain_ll</span></span></code></pre></div>
-</details>
+<p>To find out about the usage of the <code><a href="../reference/chain_ll.html">chain_ll()</a></code> function, you can run <code><a href="../reference/chain_ll.html">?chain_ll</a></code>
+to access its <code>R</code> help file.</p>
 </div>
 <div class="section level4">
 <h4 id="how-chain_ll-works">How <code>chain_ll()</code> works<a class="anchor" aria-label="anchor" href="#how-chain_ll-works"></a>
@@ -179,11 +176,12 @@ must be passed to <code><a href="../reference/chain_ll.html">chain_ll()</a></cod
 used for this approximation.</p>
 <p>For example, to get offspring drawn from a binomial distribution with
 probability <code>prob = 0.5</code>, we run</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
 <span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"binom"</span>, <span class="st">"size"</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>         nsim_offspring <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -Inf</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -8.496803</span></span></code></pre></div>
 </details>
 </div>
 </div>
@@ -192,22 +190,25 @@ probability <code>prob = 0.5</code>, we run</p>
 <code>chain_sim()</code>: simulate transmission chains with branching processes<a class="anchor" aria-label="anchor" href="#chain_sim-simulate-transmission-chains-with-branching-processes"></a>
 </h3>
 <p>To simulate a branching process, we use the <code><a href="../reference/chain_sim.html">chain_sim()</a></code> function. This
-function follows the same syntax as <code><a href="../reference/chain_ll.html">chain_ll()</a></code>.</p>
+function follows the same syntax as <code><a href="../reference/chain_ll.html">chain_ll()</a></code>. Note that <code><a href="../reference/chain_sim.html">chain_sim()</a></code> is
+stochastic, so a seed needs to be set to ensure that the results can be
+reproduced.</p>
 <p>Below, we are simulating <span class="math inline">\(5\)</span> chains, assuming the offspring are generated using
 a Poisson distribution with mean, <code>lambda = 0.5</code>. By default, <code><a href="../reference/chain_sim.html">chain_sim()</a></code>
 returns a vector of chain sizes/lengths. If we instead want to return
 a tree of infectees and infectors, we need to specify a function for
 the serial interval and set <code>tree = TRUE</code> (see next section).</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/chain_sim.html">chain_sim</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, offspring <span class="op">=</span> <span class="st">"pois"</span>, stat <span class="op">=</span> <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2 6 2 1 2</span></span></code></pre></div>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/chain_sim.html">chain_sim</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, offspring <span class="op">=</span> <span class="st">"pois"</span>, stat <span class="op">=</span> <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1 2 4 1 1</span></span></code></pre></div>
 </details><div class="section level4">
 <h4 id="simulating-trees">Simulating trees<a class="anchor" aria-label="anchor" href="#simulating-trees"></a>
 </h4>
 <p>To simulate a tree of transmission chains, we specify the serial interval
-generation function and set <code>tree = TRUE</code> as follows:</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></span>
+generation function (<code>serial_interval()</code>) and set <code>tree = TRUE</code> as follows:</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">serial_interval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">0.58</span>, sdlog <span class="op">=</span> <span class="fl">1.58</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -222,7 +223,7 @@ generation function and set <code>tree = TRUE</code> as follows:</p>
 <span><span class="co">#&gt; 3 3  1       NA          1 0.00000000</span></span>
 <span><span class="co">#&gt; 4 4  1       NA          1 0.00000000</span></span>
 <span><span class="co">#&gt; 5 5  1       NA          1 0.00000000</span></span>
-<span><span class="co">#&gt; 6 1  2        1          2 0.04771887</span></span></code></pre></div>
+<span><span class="co">#&gt; 6 2  2        1          2 0.09968906</span></span></code></pre></div>
 </details>
 </div>
 </div>
