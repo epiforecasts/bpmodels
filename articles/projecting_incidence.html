@@ -99,10 +99,10 @@
 provided we can characterize the distribution of times between
 successive cases (serial interval), and the distribution of secondary cases
 produced by a single individual (offspring distribution). Such simulations can
-be achieved in <code>bpmodels</code> with the <code><a href="../reference/chain_sim.html">chain_sim()</a></code> function and <span class="citation">Pearson et al. (<a href="#ref-pearson2020" role="doc-biblioref">2020</a>)</span>, and
+be achieved in <em>bpmodels</em> with the <code><a href="../reference/chain_sim.html">chain_sim()</a></code> function and <span class="citation">Pearson et al. (<a href="#ref-pearson2020" role="doc-biblioref">2020</a>)</span>, and
 <span class="citation">Abbott et al. (<a href="#ref-abbott2020" role="doc-biblioref">2020</a>)</span> illustrate its application to COVID-19.</p>
 <p>The purpose of this vignette is to use early data on COVID-19 in South Africa
-<span class="citation">(<a href="#ref-marivate2020" role="doc-biblioref">Marivate and Combrink 2020</a>)</span> to illustrate how <code>bpmodels</code> can be used to forecast an
+<span class="citation">(<a href="#ref-marivate2020" role="doc-biblioref">Marivate and Combrink 2020</a>)</span> to illustrate how <em>bpmodels</em> can be used to forecast an
 outbreak.</p>
 <p>Let’s load the required packages</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -115,7 +115,7 @@ outbreak.</p>
 <div class="section level2">
 <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h2>
-<p>Included in <code>bpmodels</code> is a cleaned time series of the first 15 days of
+<p>Included in <em>bpmodels</em> is a cleaned time series of the first 15 days of
 the COVID-19 outbreak in South Africa. This can be loaded into
 memory as follows:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -194,12 +194,12 @@ SD [S] &amp;= \sqrt {\ln \left(1 + \dfrac{\sigma^2}{\mu^2} \right)}
 <p>See <a href="https://en.wikipedia.org/wiki/Log-normal_distribution" class="external-link">“log-normal_distribution” on Wikipedia</a> for a
 detailed explanation of this parametrisation.</p>
 <p>We will now set up the serial interval function with the appropriate inputs.
-We adopt R’s random lognormal distribution generator (<code>rlnorm</code>) that
+We adopt R’s random lognormal distribution generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) that
 takes <code>meanlog</code> and <code>sdlog</code> as arguments, which we define with the
-parametrisation above as <code>log_mean</code> and <code>log_sd</code> respectively and wrap it in
-the <code>serial_interval</code> function. Moreover, <code>serial_interval</code> takes one
-argument <code>sample_size</code> as is required by <code>bpmodels</code>
-(See <code><a href="../reference/chain_sim.html">?bpmodels::chain_sim</a></code>), which is further passed to <code>rlnorm</code> as the
+parametrisation above as <code>log_mean()</code> and <code>log_sd()</code> respectively and wrap it in
+the <code>serial_interval()</code> function. Moreover, <code>serial_interval()</code> takes one
+argument <code>sample_size</code> as is required by <em>bpmodels</em>
+(See <code><a href="../reference/chain_sim.html">?bpmodels::chain_sim</a></code>), which is further passed to <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code> as the
 first argument to determine the number of observations to sample
 (See <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">?rlnorm</a></code>).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -252,7 +252,7 @@ many times and summarise the results.</p>
 </details><p>Lastly, <code><a href="../reference/chain_sim.html">chain_sim()</a></code> requires the maximum size of each chain.
 Above this value, the simulation is cut off. If this value is
 not specified, it assumes a value of infinity. Here, we will
-assume a maximum chain size of <span class="math inline">\(1000\)</span>.</p>
+assume a maximum chain size of <span class="math inline">\(1000\)</span>. We will call it <code>chain_threhold</code>.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' Maximum chain size allowed</span></span>
 <span><span class="va">chain_threshold</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span></code></pre></div>
