@@ -9,7 +9,7 @@ dborel <- function(x, mu, log = FALSE) {
   if (x < 1) stop("'x' must be greater than 0")
   if (mu <= 0 || is.infinite(mu)) {
     stop("'mu' must not be Inf or less than 0")
-    }
+  }
   ld <- -mu * x + (x - 1) * log(mu * x) - lgamma(x + 1)
   if (!log) ld <- exp(ld)
   return(ld)
