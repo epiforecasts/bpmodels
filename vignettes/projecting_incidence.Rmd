@@ -18,12 +18,13 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      message = FALSE,
-                      warning = FALSE,
-                      collapse = TRUE,
-                      comment = "#>"
-                      )
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
 
 ```
 
@@ -360,7 +361,7 @@ ggplot(data = incidence_ts_by_date) +
   geom_vline(
     mapping = aes(xintercept = max(covid19_sa$date)),
     linetype = "dashed"
-    ) +
+  ) +
   labs(x = "Date", y = "Daily cases")
 ```
 ## References
