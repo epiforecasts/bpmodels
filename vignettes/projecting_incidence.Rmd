@@ -275,22 +275,11 @@ Now we will aggregate the simulations by day and evaluate the median
 daily cases across all simulations.
 ```{r}
 # Median daily number of cases aggregated across all simulations
-median_daily_cases <- incidence_ts %>%
-  group_by(day) %>%
+median_daily_cases <- incidence_ts_by_date %>%
+  group_by(date) %>%
   summarise(median_cases = median(cases)) %>%
   ungroup() %>%
-  arrange(day)
-
-head(median_daily_cases)
-```
-
-As was done for the individual simulations, we will add a date column in the
-same manner.
-```{r}
-# Add dates
-median_daily_cases <- median_daily_cases %>%
-  mutate(date = index_date + days(seq(0, projection_end_day))) %>%
-  ungroup()
+  arrange(date)
 
 head(median_daily_cases)
 ```
