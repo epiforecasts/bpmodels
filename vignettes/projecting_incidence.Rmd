@@ -327,19 +327,22 @@ ggplot(data = incidence_ts_by_date) +
       y = cases
     ),
     color = "black",
-    size = 1.75,
-    shape = 21
+    linewidth = 1
   ) +
   scale_x_continuous(
     breaks = seq(
       min(incidence_ts_by_date$date),
       max(incidence_ts_by_date$date),
-      10
+      5
     ),
     labels = seq(
       min(incidence_ts_by_date$date),
       max(incidence_ts_by_date$date),
-      10
+      5
+    ),
+    limits = c(
+      min(incidence_ts_by_date$date),
+      max(incidence_ts_by_date$date) - 4 # for a better visual look
     )
   ) +
   scale_y_continuous(
@@ -354,6 +357,10 @@ ggplot(data = incidence_ts_by_date) +
       250
     )
   ) +
-  labs(x = "Date", y = "Daily cases (median)")
+  geom_vline(
+    mapping = aes(xintercept = max(covid19_sa$date)),
+    linetype = "dashed"
+    ) +
+  labs(x = "Date", y = "Daily cases")
 ```
 ## References
