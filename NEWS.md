@@ -1,3 +1,12 @@
+# bpmodels 0.3.1
+
+## Unit tests and input validation
+
+* `rborel()` and `dborel()` now have input checking in place.
+* Package coverage has been improved with new tests from `rborel()`,
+`dborel()`, and the internal functions stored in the `utils.R` script,
+and additional tests for `chain_sim()`.
+
 # bpmodels 0.3.0
 
 ## Website
