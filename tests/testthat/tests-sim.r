@@ -2,14 +2,15 @@ test_that("Chains can be simulated", {
   expect_length(chain_sim(n = 2, "pois", lambda = 0.5), 2)
   expect_length(chain_sim(n = 10, "pois", "length", lambda = 0.9), 10)
   expect_s3_class(
-    chain_sim(n = 10,
-              "pois",
-              lambda = 2,
-              tree = TRUE,
-              infinite = 10
-              ),
+    chain_sim(
+      n = 10,
+      "pois",
+      lambda = 2,
+      tree = TRUE,
+      infinite = 10
+    ),
     "data.frame"
-    )
+  )
   expect_false(any(is.finite(chain_sim(
     n = 2, "pois", "length", lambda = 0.5,
     infinite = 1
@@ -19,16 +20,16 @@ test_that("Chains can be simulated", {
     tree = TRUE
   ))
 
- tf <- 3
- set.seed(12)
- expect_true(
-   all(chain_sim(
-     n = 2, offspring = "pois", "size", lambda = 0.9,
-     tree = TRUE, serial = function(n) {
-       rlnorm(n, meanlog = 0.58, sdlog = 1.58)
-     }, tf = tf
-   )$time < tf)
- )
+  tf <- 3
+  set.seed(12)
+  expect_true(
+    all(chain_sim(
+      n = 2, offspring = "pois", "size", lambda = 0.9,
+      tree = TRUE, serial = function(n) {
+        rlnorm(n, meanlog = 0.58, sdlog = 1.58)
+      }, tf = tf
+    )$time < tf)
+  )
 })
 
 test_that("Errors are thrown", {
@@ -65,24 +66,24 @@ test_that("Errors are thrown", {
 
 test_that("Chains can be simulated", {
   expect_s3_class(
-      chain_sim_susc(
-        "pois",
-        mn_offspring = 2,
-        serial = function(x) 3,
-        pop = 100
-      ),
-      "data.frame"
+    chain_sim_susc(
+      "pois",
+      mn_offspring = 2,
+      serial = function(x) 3,
+      pop = 100
+    ),
+    "data.frame"
   )
 
   expect_s3_class(
-      chain_sim_susc(
-        "nbinom",
-        mn_offspring = 2,
-        disp_offspring = 1.5,
-        serial = function(x) 3,
-        pop = 100
-      ),
-      "data.frame"
+    chain_sim_susc(
+      "nbinom",
+      mn_offspring = 2,
+      disp_offspring = 1.5,
+      serial = function(x) 3,
+      pop = 100
+    ),
+    "data.frame"
   )
 
   expect_identical(
@@ -142,11 +143,12 @@ test_that("Errors are thrown", {
       serial = function(x) 3,
       pop = 100
     ),
-    paste("Offspring distribution 'nbinom'",
-          "requires argument 'disp_offspring' > 1.",
-          "Use 'pois' if there is no overdispersion."
-          )
+    paste(
+      "Offspring distribution 'nbinom'",
+      "requires argument 'disp_offspring' > 1.",
+      "Use 'pois' if there is no overdispersion."
     )
+  )
   expect_error(
     chain_sim_susc(
       "nbinom",
@@ -178,9 +180,10 @@ test_that("warnings work as expected", {
       serial = function(x) rpois(x, 0.9),
       tree = FALSE
     ),
-    sprintf("%s %s",
-            "`serial` can't be used with `tree = FALSE`;",
-            "Setting `tree = TRUE` internally."
+    sprintf(
+      "%s %s",
+      "`serial` can't be used with `tree = FALSE`;",
+      "Setting `tree = TRUE` internally."
     )
   )
 })
