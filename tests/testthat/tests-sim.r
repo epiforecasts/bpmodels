@@ -18,6 +18,17 @@ test_that("Chains can be simulated", {
     n = 2, offspring = "pois", "size", lambda = 0.9,
     tree = TRUE
   ))
+
+ tf <- 3
+ set.seed(12)
+ expect_true(
+   all(chain_sim(
+     n = 2, offspring = "pois", "size", lambda = 0.9,
+     tree = TRUE, serial = function(n) {
+       rlnorm(n, meanlog = 0.58, sdlog = 1.58)
+     }, tf = tf
+   )$time < tf)
+ )
 })
 
 test_that("Errors are thrown", {
