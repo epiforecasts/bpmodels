@@ -8,7 +8,7 @@
 dborel <- function(x, mu, log = FALSE) {
   if (x < 1) stop("'x' must be greater than 0")
   if (mu <= 0 || is.infinite(mu)) {
-    stop("'mu' must not be Inf or less than 0")
+    stop("'mu' must be greater 0 but less than Inf")
   }
   ld <- -mu * x + (x - 1) * log(mu * x) - lgamma(x + 1)
   if (!log) ld <- exp(ld)
@@ -26,7 +26,7 @@ dborel <- function(x, mu, log = FALSE) {
 ##' @author Sebastian Funk
 rborel <- function(n, mu, infinite = Inf) {
   if (mu <= 0 || is.infinite(mu)) {
-    stop("'mu' must not be Inf or less than 0")
+    stop("'mu' must be greater 0 but less than Inf")
   }
   chain_sim(n, "pois", "size", infinite = infinite, lambda = mu)
 }
