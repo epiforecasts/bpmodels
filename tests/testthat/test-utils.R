@@ -8,10 +8,8 @@ test_that("Util functions work", {
 })
 
 test_that("Errors are thrown", {
-  expect_error(
-    rnbinom_mean_disp(n = 5, mn = 4, disp = 0.9),
-    "'disp' must be at least 1"
-  )
+  expect_error(rnbinom_mean_disp(n = 5, mn = 4, disp = 0.9),
+  "'disp' must be at least 1")
 })
 
 test_that("Warnings are thrown", {
