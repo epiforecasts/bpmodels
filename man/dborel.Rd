@@ -9,7 +9,7 @@ dborel(x, mu, log = FALSE)
 \arguments{
 \item{x}{vector of integers.}
 
-\item{mu}{mu parameter.}
+\item{mu}{mu parameter (the Poisson mean).}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 }
