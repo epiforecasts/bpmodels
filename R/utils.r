@@ -51,6 +51,7 @@ rgen_length <- function(n, x, prob) {
 #' @examples
 #' rnbinom_mean_disp(n = 5, mn = 4, disp = 2)
 rnbinom_mean_disp <- function(n, mn, disp) {
+  if (disp < 1) stop("'disp' must be at least 1")
   size <- mn / (disp - 1)
   stats::rnbinom(n, size = size, mu = mn)
 }
