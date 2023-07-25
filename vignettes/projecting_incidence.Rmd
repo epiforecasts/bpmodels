@@ -31,14 +31,14 @@ knitr::opts_chunk$set(
 ## Overview
 
 Branching processes can be used to project infectious disease trends in time 
-provided we can characterize the distribution of times between 
+provided we can characterise the distribution of times between the symptom onset of
 successive cases (serial interval), and the distribution of secondary cases 
 produced by a single individual (offspring distribution). Such simulations can 
 be achieved in _bpmodels_ with the `chain_sim()` function and @pearson2020, and 
 @abbott2020 illustrate its application to COVID-19. 
 
 The purpose of this vignette is to use early data on COVID-19 in South Africa 
-[@marivate2020] to illustrate how _bpmodels_ can be used to forecast an 
+[@marivate2020] to illustrate how _bpmodels_ can be used to project incidence in an 
 outbreak. 
 
 Let's load the required packages
@@ -178,15 +178,6 @@ We will, therefore, run each simulation $100$ times.
 sim_rep <- 100
 ```
 
-Lastly, `chain_sim()` requires the maximum size of each chain. 
-Above this value, the simulation is cut off. If this value is 
-not specified, it assumes a value of infinity. Here, we will
-assume a maximum chain size of $1000$. We will call it `chain_threhold`.
-```{r}
-#' Maximum chain size allowed
-chain_threshold <- 1000
-```
-
 ## Modelling assumptions
 
 `chain_sim()` makes the following simplifying assumptions:
@@ -196,6 +187,7 @@ chain_threshold <- 1000
 1. Reporting rate is constant through the course of the epidemic
 1. No interventions have been implemented
 1. Population is homogeneous and well-mixed
+1. All cases start chains of transmission that proceed independently and without competition for or depletion of susceptibles. This implies that none of the cases seen so far have infected each other.
 
 To summarise the whole set up so far, we are going to simulate 
 each chain `r sim_rep` times, projecting COVID-19 cases over
@@ -217,7 +209,6 @@ sim_chain_sizes <- lapply(
       mu = 2.5,
       size = 0.58,
       stat = "size",
-      infinite = chain_threshold,
       serial = serial_interval,
       t0 = start_times,
       tf = projection_end_day,
@@ -291,6 +282,18 @@ We will now plot the individual simulation results alongside the median
 of the aggregated results.
 ```{r viz, fig.cap ="COVID-19 incidence in South Africa projected over a two week window in 2020. The light gray lines represent the individual simulations, the red line represents the median daily cases across all simulations, the black connected dots represent the observed data, and the dashed vertical line marks the beginning of the projection.", fig.width=6.0, fig.height=6}
 
+## since all simulations may end at a different date, we will find the minimum
+## final date for all simulations for the purposes of visualisation
+final_date <- incidence_ts_by_date %>%
+  group_by(sim) %>%
+  summarise(final_date = max(date), .groups = "drop") %>%
+  summarise(min_final_date = min(final_date)) %>%
+  pull(min_final_date)
+incidence_ts_by_date <- incidence_ts_by_date %>%
+  filter(date <= final_date)
+median_daily_cases <- median_daily_cases %>%
+  filter(date <= final_date)
+
 ggplot(data = incidence_ts_by_date) +
   geom_line(
     aes(
@@ -341,10 +344,6 @@ ggplot(data = incidence_ts_by_date) +
       max(incidence_ts_by_date$date),
       5
     ),
-    limits = c(
-      min(incidence_ts_by_date$date),
-      max(incidence_ts_by_date$date) - 4 # for a better visual look
-    )
   ) +
   scale_y_continuous(
     breaks = seq(
