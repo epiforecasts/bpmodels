@@ -343,7 +343,7 @@ ggplot(data = incidence_ts_by_date) +
       min(incidence_ts_by_date$date),
       max(incidence_ts_by_date$date),
       5
-    ),
+    )
   ) +
   scale_y_continuous(
     breaks = seq(
