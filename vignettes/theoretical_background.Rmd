@@ -138,7 +138,7 @@ In order to do this, the simulation functionality is be used to generate $n$ sim
 $$
 P(S|\theta) \approx \sum_i \mathbf{1}(x_i <= S)
 $$
-where $\mathbf{1}$ is the indicator function and $x_$ the i-th observed chain size (or length, if the interest is in $L$).
+where $\mathbf{1}$ is the indicator function and $x_i$ the i-th observed chain size (or length, if the interest is in $L$).
 In order to improve this approximation a linear approximation is applied to the values of the empirical distribution function (at the expense of normalisation to 1).
 
 The (unnormalised) probability of observing $S$ is then given by
