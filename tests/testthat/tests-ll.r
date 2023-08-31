@@ -19,14 +19,31 @@ test_that("Likelihoods can be calculated", {
   expect_lt(chain_ll(chains, "binom", "size", size = 1, prob = 0.5), 0)
 })
 
-test_that("Analytical size or length distributions are implemented", {
-  expect_true(all(pois_size_ll(chains, lambda = 0.5) < 0))
-  expect_true(all(nbinom_size_ll(chains, mu = 0.5, size = 0.2) < 0))
-  expect_true(all(nbinom_size_ll(chains, prob = 0.5, size = 0.2) < 0))
-  expect_true(all(gborel_size_ll(chains, prob = 0.5, size = 0.2) < 0))
-  expect_true(all(gborel_size_ll(chains, prob = 0.5, size = 0.2) < 0))
-  expect_true(all(pois_length_ll(chains, lambda = 0.5) < 0))
-  expect_true(all(geom_length_ll(chains, prob = 0.5) < 0))
+test_that("Analytical size or length distributions are correctly calculated", {
+  expect_equal(
+    round(chain_ll(chains, "pois", "size", lambda = 0.5), 6),
+    -8.607196
+  )
+  expect_equal(
+    round(chain_ll(chains, "nbinom", "size", mu = 0.5, size = 0.2), 6),
+    -9.134369
+  )
+  expect_equal(
+    round(chain_ll(chains, "nbinom", "size", prob = 0.5, size = 0.2), 6),
+    -10.88944
+  )
+  expect_equal(
+    round(chain_ll(chains, "gborel", "size", prob = 0.5, size = 0.2), 6),
+    -11.21929
+  )
+  expect_equal(
+    round(chain_ll(chains, "pois", "length", lambda = 0.5), 6),
+    -9.399452
+  )
+  expect_equal(
+    round(chain_ll(chains, "geom", "length", prob = 0.5), 6),
+    -12.48639
+  )
 })
 
 test_that("Errors are thrown", {
