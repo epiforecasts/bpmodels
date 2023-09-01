@@ -1,5 +1,5 @@
 ---
-title: "Theoretical background"
+title: "An overview of the theoretical background for bpmodels"
 author: "Sebastian Funk"
 output:
   bookdown::html_vignette2:
@@ -33,20 +33,20 @@ in the package.
 
 # Branching processes
 
-[Branching processes](https://en.wikipedia.org/wiki/Branching_process) are a class of models that are used to model the growth of populations where the number of offspring $Z$ that each member of the population has is a random variable following a given probability distribution with probability mass function $p(Z = z | \theta)$, the _offspring distribution_.
+[Branching processes](https://en.wikipedia.org/wiki/Branching_process) are a class of models that are used to model the growth of populations. They assume that each member of the population produces a number of offspring, $Z$, that is a random variable with probability mass function $p(Z = z | \theta)$, called the _offspring distribution_.
 Their use has a long history in epidemiology, where the population is interpreted as a pathogen, and the offspring as new hosts that it infects [@farrington2003].
 Below we will call these infected individuals _cases_ but the methods could be applied in other contexts where branching processes are to be used.
 
 # Simulation
 
-To simulate from a branching process, we start with a single case and proceed in discrete steps or generations, drawing from $p(Z=z | \theta)$ to generate new cases from each case.
+To simulate from a branching process, we start with a single case and proceed in discrete steps or generations, drawing from the offspring distribution $p(Z=z | \theta)$ to generate new cases from each case.
 
-If we additionally define the distribution of times $T$ as a random variable with distribution $f(T = t; \theta)$ we can assign each case $j$ a time $t_{j}$ which, if case $j$ has been affected by case $i$ is given by $f(t_{j} - t_{i} | \theta)$.
-If we identify the timing cases by the time of their symptom onset this is the [serial interval](https://en.wikipedia.org/wiki/Serial_interval), but depending on case definitions this could be another interval.
+Given an infector $i$ and infectee $j$, we can additionally assign them a distribution of times $T$ that approximates when the infection event occurred. If we define $T$ as a random variable with distribution $f(T = t; \theta)$ we can assign each case $j$ a time $t_{j}$ which, if case $j$ has been affected by case $i$ is given by $f(t_{j} - t_{i} | \theta)$.
+If we identify the timing of cases by the time of their symptom onset this is the [serial interval](https://en.wikipedia.org/wiki/Serial_interval), but depending on case definitions this could be another interval.
 
 ## Summary statistics
 
-To summarise the simulation of a branching process after it has ended (either because it has gone extinct or because of some stopping criterion) we either study the _size_ or _length_ of the resulting _chain_ of cases.
+Branching process simulations end when they have gone extinct, that is, no more offspring are being produced, or because of some stopping criterion. To summarise the simulations, we either study the _size_ or _length_ of the resulting _chain_ of cases.
 The size $S$ of a chain is the number of cases that have occurred over the course of the simulation including the initial case so that $S \geq 1$.
 The length $L$ of a chain is the number of generations that have been simulated including the initial case so that $L \geq 1$.
 
@@ -119,7 +119,7 @@ $$
 
 In both cases $f(L)$ denotes cumulative mass functions and therefore the probability of observing a chain of length $L$ is therefore $f(L) - f(L - 1)$.
 
-## Gamma-Borel mixture
+### Gamma-Borel mixture
 
 The probability distribution of outbreak sizes from a branching process with a Poisson offspring distribution (Eq. 2.2 in @farrington2003) is a special case of the [Borel-Tanner distribution](https://en.wikipedia.org/wiki/Borel_distribution#Borel%E2%80%93Tanner_distribution) starting with 1 individual.
 An alternative to the negative binomial offspring distribution which represents a Poisson-gamma mixture is a Borel-gamma mixture.
@@ -131,7 +131,7 @@ In that case, it can be shown that the resulting log-likelihood of chain sizes i
 & + (S-1) \log S - k \log \left(S + \frac{R_0}{k}\right)
 \end{align}
 
-## Size and length distributions for arbitrary offspring distributions
+## Numerical approximations of chain size and length distributions
 
 The analytic likelihoods stated above are included in the package and used when the corresponding offspring distributions are given.
 In order to do this, the simulation functionality is be used to generate $n$ simulated chains and the value of the cumulative mass function $P(S|\theta)$ at the observed $S$ approximated by the empirical cumulative distribution function:
