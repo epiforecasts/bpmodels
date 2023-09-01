@@ -37,12 +37,9 @@ reference:
 
 articles:
 - title: Background
-  navbar: Modelling
+  navbar: Theory & literature
   contents:
   - theoretical_background
-- title: Resources
-  navbar: Literature
-  contents:
   - branching_process_literature
 - title: Package vignettes
   navbar: Modelling
