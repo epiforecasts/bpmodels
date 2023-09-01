@@ -133,7 +133,7 @@ In that case, it can be shown that the resulting log-likelihood of chain sizes i
 
 ## Numerical approximations of chain size and length distributions
 
-The analytic likelihoods stated above are included in the package and used when the corresponding offspring distributions are given.
+When analytic likelihoods are not available a numerical approximation is used to derive the distributions.
 In order to do this, the simulation functionality is be used to generate $n$ simulated chains and the value of the cumulative mass function $P(S|\theta)$ at the observed $S$ approximated by the empirical cumulative distribution function:
 $$
 P(S|\theta) \approx \sum_i \mathbf{1}(x_i <= S)
