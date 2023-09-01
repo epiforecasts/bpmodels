@@ -1,6 +1,6 @@
 ---
 title: "An overview of the theoretical background for bpmodels"
-author: "Sebastian Funk"
+author: "Sebastian Funk and James Azam"
 output:
   bookdown::html_vignette2:
     fig_caption: yes
