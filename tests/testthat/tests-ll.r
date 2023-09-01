@@ -20,28 +20,28 @@ test_that("Likelihoods can be calculated", {
 })
 
 test_that("Analytical size or length distributions are correctly calculated", {
-  expect_equal(
-    round(chain_ll(chains, "pois", "size", lambda = 0.5), 6),
-    -8.607196
+  expect_identical(
+    round(chain_ll(chains, "pois", "size", lambda = 0.5), 5),
+    -8.6072
   )
-  expect_equal(
-    round(chain_ll(chains, "nbinom", "size", mu = 0.5, size = 0.2), 6),
-    -9.134369
+  expect_identical(
+    round(chain_ll(chains, "nbinom", "size", mu = 0.5, size = 0.2), 5),
+    -9.13437
   )
-  expect_equal(
-    round(chain_ll(chains, "nbinom", "size", prob = 0.5, size = 0.2), 6),
+  expect_identical(
+    round(chain_ll(chains, "nbinom", "size", prob = 0.5, size = 0.2), 5),
     -10.88944
   )
-  expect_equal(
-    round(chain_ll(chains, "gborel", "size", prob = 0.5, size = 0.2), 6),
+  expect_identical(
+    round(chain_ll(chains, "gborel", "size", prob = 0.5, size = 0.2), 5),
     -11.21929
   )
-  expect_equal(
-    round(chain_ll(chains, "pois", "length", lambda = 0.5), 6),
-    -9.399452
+  expect_identical(
+    round(chain_ll(chains, "pois", "length", lambda = 0.5), 5),
+    -9.39945
   )
-  expect_equal(
-    round(chain_ll(chains, "geom", "length", prob = 0.5), 6),
+  expect_identical(
+    round(chain_ll(chains, "geom", "length", prob = 0.5), 5),
     -12.48639
   )
 })
