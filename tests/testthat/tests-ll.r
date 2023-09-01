@@ -4,17 +4,15 @@ test_that("Likelihoods can be calculated", {
   expect_lt(chain_ll(chains, "pois", "size", lambda = 0.5), 0)
   expect_lt(chain_ll(chains, "pois", "size", lambda = 0.5, exclude = 1), 0)
   expect_lt(chain_ll(chains, "pois", "size", lambda = 0.5, infinite = 5), 0)
-  expect_lt(chain_ll(chains, "pois", "size",
-    lambda = 0.5, obs_prob = 0.5,
-    nsim_obs = 1
+  expect_lt(chain_ll(
+    chains, "pois", "size", lambda = 0.5, obs_prob = 0.5, nsim_obs = 1
   ), 0)
-  expect_lt(chain_ll(chains, "pois", "length",
-    lambda = 0.5, obs_prob = 0.5,
-    nsim_obs = 1
+  expect_lt(chain_ll(
+    chains, "pois", "length", lambda = 0.5, obs_prob = 0.5, nsim_obs = 1
   ), 0)
-  expect_lt(chain_ll(chains, "pois", "size",
-    lambda = 0.5, infinite = 5,
-    obs_prob = 0.5, nsim_obs = 1
+  expect_lt(chain_ll(
+    chains, "pois", "size", lambda = 0.5, infinite = 5, obs_prob = 0.5,
+    nsim_obs = 1
   ), 0)
   expect_lt(chain_ll(chains, "binom", "size", size = 1, prob = 0.5), 0)
 })
