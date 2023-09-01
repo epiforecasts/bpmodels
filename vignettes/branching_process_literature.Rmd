@@ -1,5 +1,5 @@
 ---
-title: "Literature on the applications of branching processes to infectious disease epidemiology"
+title: "Literature on branching process applications"
 output:
   bookdown::html_vignette2:
     fig_caption: yes
@@ -10,7 +10,7 @@ bibliography: branching_process_literature.json
 link-citations: true
 vignette: >
   %\VignetteEncoding{UTF-8}
-  %\VignetteIndexEntry{Literature on the applications of branching processes to infectious disease epidemiology}
+  %\VignetteIndexEntry{Literature on branching process applications}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
