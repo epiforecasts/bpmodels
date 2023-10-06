@@ -10,7 +10,13 @@ Authors@R: c(
     person("Flavio", "Finger", , "flavio.finger@epicentre.msf.org", role = "aut",
            comment = c(ORCID = "https://orcid.org/0000-0002-8613-5170")),
     person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut", "cph"),
-           comment = c(ORCID = "https://orcid.org/0000-0002-2842-3406"))
+           comment = c(ORCID = "https://orcid.org/0000-0002-2842-3406")),
+    person(given = "Joshua W.", family = "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = c("rev"),
+           comment = c(ORCID = "0000-0001-5218-3046")),
+    person(given = "Pratik", family = "Gupte", email = "pratik.gupte@lshtm.ac.uk", role = c("rev"), 
+           comment = c(ORCID = "https://orcid.org/0000-0001-5294-7819")),
+    person(given = "Hugo", family = "Gruson", email = "hugo.gruson+R@normalesup.org", role = c("rev"),
+           comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476"))
   )
 Description: Provides methods to simulate and analyse the size and length
     of branching processes with an arbitrary offspring distribution. These
