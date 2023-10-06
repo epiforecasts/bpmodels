@@ -97,13 +97,13 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>Branching processes can be used to project infectious disease trends in time
-provided we can characterize the distribution of times between
+provided we can characterise the distribution of times between the symptom onset of
 successive cases (serial interval), and the distribution of secondary cases
 produced by a single individual (offspring distribution). Such simulations can
 be achieved in <em>bpmodels</em> with the <code><a href="../reference/chain_sim.html">chain_sim()</a></code> function and <span class="citation">Pearson et al. (<a href="#ref-pearson2020" role="doc-biblioref">2020</a>)</span>, and
 <span class="citation">Abbott et al. (<a href="#ref-abbott2020" role="doc-biblioref">2020</a>)</span> illustrate its application to COVID-19.</p>
 <p>The purpose of this vignette is to use early data on COVID-19 in South Africa
-<span class="citation">(<a href="#ref-marivate2020" role="doc-biblioref">Marivate and Combrink 2020</a>)</span> to illustrate how <em>bpmodels</em> can be used to forecast an
+<span class="citation">(<a href="#ref-marivate2020" role="doc-biblioref">Marivate and Combrink 2020</a>)</span> to illustrate how <em>bpmodels</em> can be used to project incidence in an
 outbreak.</p>
 <p>Let’s load the required packages</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -250,13 +250,6 @@ many times and summarise the results.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' Number of simulations</span></span>
 <span><span class="va">sim_rep</span> <span class="op">&lt;-</span> <span class="fl">100</span></span></code></pre></div>
-</details><p>Lastly, <code><a href="../reference/chain_sim.html">chain_sim()</a></code> requires the maximum size of each chain.
-Above this value, the simulation is cut off. If this value is
-not specified, it assumes a value of infinity. Here, we will
-assume a maximum chain size of <span class="math inline">\(1000\)</span>. We will call it <code>chain_threhold</code>.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' Maximum chain size allowed</span></span>
-<span><span class="va">chain_threshold</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span></code></pre></div>
 </details>
 </div>
 </div>
@@ -270,18 +263,18 @@ assume a maximum chain size of <span class="math inline">\(1000\)</span>. We wil
 <li>Reporting rate is constant through the course of the epidemic</li>
 <li>No interventions have been implemented</li>
 <li>Population is homogeneous and well-mixed</li>
+<li>All cases start chains of transmission that proceed independently and without competition for or depletion of susceptibles. This implies that none of the cases seen so far have infected each other.</li>
 </ol>
 <p>To summarise the whole set up so far, we are going to simulate
 each chain 100 times, projecting COVID-19 cases over
-14 days after the first <span class="math inline">\(15\)</span> days, and
-assuming that no outbreak size exceeds 1000 cases.</p>
+14 days after the first <span class="math inline">\(15\)</span> days.</p>
 </div>
 <div class="section level2">
 <h2 id="running-the-simulations">Running the simulations<a class="anchor" aria-label="anchor" href="#running-the-simulations"></a>
 </h2>
 <p>We will use the function <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> to run the simulations and bind them
 by rows with <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">dplyr::bind_rows()</a></code>.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
 <span><span class="va">sim_chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">sim_rep</span><span class="op">)</span>,</span>
@@ -292,7 +285,6 @@ by rows with <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html
 <span>      mu <span class="op">=</span> <span class="fl">2.5</span>,</span>
 <span>      size <span class="op">=</span> <span class="fl">0.58</span>,</span>
 <span>      stat <span class="op">=</span> <span class="st">"size"</span>,</span>
-<span>      infinite <span class="op">=</span> <span class="va">chain_threshold</span>,</span>
 <span>      serial <span class="op">=</span> <span class="va">serial_interval</span>,</span>
 <span>      t0 <span class="op">=</span> <span class="va">start_times</span>,</span>
 <span>      tf <span class="op">=</span> <span class="va">projection_end_day</span>,</span>
@@ -304,7 +296,7 @@ by rows with <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html
 <span></span>
 <span><span class="va">sim_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">sim_chain_sizes</span><span class="op">)</span></span></code></pre></div>
 </details><p>Let us view the first few rows of the simulation results.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sim_output</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   n id ancestor generation time sim</span></span>
 <span><span class="co">#&gt; 1 1  1       NA          1    0   1</span></span>
@@ -323,7 +315,7 @@ by rows with <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html
 the median cases per day aggregated over all simulations.</p>
 <p>First, we will create the daily time series per simulation by
 aggregating the number of cases per day of each simulation.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Daily number of cases for each simulation</span></span>
 <span><span class="va">incidence_ts</span> <span class="op">&lt;-</span> <span class="va">sim_output</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -344,7 +336,7 @@ aggregating the number of cases per day of each simulation.</p>
 </details><p>Next, we will add a date column to the results of each simulation
 set. We will use the date of the first case in the observed data
 as the reference start date.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get start date from the observed data</span></span>
 <span><span class="va">index_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">covid19_sa</span><span class="op">$</span><span class="va">date</span><span class="op">)</span></span>
 <span><span class="va">index_date</span></span>
@@ -368,7 +360,7 @@ as the reference start date.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1     7     4 2020-03-10</span></span></code></pre></div>
 </details><p>Now we will aggregate the simulations by day and evaluate the median
 daily cases across all simulations.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Median daily number of cases aggregated across all simulations</span></span>
 <span><span class="va">median_daily_cases</span> <span class="op">&lt;-</span> <span class="va">incidence_ts_by_date</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -380,12 +372,12 @@ daily cases across all simulations.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">#&gt;   date       median_cases</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020-03-05          1  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020-03-06          1  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2020-03-07          1  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020-03-08          4  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2020-03-09          3.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-03-10          8</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020-03-05            1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020-03-06            1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2020-03-07            1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020-03-08            4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2020-03-09            4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-03-10            8</span></span></code></pre></div>
 </details>
 </div>
 <div class="section level2">
@@ -393,8 +385,20 @@ daily cases across all simulations.</p>
 </h2>
 <p>We will now plot the individual simulation results alongside the median
 of the aggregated results.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
+<span><span class="co">## since all simulations may end at a different date, we will find the minimum</span></span>
+<span><span class="co">## final date for all simulations for the purposes of visualisation</span></span>
+<span><span class="va">final_date</span> <span class="op">&lt;-</span> <span class="va">incidence_ts_by_date</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">sim</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>final_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>min_final_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">final_date</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">min_final_date</span><span class="op">)</span></span>
+<span><span class="va">incidence_ts_by_date</span> <span class="op">&lt;-</span> <span class="va">incidence_ts_by_date</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">date</span> <span class="op">&lt;=</span> <span class="va">final_date</span><span class="op">)</span></span>
+<span><span class="va">median_daily_cases</span> <span class="op">&lt;-</span> <span class="va">median_daily_cases</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">date</span> <span class="op">&lt;=</span> <span class="va">final_date</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">incidence_ts_by_date</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
@@ -444,10 +448,6 @@ of the aggregated results.</p>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">incidence_ts_by_date</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>,</span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">incidence_ts_by_date</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>,</span>
 <span>      <span class="fl">5</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">incidence_ts_by_date</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">incidence_ts_by_date</span><span class="op">$</span><span class="va">date</span><span class="op">)</span> <span class="op">-</span> <span class="fl">4</span> <span class="co"># for a better visual look</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span></span>
