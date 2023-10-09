@@ -101,16 +101,13 @@
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
-<p>The package can be installed from CRAN using</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"bpmodels"</span><span class="op">)</span></span></code></pre></div>
 <p>The latest development version of the <em>bpmodels</em> package can be installed via</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check whether {pak} is installed</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://pak.r-lib.org/" class="external-link">"pak"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"epiverse-trace/bpmodels"</span><span class="op">)</span></span></code></pre></div>
 <p>To load the package, use</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/epiverse-trace/bpmodels" class="external-link">"bpmodels"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level1">
@@ -119,7 +116,7 @@
 <p><em>bpmodels</em> provides three main functions:</p>
 <p><code><a href="reference/chain_ll.html">chain_ll()</a></code>: calculates the likelihoods of observing a vector of chains of given sizes or lengths.</p>
 <p>Here is a quick example of estimating the loglikelihood of an observed chain:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># example of observed chain sizes</span></span>
 <span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span> </span>
 <span><span class="co"># estimate loglikelihood of the observed chain sizes</span></span>
@@ -129,7 +126,7 @@
 <span><span class="co">#&gt; [1] -7.772589</span></span></code></pre></div>
 <p><code><a href="reference/chain_sim.html">chain_sim()</a></code>: simulates transmission chains until all chains stop producing offspring.</p>
 <p>Below is a quick example where we simulate the chain sizes of <span class="math inline">5</span> chains with a poisson offspring with mean, <span class="math inline">lambda = 0.5</span>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">chain_sim_eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/chain_sim.html">chain_sim</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, offspring <span class="op">=</span> <span class="st">"pois"</span>, stat <span class="op">=</span> <span class="st">"size"</span>, </span>
@@ -145,7 +142,7 @@
 <span><span class="co">#&gt; 6 2  2        1          2</span></span></code></pre></div>
 <p><code><a href="reference/chain_sim_susc.html">chain_sim_susc()</a></code>: simulates transmission chains from a specified population size with pre-existing immunity until the susceptible pool runs out.</p>
 <p>Below is a quick example where we simulate chains with a poisson offspring with mean, <span class="math inline">lambda = 0.5</span>, and serial interval of <span class="math inline">3</span>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">chain_sim_susc_eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/chain_sim_susc.html">chain_sim_susc</a></span><span class="op">(</span>pop <span class="op">=</span> <span class="fl">1000</span>, offspring <span class="op">=</span> <span class="st">"pois"</span>,</span>
@@ -180,7 +177,7 @@
 <div class="section level2">
 <h2 id="citing-this-package">Citing this package<a class="anchor" aria-label="anchor" href="#citing-this-package"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"bpmodels"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package bpmodels in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
