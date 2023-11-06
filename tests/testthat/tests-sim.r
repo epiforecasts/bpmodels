@@ -1,6 +1,24 @@
 test_that("Chains can be simulated", {
-  expect_length(chain_sim(n = 2, "pois", lambda = 0.5), 2)
-  expect_length(chain_sim(n = 10, "pois", "length", lambda = 0.9), 10)
+  set.seed(12)
+  tf <- 3
+  chain_sim_test_df <- chain_sim(
+    n = 2,
+    offspring = "pois",
+    stat = "size",
+    lambda = 0.9,
+    tree = TRUE,
+    serial = function(n) {
+      rlnorm(n, meanlog = 0.58, sdlog = 1.58)
+    },
+    tf = tf
+  )
+ # Check that all the simulated times are less than tf
+  expect_true(
+    all(
+      chain_sim_test_df$time < tf
+    )
+  )
+  # Other checks
   expect_s3_class(
     chain_sim(
       n = 10,
