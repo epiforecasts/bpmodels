@@ -19,6 +19,23 @@ test_that("Chains can be simulated", {
     )
   )
   # Other checks
+  expect_length(
+    chain_sim(
+      n = 2,
+      offspring = "pois",
+      lambda = 0.5
+    ),
+    2
+  )
+  expect_length(
+    chain_sim(
+      n = 10,
+      offspring = "pois",
+      stat = "length",
+      lambda = 0.9
+    ),
+    10
+  )
   expect_s3_class(
     chain_sim(
       n = 10,
@@ -29,47 +46,81 @@ test_that("Chains can be simulated", {
     ),
     "data.frame"
   )
-  expect_false(any(is.finite(chain_sim(
-    n = 2, "pois", "length", lambda = 0.5,
-    infinite = 1
-  ))))
-  expect_no_error(chain_sim(
-    n = 2, offspring = "pois", "size", lambda = 0.9,
-    tree = TRUE
-  ))
-
-  tf <- 3
-  set.seed(12)
-  expect_true(
-    all(chain_sim(
-      n = 2, offspring = "pois", "size", lambda = 0.9,
-      tree = TRUE, serial = function(n) {
-        rlnorm(n, meanlog = 0.58, sdlog = 1.58)
-      }, tf = tf
-    )$time < tf)
+  expect_false(
+    any(
+      is.finite(
+        chain_sim(
+          n = 2,
+          offspring = "pois",
+          stat = "length",
+          lambda = 0.5,
+          infinite = 1
+        )
+      )
+    )
+  )
+  expect_no_error(
+    chain_sim(
+      n = 2,
+      offspring = "pois",
+      stat = "size",
+      lambda = 0.9,
+      tree = TRUE
+    )
   )
 })
 
 test_that("Errors are thrown", {
-  expect_error(chain_sim(n = 2, "dummy"), "does not exist")
-  expect_error(chain_sim(n = 2, "lnorm", meanlog = log(1.6)), "integer")
   expect_error(
-    chain_sim(n = 2, offspring = pois, "length", lambda = 0.9),
+    chain_sim(
+      n = 2,
+      "dummy"
+    ),
+    "does not exist"
+  )
+  expect_error(
+    chain_sim(
+      n = 2,
+      offspring = "lnorm",
+      meanlog = log(1.6)
+    ),
+    "integer"
+  )
+  expect_error(
+    chain_sim(
+      n = 2,
+      offspring = pois,
       stat = "length",
+      lambda = 0.9
+    ),
     "not found"
   )
-  expect_error(chain_sim(
-    n = 2, offspring = "pois", "size", lambda = 0.9,
-    serial = c(1, 2), "must be a function"
-  ))
   expect_error(
-    chain_sim(n = 2, offspring = c(1, 2), "length", lambda = 0.9),
+    chain_sim(
+      n = 2,
+      offspring = "pois",
+      stat = "size",
+      lambda = 0.9,
+      serial = c(1, 2)
+    ),
+    "must be a function"
+  )
+  expect_error(
+    chain_sim(
+      n = 2,
+      offspring = c(1, 2),
       stat = "length",
+      lambda = 0.9
+    ),
     "not a character string"
   )
   expect_error(
-    chain_sim(n = 2, offspring = list(1, 2), "length", lambda = 0.9),
+    chain_sim(
+      n = 2,
+      offspring = list(1, 2),
       stat = "length",
+      lambda = 0.9
+    ),
     "not a character string"
   )
   expect_error(
