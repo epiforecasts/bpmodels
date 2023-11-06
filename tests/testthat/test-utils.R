@@ -14,7 +14,13 @@ test_that("Errors are thrown", {
   )
 })
 
-test_that("Warnings are thrown", {
-  expect_warning(complementary_logprob(0.1), "NaNs produced")
-  expect_warning(complementary_logprob(Inf), "NaNs produced")
+test_that("Errors are thrown", {
+  expect_error(
+    complementary_logprob(0.1),
+    "is not <= 0"
+  )
+  expect_error(
+    complementary_logprob(Inf),
+    "is not <= 0"
+  )
 })
