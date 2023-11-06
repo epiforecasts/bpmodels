@@ -44,14 +44,22 @@ rgen_length <- function(n, x, prob) {
 #' in terms of mean and dispersion coefficient
 #' @param n number of samples to draw
 #' @param mn mean of distribution
-#' @param disp dispersion coefficient (var/mean)
+#' @param disp dispersion coefficient (var/mean); Must be > 1.
 #' @return vector containing the random numbers
 #' @author Flavio Finger
 #' @export
 #' @examples
 #' rnbinom_mean_disp(n = 5, mn = 4, disp = 2)
 rnbinom_mean_disp <- function(n, mn, disp) {
-  if (disp < 1) stop("'disp' must be at least 1")
+  checkmate::assert_number(
+    n, lower = 0, finite = TRUE, na.ok = FALSE
+  )
+  checkmate::assert_number(
+    disp, lower = 1, finite = TRUE, na.ok = FALSE
+  )
+  checkmate::assert_number(
+    mn, lower = 0, finite = TRUE, na.ok = FALSE
+  )
   size <- mn / (disp - 1)
   stats::rnbinom(n, size = size, mu = mn)
 }
