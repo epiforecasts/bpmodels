@@ -7,22 +7,22 @@ test_that("We can calculate probabilities and sample", {
 test_that("Errors are thrown", {
   expect_error(
     dborel(x = 0, mu = 0.5),
-    "'x' must be greater than 0"
+    "is not >= 1"
   )
   expect_error(
     dborel(x = 1, mu = -0.5),
-    "'mu' must be greater 0 but less than Inf"
+    "is not >= 0"
   )
   expect_error(
     dborel(x = 1, mu = Inf),
-    "'mu' must be greater 0 but less than Inf"
+    "Must be finite"
   )
   expect_error(
     rborel(n = 0, mu = -0.5),
-    "'mu' must be greater 0 but less than Inf"
+    "is not >= 1"
   )
   expect_error(
     rborel(n = 0, mu = Inf),
-    "'mu' must be greater 0 but less than Inf"
+    "is not >= 1"
   )
 })
