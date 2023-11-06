@@ -1,7 +1,7 @@
 ##' Density of the Borel distribution
 ##'
-##' @param x vector of integers.
-##' @param mu mu parameter (the Poisson mean).
+##' @param x vector of quantiles; integer.
+##' @param mu mu parameter (the poisson mean); non-negative.
 ##' @param log logical; if TRUE, probabilities p are given as log(p).
 ##' @return probability mass.
 ##' @author Sebastian Funk
