@@ -6,10 +6,12 @@
 ##' @return probability mass.
 ##' @author Sebastian Funk
 dborel <- function(x, mu, log = FALSE) {
-  if (any(x < 1)) stop("All 'x' elements must be greater than 0")
-  if (mu <= 0 || is.infinite(mu)) {
-    stop("'mu' must be greater 0 but less than Inf")
-  }
+  checkmate::assert_numeric(
+    x, lower = 0, upper = Inf
+  )
+  checkmate::assert_number(
+    mu, lower = 0, finite = TRUE, na.ok = FALSE
+  )
   ld <- -mu * x + (x - 1) * log(mu * x) - lgamma(x + 1)
   if (!log) ld <- exp(ld)
   return(ld)
@@ -25,8 +27,11 @@ dborel <- function(x, mu, log = FALSE) {
 ##' @return vector of random numbers
 ##' @author Sebastian Funk
 rborel <- function(n, mu, infinite = Inf) {
-  if (mu <= 0 || is.infinite(mu)) {
-    stop("'mu' must be greater 0 but less than Inf")
-  }
+  checkmate::assert_number(
+    n, lower = 1, finite = TRUE, na.ok = FALSE
+  )
+  checkmate::assert_number(
+    mu, lower = 0, finite = TRUE, na.ok = FALSE
+  )
   chain_sim(n, "pois", "size", infinite = infinite, lambda = mu)
 }
