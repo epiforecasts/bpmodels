@@ -2,10 +2,8 @@
 
 ## Unit tests and input validation
 
-* `rborel()` and `dborel()` now have input checking in place.
-* Package coverage has been improved with new tests from `rborel()`,
-`dborel()`, and the internal functions stored in the `utils.R` script,
-and additional tests for `chain_sim()`.
+* The following internal functions now have input validation: `rborel()`, `dborel()`, `complementary_logprob()`, and `rnbinom_mean_disp()`.
+* Code coverage has been improved with more tests on the following functions: `rborel()`, `dborel()`, `chain_sim()`, `rnbinom_mean_disp()`, `complementary_logprob()`, `rgen_length()`, and `rbinom_size()`.
 
 # bpmodels 0.3.0
 
