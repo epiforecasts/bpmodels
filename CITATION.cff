@@ -249,3 +249,15 @@ references:
     given-names: Saralees
     email: saralees.nadarajah@manchester.ac.uk
   year: '2023'
+- type: software
+  title: checkmate
+  abstract: 'checkmate: Fast and Versatile Argument Checks'
+  notes: Imports
+  url: https://mllg.github.io/checkmate/
+  repository: https://CRAN.R-project.org/package=checkmate
+  authors:
+  - family-names: Lang
+    given-names: Michel
+    email: michellang@gmail.com
+    orcid: https://orcid.org/0000-0001-9754-0393
+  year: '2023'
