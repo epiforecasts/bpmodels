@@ -12,7 +12,7 @@ test_that("Chains can be simulated", {
     },
     tf = tf
   )
- # Check that all the simulated times are less than tf
+  # Check that all the simulated times are less than tf
   expect_true(
     all(
       chain_sim_test_df$time < tf
