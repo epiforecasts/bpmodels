@@ -7,7 +7,7 @@
 ##' @author Sebastian Funk
 dborel <- function(x, mu, log = FALSE) {
   checkmate::assert_numeric(
-    x, lower = 0, upper = Inf
+    x, lower = 1, upper = Inf
   )
   checkmate::assert_number(
     mu, lower = 0, finite = TRUE, na.ok = FALSE
