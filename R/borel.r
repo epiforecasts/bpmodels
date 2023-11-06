@@ -6,7 +6,7 @@
 ##' @return probability mass.
 ##' @author Sebastian Funk
 dborel <- function(x, mu, log = FALSE) {
-  if (x < 1) stop("'x' must be greater than 0")
+  if (any(x < 1)) stop("All 'x' elements must be greater than 0")
   if (mu <= 0 || is.infinite(mu)) {
     stop("'mu' must be greater 0 but less than Inf")
   }
