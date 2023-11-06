@@ -4,7 +4,7 @@ test_that("Chains can be simulated", {
   expect_s3_class(
     chain_sim(
       n = 10,
-      "pois",
+      offspring = "pois",
       lambda = 2,
       tree = TRUE,
       infinite = 10
@@ -37,6 +37,7 @@ test_that("Errors are thrown", {
   expect_error(chain_sim(n = 2, "lnorm", meanlog = log(1.6)), "integer")
   expect_error(
     chain_sim(n = 2, offspring = pois, "length", lambda = 0.9),
+      stat = "length",
     "not found"
   )
   expect_error(chain_sim(
@@ -45,17 +46,19 @@ test_that("Errors are thrown", {
   ))
   expect_error(
     chain_sim(n = 2, offspring = c(1, 2), "length", lambda = 0.9),
+      stat = "length",
     "not a character string"
   )
   expect_error(
     chain_sim(n = 2, offspring = list(1, 2), "length", lambda = 0.9),
+      stat = "length",
     "not a character string"
   )
   expect_error(
     chain_sim(
       n = 2,
       offspring = "pois",
-      "size",
+      stat = "size",
       lambda = 0.9,
       tf = 5,
       tree = FALSE
@@ -67,7 +70,7 @@ test_that("Errors are thrown", {
 test_that("Chains can be simulated", {
   expect_s3_class(
     chain_sim_susc(
-      "pois",
+      offspring = "pois",
       mn_offspring = 2,
       serial = function(x) 3,
       pop = 100
@@ -77,7 +80,7 @@ test_that("Chains can be simulated", {
 
   expect_s3_class(
     chain_sim_susc(
-      "nbinom",
+      offspring = "nbinom",
       mn_offspring = 2,
       disp_offspring = 1.5,
       serial = function(x) 3,
@@ -89,7 +92,7 @@ test_that("Chains can be simulated", {
   expect_identical(
     nrow(
       chain_sim_susc(
-        "pois",
+        offspring = "pois",
         mn_offspring = 2,
         serial = function(x) 3,
         pop = 1
@@ -101,7 +104,7 @@ test_that("Chains can be simulated", {
   expect_identical(
     nrow(
       chain_sim_susc(
-        "pois",
+        offspring = "pois",
         mn_offspring = 100,
         tf = 2,
         serial = function(x) 3,
@@ -114,7 +117,7 @@ test_that("Chains can be simulated", {
   expect_identical(
     nrow(
       chain_sim_susc(
-        "pois",
+        offspring = "pois",
         mn_offspring = 100,
         serial = function(x) 3,
         pop = 999,
@@ -128,7 +131,7 @@ test_that("Chains can be simulated", {
 test_that("Errors are thrown", {
   expect_error(
     chain_sim_susc(
-      "dummy",
+      offspring = "dummy",
       mn_offspring = 3,
       serial = function(x) 3,
       pop = 100
@@ -137,7 +140,7 @@ test_that("Errors are thrown", {
   )
   expect_error(
     chain_sim_susc(
-      "nbinom",
+      offspring = "nbinom",
       mn_offspring = 3,
       disp_offspring = 1,
       serial = function(x) 3,
@@ -151,7 +154,7 @@ test_that("Errors are thrown", {
   )
   expect_error(
     chain_sim_susc(
-      "nbinom",
+      offspring = "nbinom",
       mn_offspring = 3,
       serial = function(x) 3,
       pop = 100
@@ -163,7 +166,7 @@ test_that("Errors are thrown", {
 test_that("warnings work as expected", {
   expect_warning(
     chain_sim_susc(
-      "pois",
+      offspring = "pois",
       mn_offspring = 3,
       disp_offspring = 1,
       serial = function(x) 3,
@@ -175,7 +178,7 @@ test_that("warnings work as expected", {
     chain_sim(
       n = 2,
       offspring = "pois",
-      "size",
+      stat = "size",
       lambda = 0.9,
       serial = function(x) rpois(x, 0.9),
       tree = FALSE
