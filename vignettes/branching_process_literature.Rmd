@@ -17,6 +17,10 @@ editor_options:
 nocite: '@*'
 ---
 
+# Note
+
+> `{bpmodels}` is now *retired and will no longer be maintained*. We recommend using [`{epichains}`](https://github.com/epiverse-trace/epichains) instead. If you need help converting your code to use `{epichains}`, please [open a discussion on epichains](https://github.com/epiverse-trace/epichains/discussions).
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
