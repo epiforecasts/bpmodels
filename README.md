@@ -3,6 +3,8 @@
 
 <!-- badges: start -->
 
+[![Lifecycle:
+retired](https://img.shields.io/badge/lifecycle-retired-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#retired)
 ![GitHub R package
 version](https://img.shields.io/github/r-package/v/epiverse-trace/bpmodels)
 [![R-CMD-check](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml)
@@ -12,6 +14,15 @@ contributors](https://img.shields.io/github/contributors/epiverse-trace/bpmodels
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT/)
 <!-- badges: end -->
+
+## Note
+
+> `{bpmodels}` is now *retired and will no longer be maintained*. We
+> recommend using
+> [`{epichains}`](https://github.com/epiverse-trace/epichains) instead.
+> If you need help converting your code to use `{epichains}`, please
+> [open a discussion on
+> epichains](https://github.com/epiverse-trace/epichains/discussions).
 
 *bpmodels* is an R package to simulate and analyse the size and length
 of branching processes with a given offspring distribution. These models
@@ -35,6 +46,7 @@ To load the package, use
 
 ``` r
 library("bpmodels")
+#> Note: bpmodels is now retired and replaced by epichains. All features from bpmodels are available in epichains. Get epichains from <https://github.com/epiverse-trace/epichains>.Thank you for your support!
 ```
 
 # Core functionality
