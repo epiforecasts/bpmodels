@@ -94,8 +94,14 @@
     
     
 <div class="section level2">
-<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+<h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h2>
+<blockquote>
+<p><a href="https://github.com/epiverse-trace/bpmodels" class="external-link">bpmodels</a> is now <em>retired and will no longer be maintained</em>. We recommend using <a href="https://github.com/epiverse-trace/epichains" class="external-link"><code>{epichains}</code></a> instead. If you need help converting your code to use <code>{epichains}</code>, please <a href="https://github.com/epiverse-trace/epichains/discussions" class="external-link">open a discussion on epichains</a>.</p>
+</blockquote>
+<div class="section level3">
+<h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h3>
 <p>Branching processes can be used to project infectious disease trends in time
 provided we can characterise the distribution of times between the symptom onset of
 successive cases (serial interval), and the distribution of secondary cases
@@ -113,9 +119,9 @@ outbreak.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://lubridate.tidyverse.org" class="external-link">"lubridate"</a></span><span class="op">)</span></span></code></pre></div>
 </details>
 </div>
-<div class="section level2">
-<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
-</h2>
+<div class="section level3">
+<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h3>
 <p>Included in <em>bpmodels</em> is a cleaned time series of the first 15 days of
 the COVID-19 outbreak in South Africa. This can be loaded into
 memory as follows:</p>
@@ -135,12 +141,12 @@ memory as follows:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-03-12     3</span></span></code></pre></div>
 </details>
 </div>
-<div class="section level2">
-<h2 id="setting-up-the-inputs">Setting up the inputs<a class="anchor" aria-label="anchor" href="#setting-up-the-inputs"></a>
-</h2>
 <div class="section level3">
-<h3 id="onset-times">Onset times<a class="anchor" aria-label="anchor" href="#onset-times"></a>
+<h3 id="setting-up-the-inputs">Setting up the inputs<a class="anchor" aria-label="anchor" href="#setting-up-the-inputs"></a>
 </h3>
+<div class="section level4">
+<h4 id="onset-times">Onset times<a class="anchor" aria-label="anchor" href="#onset-times"></a>
+</h4>
 <p><code><a href="../reference/chain_sim.html">chain_sim()</a></code> requires a vector of onset times, <code>t0</code>, for each
 chain/individual/simulation.</p>
 <p>The <code>covid19_sa</code> dataset above is aggregated, so we will have to disaggregate
@@ -173,9 +179,9 @@ that each case has a corresponding start time.</p>
 <span><span class="co">#&gt; [201] 15 15</span></span></code></pre></div>
 </details>
 </div>
-<div class="section level3">
-<h3 id="serial-interval">Serial interval<a class="anchor" aria-label="anchor" href="#serial-interval"></a>
-</h3>
+<div class="section level4">
+<h4 id="serial-interval">Serial interval<a class="anchor" aria-label="anchor" href="#serial-interval"></a>
+</h4>
 <p>The log-normal distribution is commonly used in epidemiology to characterise
 quantities such as the serial interval because it has a large variance
 and can only be positive-valued <span class="citation">(<a href="#ref-nishiura2007">Nishiura 2007</a>; <a href="#ref-limpert2001">Limpert, Stahel, and Abbt 2001</a>)</span>.</p>
@@ -217,9 +223,9 @@ first argument to determine the number of observations to sample
 <span><span class="op">}</span></span></code></pre></div>
 </details>
 </div>
-<div class="section level3">
-<h3 id="offspring-distribution">Offspring distribution<a class="anchor" aria-label="anchor" href="#offspring-distribution"></a>
-</h3>
+<div class="section level4">
+<h4 id="offspring-distribution">Offspring distribution<a class="anchor" aria-label="anchor" href="#offspring-distribution"></a>
+</h4>
 <p>The negative binomial distribution is commonly used in epidemiology to
 account for individual variation in transmissibility,
 also known as superspreading <span class="citation">(<a href="#ref-lloyd-smith2005">Lloyd-Smith et al. 2005</a>)</span>.</p>
@@ -231,9 +237,9 @@ cases produced by a single individual in an entirely susceptible population.
 The parameter <span class="math inline">\(k\)</span> represents superspreading, that is, the degree of
 heterogeneity in transmission by single individuals.</p>
 </div>
-<div class="section level3">
-<h3 id="simulation-controls">Simulation controls<a class="anchor" aria-label="anchor" href="#simulation-controls"></a>
-</h3>
+<div class="section level4">
+<h4 id="simulation-controls">Simulation controls<a class="anchor" aria-label="anchor" href="#simulation-controls"></a>
+</h4>
 <p><code><a href="../reference/chain_sim.html">chain_sim()</a></code> also requires the end time for the simulations. For this
 example, we will simulate outbreaks that end 14 days after the last date
 of observations in <code>covid19_sa</code>.</p>
@@ -253,9 +259,9 @@ many times and summarise the results.</p>
 </details>
 </div>
 </div>
-<div class="section level2">
-<h2 id="modelling-assumptions">Modelling assumptions<a class="anchor" aria-label="anchor" href="#modelling-assumptions"></a>
-</h2>
+<div class="section level3">
+<h3 id="modelling-assumptions">Modelling assumptions<a class="anchor" aria-label="anchor" href="#modelling-assumptions"></a>
+</h3>
 <p><code><a href="../reference/chain_sim.html">chain_sim()</a></code> makes the following simplifying assumptions:</p>
 <ol style="list-style-type: decimal">
 <li>All cases are observed</li>
@@ -269,9 +275,9 @@ many times and summarise the results.</p>
 each chain 100 times, projecting COVID-19 cases over
 14 days after the first <span class="math inline">\(15\)</span> days.</p>
 </div>
-<div class="section level2">
-<h2 id="running-the-simulations">Running the simulations<a class="anchor" aria-label="anchor" href="#running-the-simulations"></a>
-</h2>
+<div class="section level3">
+<h3 id="running-the-simulations">Running the simulations<a class="anchor" aria-label="anchor" href="#running-the-simulations"></a>
+</h3>
 <p>We will use the function <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> to run the simulations and bind them
 by rows with <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">dplyr::bind_rows()</a></code>.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -307,9 +313,9 @@ by rows with <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html
 <span><span class="co">#&gt; 6 6  1       NA          1    4   1</span></span></code></pre></div>
 </details>
 </div>
-<div class="section level2">
-<h2 id="post-processing">Post-processing<a class="anchor" aria-label="anchor" href="#post-processing"></a>
-</h2>
+<div class="section level3">
+<h3 id="post-processing">Post-processing<a class="anchor" aria-label="anchor" href="#post-processing"></a>
+</h3>
 <p>Now, we will summarise the simulation results.</p>
 <p>We want to plot the individual simulated daily time series and show
 the median cases per day aggregated over all simulations.</p>
@@ -381,9 +387,9 @@ daily cases across all simulations.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-03-10            8</span></span></code></pre></div>
 </details>
 </div>
-<div class="section level2">
-<h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
-</h2>
+<div class="section level3">
+<h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+</h3>
 <p>We will now plot the individual simulation results alongside the median
 of the aggregated results.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -475,9 +481,9 @@ Figure 1: COVID-19 incidence in South Africa projected over a two week window in
 </p>
 </div>
 </div>
-<div class="section level2 unnumbered">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
+<div class="section level3">
+<h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-abbott2020" class="csl-entry">
 Abbott, Sam, Joel Hellewell, James Munday, Sebastian Funk, CMMID nCoV working group, et al. 2020. <span>“The Transmissibility of Novel Coronavirus in the Early Stages of the 2019-20 Outbreak in Wuhan: Exploring Initial Point-Source Exposure Sizes and Durations Using Scenario Analysis.”</span> <em>Wellcome Open Research</em> 5.
@@ -499,6 +505,7 @@ Pearson, Carl A.B., Cari van Schalkwyk, Anna M. Foss, Kathleen M. O’Reilly, an
 </div>
 <div id="ref-wang2020" class="csl-entry">
 Wang, Liang, Xavier Didelot, Jing Yang, Gary Wong, Yi Shi, Wenjun Liu, George F. Gao, and Yuhai Bi. 2020. <span>“Inference of Person-to-Person Transmission of COVID-19 Reveals Hidden Super-Spreading Events During the Early Outbreak Phase.”</span> <em>Nature Communications</em> 11 (1): 1–6. <a href="https://doi.org/10.1038/s41467-020-18836-4" class="external-link">https://doi.org/10.1038/s41467-020-18836-4</a>.
+</div>
 </div>
 </div>
 </div>
