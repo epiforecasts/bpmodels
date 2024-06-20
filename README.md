@@ -39,7 +39,7 @@ installed via
 ``` r
 # check whether {pak} is installed
 if (!require("pak")) install.packages("pak")
-pak::pkg_install("epiverse-trace/bpmodels")
+pak::pkg_install("epiforecasts/bpmodels")
 ```
 
 To load the package, use
