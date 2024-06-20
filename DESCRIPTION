@@ -24,9 +24,9 @@ Description: Provides methods to simulate and analyse the size and length
     or length of infectious disease outbreaks, as discussed in Farrington
     et al. (2003) <doi:10.1093/biostatistics/4.2.279>.
 License: MIT + file LICENSE
-URL: https://github.com/epiverse-trace/bpmodels,
-    https://epiverse-trace.github.io/bpmodels/
-BugReports: https://github.com/epiverse-trace/bpmodels/issues
+URL: https://github.com/epiforecasts/bpmodels,
+    https://epiforecasts.io/bpmodels/
+BugReports: https://github.com/epiforecasts/bpmodels/issues
 Depends:
     R (>= 3.6.0)
 Suggests:
