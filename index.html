@@ -68,7 +68,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/epiverse-trace/bpmodels/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/epiforecasts/bpmodels/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -90,7 +90,7 @@
 <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h2>
 <blockquote>
-<p><a href="https://github.com/epiverse-trace/bpmodels" class="external-link">bpmodels</a> is now <em>retired and will no longer be maintained</em>. We recommend using <a href="https://github.com/epiverse-trace/epichains" class="external-link"><code>{epichains}</code></a> instead. If you need help converting your code to use <code>{epichains}</code>, please <a href="https://github.com/epiverse-trace/epichains/discussions" class="external-link">open a discussion on epichains</a>.</p>
+<p><a href="https://github.com/epiforecasts/bpmodels" class="external-link">bpmodels</a> is now <em>retired and will no longer be maintained</em>. We recommend using <a href="https://github.com/epiverse-trace/epichains" class="external-link"><code>{epichains}</code></a> instead. If you need help converting your code to use <code>{epichains}</code>, please <a href="https://github.com/epiverse-trace/epichains/discussions" class="external-link">open a discussion on epichains</a>.</p>
 </blockquote>
 <p><em>bpmodels</em> is an R package to simulate and analyse the size and length of branching processes with a given offspring distribution. These models are often used in infectious disease epidemiology, where the chains represent chains of transmission, and the offspring distribution represents the distribution of secondary infections caused by an infected individual.</p>
 </div>
@@ -102,10 +102,10 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check whether {pak} is installed</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://pak.r-lib.org/" class="external-link">"pak"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"epiverse-trace/bpmodels"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"epiforecasts/bpmodels"</span><span class="op">)</span></span></code></pre></div>
 <p>To load the package, use</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/epiverse-trace/bpmodels" class="external-link">"bpmodels"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/epiforecasts/bpmodels" class="external-link">"bpmodels"</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Note: bpmodels is now retired and replaced by epichains. All features from bpmodels are available in epichains. Get epichains from &lt;https://github.com/epiverse-trace/epichains&gt;.Thank you for your support!</span></span></code></pre></div>
 </div>
 <div class="section level1">
@@ -151,11 +151,11 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">chain_sim_susc_eg</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id ancestor generation time</span></span>
 <span><span class="co">#&gt; 1  1       NA          1    0</span></span></code></pre></div>
-<p>See the <a href="https://epiverse-trace.github.io/bpmodels/articles/bpmodels.html">“Get started vignette”</a> for a detailed illustration of each function.</p>
+<p>See the <a href="https://epiverse-trace.github.io/bpmodels/articles/bpmodels.html" class="external-link">“Get started vignette”</a> for a detailed illustration of each function.</p>
 <div class="section level2">
 <h2 id="package-vignettes">Package vignettes<a class="anchor" aria-label="anchor" href="#package-vignettes"></a>
 </h2>
-<p>Specific use cases of <em>bpmodels</em> can be found in the <a href="https://epiverse-trace.github.io/bpmodels/">online documentation as package vignettes</a>, under “Articles”.</p>
+<p>Specific use cases of <em>bpmodels</em> can be found in the <a href="https://epiverse-trace.github.io/bpmodels/" class="external-link">online documentation as package vignettes</a>, under “Articles”.</p>
 </div>
 <div class="section level2">
 <h2 id="reporting-bugs">Reporting bugs<a class="anchor" aria-label="anchor" href="#reporting-bugs"></a>
@@ -197,8 +197,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/epiverse-trace/bpmodels/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/epiverse-trace/bpmodels/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/epiforecasts/bpmodels/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/epiforecasts/bpmodels/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
