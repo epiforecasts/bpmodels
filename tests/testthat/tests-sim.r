@@ -134,6 +134,16 @@ test_that("Errors are thrown", {
     ),
     "If `tf` is specified, `serial` must be specified too."
   )
+  expect_error(
+    chain_sim(
+      n = 10,
+      offspring = "nbinom",
+      stat = "size",
+      mu = 0,
+      size = 0
+    ),
+    "must have at least one non-zero parameter"
+  )
 })
 
 test_that("Chains can be simulated", {
