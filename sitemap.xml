@@ -1,93 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/404.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/articles/bpmodels.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/articles/branching_process_literature.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/articles/projecting_incidence.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/articles/theoretical_background.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/bpmodels-package.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/chain_ll.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/chain_sim.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/chain_sim_susc.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/complementary_logprob.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/covid19_sa.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/dborel.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/gborel_size_ll.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/geom_length_ll.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/nbinom_size_ll.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/offspring_ll.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/pois_length_ll.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/pois_size_ll.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/rbinom_size.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/rborel.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/rgen_length.html</loc>
-  </url>
-  <url>
-    <loc>https://epiforecasts.io/bpmodels/reference/rnbinom_mean_disp.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://epiforecasts.io/bpmodels/404.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/CONTRIBUTING.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/LICENSE-text.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/LICENSE.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/articles/bpmodels.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/articles/branching_process_literature.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/articles/index.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/articles/projecting_incidence.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/articles/theoretical_background.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/authors.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/index.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/news/index.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/bpmodels-package.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/chain_ll.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/chain_sim.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/chain_sim_susc.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/complementary_logprob.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/covid19_sa.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/dborel.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/gborel_size_ll.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/geom_length_ll.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/index.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/nbinom_size_ll.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/offspring_ll.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/pois_length_ll.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/pois_size_ll.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/rbinom_size.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/rborel.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/rgen_length.html</loc></url>
+<url><loc>https://epiforecasts.io/bpmodels/reference/rnbinom_mean_disp.html</loc></url>
 </urlset>
+
