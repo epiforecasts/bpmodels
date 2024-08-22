@@ -128,6 +128,13 @@ chain_sim <- function(n, offspring, stat = c("size", "length"), infinite = Inf,
   if (!(exists(roffspring_name)) || !is.function(get(roffspring_name))) {
     stop("Function ", roffspring_name, " does not exist.")
   }
+  # If both parameters of the negative binomial are zero, you get NaNs
+  if (roffspring_name == "rnbinom" && all(c(...) == 0)) {
+    stop(
+      "The negative binomial parameters must have at least one ",
+      "non-zero parameter."
+    )
+  }
 
   if (!missing(serial)) {
     if (!is.function(serial)) {
