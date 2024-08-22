@@ -1,3 +1,9 @@
+# bpmodels 0.3.2
+
+## Model
+
+* `chain_sim()` now ensures that the parameters of the negative binomial offspring are not both zero else returns an informative error.
+
 # bpmodels 0.3.1
 
 ## Unit tests and input validation
