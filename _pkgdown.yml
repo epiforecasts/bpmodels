@@ -1,7 +1,9 @@
 url: https://epiforecasts.io/bpmodels/
 
 template:
-  package: epiversetheme
+  bootstrap: 5
+  math-rendering: katex
+  bootswatch: darkly
   bslib:
     font_weight_base : 300
 
