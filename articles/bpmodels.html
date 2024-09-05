@@ -6,25 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Analysing infectious disease transmission chains with bpmodels • bpmodels</title>
-<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Analysing infectious disease transmission chains with bpmodels">
-<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XZ471458FQ');
-</script>
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><link href="../deps/KaTex-0.16.10/katex.min.css" rel="stylesheet">
+<script src="../deps/KaTex-0.16.10/katex.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Analysing infectious disease transmission chains with bpmodels">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
-    <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">bpmodels</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.3.2</small>
@@ -57,14 +51,6 @@
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/epiforecasts/bpmodels/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
-  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
-<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
-    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
-    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
-  </ul>
-</li>
       </ul>
 </div>
 
@@ -73,14 +59,17 @@
 </nav><div class="container template-article">
 
 
+
+
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Analysing infectious disease transmission chains with bpmodels</h1>
-                        <h4 data-toc-skip class="author">Sebastian Funk, James Azam</h4>
+                        <h4 data-toc-skip class="author">Sebastian Funk,
+James Azam</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/epiforecasts/bpmodels/blob/v0.3.2/vignettes/bpmodels.Rmd" class="external-link"><code>vignettes/bpmodels.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/epiforecasts/bpmodels/blob/main/vignettes/bpmodels.Rmd" class="external-link"><code>vignettes/bpmodels.Rmd</code></a></small>
       <div class="d-none name"><code>bpmodels.Rmd</code></div>
     </div>
 
@@ -90,125 +79,139 @@
 <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h2>
 <blockquote>
-<p><a href="https://github.com/epiforecasts/bpmodels" class="external-link">bpmodels</a> is now <em>retired and will no longer be maintained</em>. We recommend using <a href="https://github.com/epiverse-trace/epichains" class="external-link"><code>{epichains}</code></a> instead. If you need help converting your code to use <code>{epichains}</code>, please <a href="https://github.com/epiverse-trace/epichains/discussions" class="external-link">open a discussion on epichains</a>.</p>
+<p><a href="https://github.com/epiforecasts/bpmodels" class="external-link">bpmodels</a> is now <em>retired and will no longer be
+maintained</em>. We recommend using <a href="https://github.com/epiverse-trace/epichains" class="external-link"><code>{epichains}</code></a>
+instead. If you need help converting your code to use
+<code>{epichains}</code>, please <a href="https://github.com/epiverse-trace/epichains/discussions" class="external-link">open a
+discussion on epichains</a>.</p>
 </blockquote>
-<p><em>bpmodels</em> provides methods to analyse and simulate the size and length
-of branching processes with an arbitrary offspring distribution. These
-can be used, for example, to analyse the distribution of chain sizes
-or length of infectious disease outbreaks, as discussed in <span class="citation">Farrington, Kanaan, and Gay (<a href="#ref-farrington2003">2003</a>)</span> and
-<span class="citation">Blumberg and Lloyd-Smith (<a href="#ref-blumberg2013">2013</a>)</span>.</p>
+<p><em>bpmodels</em> provides methods to analyse and simulate the size
+and length of branching processes with an arbitrary offspring
+distribution. These can be used, for example, to analyse the
+distribution of chain sizes or length of infectious disease outbreaks,
+as discussed in <span class="citation">Farrington, Kanaan, and Gay (<a href="#ref-farrington2003">2003</a>)</span> and <span class="citation">Blumberg and Lloyd-Smith (<a href="#ref-blumberg2013">2013</a>)</span>.</p>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/epiforecasts/bpmodels" class="external-link">"bpmodels"</a></span><span class="op">)</span></span></code></pre></div>
-</details><div class="section level3">
+<div class="section level3">
 <h3 id="chain_ll-calculate-log-likelihoods">
 <code>chain_ll()</code>: calculate log-likelihoods<a class="anchor" aria-label="anchor" href="#chain_ll-calculate-log-likelihoods"></a>
 </h3>
-<p>The <code><a href="../reference/chain_ll.html">chain_ll()</a></code> function calculates the log-likelihood of a distribution of
-chain sizes or lengths given an offspring distribution and its associated
-parameters.</p>
+<p>The <code><a href="../reference/chain_ll.html">chain_ll()</a></code> function calculates the log-likelihood of
+a distribution of chain sizes or lengths given an offspring distribution
+and its associated parameters.</p>
 <p>For example, if we have observed a distribution of chains of sizes
-<span class="math inline">\(1, 1, 4, 7\)</span>, we can
-calculate the log-likelihood of this observed chain by assuming the offspring
-per generation is Poisson distributed with a mean number (which can
-be interpreted as the reproduction number, <span class="math inline">\(R_0\)</span>) of <span class="math inline">\(0.5\)</span>.</p>
+<span class="math inline">1, 1, 4, 7</span>, we can calculate the
+log-likelihood of this observed chain by assuming the offspring per
+generation is Poisson distributed with a mean number (which can be
+interpreted as the reproduction number, <span class="math inline">R_0</span>) of <span class="math inline">0.5</span>.</p>
 <p>To do this, we run</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
 <span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">chain_sizes</span>, offspring <span class="op">=</span> <span class="st">"pois"</span>, stat <span class="op">=</span> <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -8.607196</span></span></code></pre></div>
-</details><p>The first argument of <code><a href="../reference/chain_ll.html">chain_ll()</a></code> is the chain size (or length, in number of
-generations that a chain lasted) distribution to
+<p>The first argument of <code><a href="../reference/chain_ll.html">chain_ll()</a></code> is the chain size (or
+length, in number of generations that a chain lasted) distribution to
 analyse.</p>
 <p>The second argument, <code>offspring</code>, specifies the offspring
-distribution. This is specified as a string of the name of the function used to generate random offspring.
-It can be any probability distribution implemented in <code>R</code>, that is, one that
-has a corresponding function for generating random numbers beginning with the
-letter <code>r</code>. In the case of the example above, since random Poisson numbers are
-generated in <code>R</code> using a function called <code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois()</a></code>, the string to pass to the
-<code>offspring</code> argument is <code>"pois"</code>.</p>
-<p>The third argument, <code>stat</code>, determines whether to analyse chain sizes
-(<code>"size"</code>, the default if this argument is not specified) or lengths
-(<code>"length"</code>). Lastly, any named arguments not recognised by <code><a href="../reference/chain_ll.html">chain_ll()</a></code>
-are interpreted as parameters of the corresponding probability distribution,
-here <code>lambda = 0.5</code> as the mean of the Poisson distribution (see the <code>R</code> help
-page for the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Poisson.html" class="external-link">Poisson distribution</a> for more information).</p>
+distribution. This is specified as a string of the name of the function
+used to generate random offspring. It can be any probability
+distribution implemented in <code>R</code>, that is, one that has a
+corresponding function for generating random numbers beginning with the
+letter <code>r</code>. In the case of the example above, since random
+Poisson numbers are generated in <code>R</code> using a function called
+<code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois()</a></code>, the string to pass to the <code>offspring</code>
+argument is <code>"pois"</code>.</p>
+<p>The third argument, <code>stat</code>, determines whether to analyse
+chain sizes (<code>"size"</code>, the default if this argument is not
+specified) or lengths (<code>"length"</code>). Lastly, any named
+arguments not recognised by <code><a href="../reference/chain_ll.html">chain_ll()</a></code> are interpreted as
+parameters of the corresponding probability distribution, here
+<code>lambda = 0.5</code> as the mean of the Poisson distribution (see
+the <code>R</code> help page for the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Poisson.html" class="external-link">Poisson
+distribution</a> for more information).</p>
 <div class="section level4">
 <h4 id="imperfect-observations">Imperfect observations<a class="anchor" aria-label="anchor" href="#imperfect-observations"></a>
 </h4>
-<p>By default, <code><a href="../reference/chain_ll.html">chain_ll()</a></code> assumes perfect observation, where <code>obs_prob = 1</code>
-(See <code><a href="../reference/chain_ll.html">?chain_ll</a></code>), meaning that all transmission events are observed and
-recorded in the data. If observations are imperfect, <code><a href="../reference/chain_ll.html">chain_ll()</a></code> provides
-the argument, <code>obs_prob</code>, for specifying the probability of observation.
-This probability is used to determine the likelihood of observing the specified
-chain sizes or lengths. In the case of imperfect observation, true chain sizes
-or lengths are simulated repeatedly (the number of times given by the
-<code>nsim_obs</code> argument), and the likelihood calculated for each of
-these simulations.</p>
-<p>For example, if the probability of observing each case is <code>obs_prob = 0.30</code>,
-we use</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>By default, <code><a href="../reference/chain_ll.html">chain_ll()</a></code> assumes perfect observation,
+where <code>obs_prob = 1</code> (See <code><a href="../reference/chain_ll.html">?chain_ll</a></code>), meaning
+that all transmission events are observed and recorded in the data. If
+observations are imperfect, <code><a href="../reference/chain_ll.html">chain_ll()</a></code> provides the
+argument, <code>obs_prob</code>, for specifying the probability of
+observation. This probability is used to determine the likelihood of
+observing the specified chain sizes or lengths. In the case of imperfect
+observation, true chain sizes or lengths are simulated repeatedly (the
+number of times given by the <code>nsim_obs</code> argument), and the
+likelihood calculated for each of these simulations.</p>
+<p>For example, if the probability of observing each case is
+<code>obs_prob = 0.30</code>, we use</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
 <span><span class="va">ll</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"pois"</span>, <span class="st">"size"</span>, obs_prob <span class="op">=</span> <span class="fl">0.3</span>, lambda <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>               nsim_obs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">ll</span></span>
 <span><span class="co">#&gt;  [1] -20.47284 -22.52364 -26.77325 -24.33340 -21.86479 -22.11361 -32.01951</span></span>
 <span><span class="co">#&gt;  [8] -19.77477 -22.90776 -27.59180</span></span></code></pre></div>
-</details><p>This returns <code>10</code> likelihood values (because <code>nsim_obs = 10</code>), which can be
-averaged to come up with an overall likelihood estimate.</p>
-<p>To find out about the usage of the <code><a href="../reference/chain_ll.html">chain_ll()</a></code> function, you can run <code><a href="../reference/chain_ll.html">?chain_ll</a></code>
-to access its <code>R</code> help file.</p>
+<p>This returns <code>10</code> likelihood values (because
+<code>nsim_obs = 10</code>), which can be averaged to come up with an
+overall likelihood estimate.</p>
+<p>To find out about the usage of the <code><a href="../reference/chain_ll.html">chain_ll()</a></code> function,
+you can run <code><a href="../reference/chain_ll.html">?chain_ll</a></code> to access its <code>R</code> help
+file.</p>
 </div>
 <div class="section level4">
 <h4 id="how-chain_ll-works">How <code>chain_ll()</code> works<a class="anchor" aria-label="anchor" href="#how-chain_ll-works"></a>
 </h4>
-<p>If the probability distribution of chain sizes or lengths has an analytical
-solution, this will be used. <code><a href="../reference/chain_ll.html">chain_ll()</a></code> currently supports the Poisson and
-negative binomial size distribution and the Poisson and geometric length
-distribution.</p>
-<p>If an analytical solution does not exist, simulations are used to approximate
-this probability distributions (<a href="https://en.wikipedia.org/wiki/Empirical_distribution_function" class="external-link">using a linear approximation to the cumulative
-distribution</a>
-for unobserved sizes/lengths). In that case, an extra argument <code>nsim_offspring</code>
-must be passed to <code><a href="../reference/chain_ll.html">chain_ll()</a></code> to specify the number of simulations to be
-used for this approximation.</p>
+<p>If the probability distribution of chain sizes or lengths has an
+analytical solution, this will be used. <code><a href="../reference/chain_ll.html">chain_ll()</a></code>
+currently supports the Poisson and negative binomial size distribution
+and the Poisson and geometric length distribution.</p>
+<p>If an analytical solution does not exist, simulations are used to
+approximate this probability distributions (<a href="https://en.wikipedia.org/wiki/Empirical_distribution_function" class="external-link">using
+a linear approximation to the cumulative distribution</a> for unobserved
+sizes/lengths). In that case, an extra argument
+<code>nsim_offspring</code> must be passed to <code><a href="../reference/chain_ll.html">chain_ll()</a></code> to
+specify the number of simulations to be used for this approximation.</p>
 <p>For example, to get offspring drawn from a binomial distribution with
 probability <code>prob = 0.5</code>, we run</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">chain_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span><span class="op">)</span> <span class="co"># example of observed chain sizes</span></span>
 <span><span class="fu"><a href="../reference/chain_ll.html">chain_ll</a></span><span class="op">(</span><span class="va">chain_sizes</span>, <span class="st">"binom"</span>, <span class="st">"size"</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>         nsim_offspring <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -8.496803</span></span></code></pre></div>
-</details>
 </div>
 </div>
 <div class="section level3">
 <h3 id="chain_sim-simulate-transmission-chains-with-branching-processes">
-<code>chain_sim()</code>: simulate transmission chains with branching processes<a class="anchor" aria-label="anchor" href="#chain_sim-simulate-transmission-chains-with-branching-processes"></a>
+<code>chain_sim()</code>: simulate transmission chains with
+branching processes<a class="anchor" aria-label="anchor" href="#chain_sim-simulate-transmission-chains-with-branching-processes"></a>
 </h3>
-<p>To simulate a branching process, we use the <code><a href="../reference/chain_sim.html">chain_sim()</a></code> function. This
-function follows the same syntax as <code><a href="../reference/chain_ll.html">chain_ll()</a></code>. Note that <code><a href="../reference/chain_sim.html">chain_sim()</a></code> is
+<p>To simulate a branching process, we use the <code><a href="../reference/chain_sim.html">chain_sim()</a></code>
+function. This function follows the same syntax as
+<code><a href="../reference/chain_ll.html">chain_ll()</a></code>. Note that <code><a href="../reference/chain_sim.html">chain_sim()</a></code> is
 stochastic, so a seed needs to be set to ensure that the results can be
 reproduced.</p>
-<p>Below, we are simulating <span class="math inline">\(5\)</span> chains, assuming the offspring are generated using
-a Poisson distribution with mean, <code>lambda = 0.5</code>. By default, <code><a href="../reference/chain_sim.html">chain_sim()</a></code>
-returns a vector of chain sizes/lengths. If we instead want to return
-a tree of infectees and infectors, we need to specify a function for
-the serial interval and set <code>tree = TRUE</code> (see next section).</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Below, we are simulating <span class="math inline">5</span> chains,
+assuming the offspring are generated using a Poisson distribution with
+mean, <code>lambda = 0.5</code>. By default, <code><a href="../reference/chain_sim.html">chain_sim()</a></code>
+returns a vector of chain sizes/lengths. If we instead want to return a
+tree of infectees and infectors, we need to specify a function for the
+serial interval and set <code>tree = TRUE</code> (see next section).</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/chain_sim.html">chain_sim</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, offspring <span class="op">=</span> <span class="st">"pois"</span>, stat <span class="op">=</span> <span class="st">"size"</span>, lambda <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1 2 4 1 1</span></span></code></pre></div>
-</details><div class="section level4">
+<div class="section level4">
 <h4 id="simulating-trees">Simulating trees<a class="anchor" aria-label="anchor" href="#simulating-trees"></a>
 </h4>
-<p>To simulate a tree of transmission chains, we specify the serial interval
-generation function (<code>serial_interval()</code>) and set <code>tree = TRUE</code> as follows:</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>To simulate a tree of transmission chains, we specify the serial
+interval generation function (<code>serial_interval()</code>) and set
+<code>tree = TRUE</code> as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">serial_interval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">0.58</span>, sdlog <span class="op">=</span> <span class="fl">1.58</span><span class="op">)</span></span>
@@ -225,18 +228,22 @@ generation function (<code>serial_interval()</code>) and set <code>tree = TRUE</
 <span><span class="co">#&gt; 4 4  1       NA          1 0.00000000</span></span>
 <span><span class="co">#&gt; 5 5  1       NA          1 0.00000000</span></span>
 <span><span class="co">#&gt; 6 2  2        1          2 0.09968906</span></span></code></pre></div>
-</details>
 </div>
 </div>
 <div class="section level3">
-<h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+<h3 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-blumberg2013" class="csl-entry">
-Blumberg, S., and J. O. Lloyd-Smith. 2013. <span>“Comparing Methods for Estimating R0 from the Size Distribution of Subcritical Transmission Chains.”</span> <em>Epidemics</em> 5 (3): 131–45. <a href="https://doi.org/10.1016/j.epidem.2013.05.002" class="external-link">https://doi.org/10.1016/j.epidem.2013.05.002</a>.
+Blumberg, S., and J. O. Lloyd-Smith. 2013. <span>“Comparing Methods for
+Estimating R0 from the Size Distribution of Subcritical Transmission
+Chains.”</span> <em>Epidemics</em> 5 (3): 131–45. <a href="https://doi.org/10.1016/j.epidem.2013.05.002" class="external-link">https://doi.org/10.1016/j.epidem.2013.05.002</a>.
 </div>
 <div id="ref-farrington2003" class="csl-entry">
-Farrington, C. P., M. N. Kanaan, and N. J. Gay. 2003. <span>“Branching Process Models for Surveillance of Infectious Diseases Controlled by Mass Vaccination.”</span> <em>Biostatistics (Oxford, England)</em> 4 (2): 279–95. <a href="https://doi.org/10.1093/biostatistics/4.2.279" class="external-link">https://doi.org/10.1093/biostatistics/4.2.279</a>.
+Farrington, C. P., M. N. Kanaan, and N. J. Gay. 2003. <span>“Branching
+Process Models for Surveillance of Infectious Diseases Controlled by
+Mass Vaccination.”</span> <em>Biostatistics (Oxford, England)</em> 4
+(2): 279–95. <a href="https://doi.org/10.1093/biostatistics/4.2.279" class="external-link">https://doi.org/10.1093/biostatistics/4.2.279</a>.
 </div>
 </div>
 </div>
