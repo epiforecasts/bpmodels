@@ -35,9 +35,9 @@ infectious disease modelling.
 It is our intention to grow this list to serve as a point of reference for 
 budding modellers with an interest in the subject. 
 
-If you would like to extend this list, the easiest way would be to [file an issue](https://github.com/epiverse-trace/bpmodels/issues/new/choose), listing the
+If you would like to extend this list, the easiest way would be to [file an issue](https://github.com/epiforecasts/bpmodels/issues/new/choose), listing the
 new additions and we'll take it from there,
-or [submit a pull request](https://github.com/epiverse-trace/bpmodels/pulls) 
+or [submit a pull request](https://github.com/epiforecasts/bpmodels/pulls) 
 with an updated version of the bibliography file found in 
 "vignettes/branching_process_literature.json".
 
