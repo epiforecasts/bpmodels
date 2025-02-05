@@ -15,12 +15,14 @@ contributors](https://img.shields.io/github/contributors/epiverse-trace/bpmodels
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT/)
 <!-- badges: end -->
 
-> \[!WARNING\] `{bpmodels}` is now *retired and will no longer be
-> maintained*. We recommend using
-> [`{epichains}`](https://github.com/epiverse-trace/epichains) instead.
-> If you need help converting your code to use `{epichains}`, please
-> [open a discussion on
-> epichains](https://github.com/epiverse-trace/epichains/discussions).
+> \[!WARNING\]
+
+`{bpmodels}` is now *retired and will no longer be maintained*. We
+recommend using
+[`{epichains}`](https://github.com/epiverse-trace/epichains) instead. If
+you need help converting your code to use `{epichains}`, please [open a
+discussion on
+epichains](https://github.com/epiverse-trace/epichains/discussions).
 
 *bpmodels* is an R package to simulate and analyse the size and length
 of branching processes with a given offspring distribution. These models
