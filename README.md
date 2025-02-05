@@ -6,23 +6,28 @@
 [![Lifecycle:
 retired](https://img.shields.io/badge/lifecycle-retired-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#retired)
 ![GitHub R package
-version](https://img.shields.io/github/r-package/v/epiverse-trace/bpmodels)
-[![R-CMD-check](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/bpmodels/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/github/epiverse-trace/bpmodels/branch/main/graph/badge.svg)](https://app.codecov.io/github/epiverse-trace/bpmodels)
+version](https://img.shields.io/github/r-package/v/epiforecasts/bpmodels)
+[![R-CMD-check](https://github.com/epiforecasts/bpmodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiforecasts/bpmodels/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/github/epiforecasts/bpmodels/branch/main/graph/badge.svg)](https://app.codecov.io/github/epiforecasts/bpmodels)
 ![GitHub
-contributors](https://img.shields.io/github/contributors/epiverse-trace/bpmodels)
+contributors](https://img.shields.io/github/contributors/epiforecasts/bpmodels)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT/)
 <!-- badges: end -->
 
-> \[!WARNING\]
+<div style="background-color: #ffcccc; border: 1px solid #ff0000; padding: 10px; margin-bottom: 20px;">
 
+<strong style="color: #ff0000;">️ WARNING:</strong>
+<p style="margin: 0;">
 `{bpmodels}` is now *retired and will no longer be maintained*. We
 recommend using
-[`{epichains}`](https://github.com/epiverse-trace/epichains) instead. If
+[`{epichains}`](https://github.com/epiforecasts/epichains) instead. If
 you need help converting your code to use `{epichains}`, please [open a
 discussion on
-epichains](https://github.com/epiverse-trace/epichains/discussions).
+epichains](https://github.com/epiforecasts/epichains/discussions).
+</p>
+
+</div>
 
 *bpmodels* is an R package to simulate and analyse the size and length
 of branching processes with a given offspring distribution. These models
@@ -112,32 +117,31 @@ head(chain_sim_susc_eg)
 ```
 
 See the [“Get started
-vignette”](https://epiverse-trace.github.io/bpmodels/articles/bpmodels.html)
+vignette”](https://epiforecasts.github.io/bpmodels/articles/bpmodels.html)
 for a detailed illustration of each function.
 
 ## Package vignettes
 
 Specific use cases of *bpmodels* can be found in the [online
 documentation as package
-vignettes](https://epiverse-trace.github.io/bpmodels/), under
-“Articles”.
+vignettes](https://epiforecasts.github.io/bpmodels/), under “Articles”.
 
 ## Reporting bugs
 
 To report a bug please open an
-[issue](https://github.com/epiverse-trace/bpmodels/issues/new/choose).
+[issue](https://github.com/epiforecasts/bpmodels/issues/new/choose).
 
 ## Contribute
 
 We welcome contributions to enhance the package’s functionalities. If
 you wish to do so, please follow the [package contributing
-guide](https://github.com/epiverse-trace/bpmodels/blob/main/.github/CONTRIBUTING.md).
+guide](https://github.com/epiforecasts/bpmodels/blob/main/.github/CONTRIBUTING.md).
 
 ## Code of conduct
 
 Please note that the *bpmodels* project is released with a [Contributor
 Code of
-Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
+Conduct](https://github.com/epiforecasts/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
 ## Citing this package
